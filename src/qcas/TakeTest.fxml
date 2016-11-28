@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.TakeTestController">
+    <children>
+        <Label layoutX="41.0" layoutY="46.0" text="Number of Questions" />
+        <Label layoutX="41.0" layoutY="118.0" text="DIfficulty Level" />
+        <!--<ChoiceBox fx:id="cboxNoOfQuestions" layoutX="253.0" layoutY="41.0" prefWidth="150.0" >
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="reihe" fx:value="Reihenschaltung" />
+                    <String fx:id="parallel" fx:value="Parallelschaltung" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>-->
+        <ChoiceBox fx:id="cboxDificulty" layoutX="389.0" layoutY="212.0" prefWidth="150.0" >
+        <Button fx:id="btnStartTest" layoutX="194.0" layoutY="206.0" mnemonicParsing="false" text="Start Test" />
+      <ComboBox fx:id="cmbNoOfQuestions" layoutX="253.0" layoutY="52.0" prefWidth="150.0" >
+          <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="1" fx:value="5" />
+                    <String fx:id="2" fx:value="10" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        
+        
+      <ComboBox fx:id="cmbDifficultyLevel" layoutX="253.0" layoutY="113.0" prefWidth="150.0" />
+    </children>
+</AnchorPane>
