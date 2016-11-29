@@ -8,9 +8,13 @@ package qcas;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
 import qcas.backEnd.Login;
 import qcas.backEnd.User;
@@ -45,12 +49,27 @@ public class FXMLHomeController {
         DatabaseManager dbManager = new DatabaseManager();
         //actiontarget.setText("invalid credentials");
         User user = dbManager.login(username, passsword, "student");
+        if (user != null && user.getUserID() > 0) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TakeTest.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            passwordField.clear(); //.setText("");
+            actiontarget.setText("invalid credentials");
+        }
 
+        /*
         if (user != null && user.getUserID() > 0) {
             actiontarget.setText("login successful");
         } else {
             actiontarget.setText("invalid credentials");
         }
-
+         */
     }
 }

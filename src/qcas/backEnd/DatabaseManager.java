@@ -320,81 +320,24 @@ public class DatabaseManager {
      * @return
      * @throws SQLException
      */
-    /*  public ArrayList<Question> saveTestDetails(Test testObject) throws SQLException {
+    public void saveTestDetails(Test testObject) throws SQLException {
         String query;
 
-       
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             Statement stmt = con.createStatement();
 
-               query = "INSERT INTO TEST ('"+ testObject.g
-            for (Question quest : arrQuestion) {
-                // Add a record into the QUIZ table of the database
-                query = "INSERT INTO QUIZ VALUES ('" + quest.getQuestionType() + "','" + quest.getDifficulty() + "','" + quest.getQuestion() + "','" + quest.getOptionA();
+            query = "INSERT INTO TEST (testID," + "29 - November - 2016" + "," + testObject.getUserID() + "," + testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() + "," + testObject.getIncorrectQuestions() + "," + testObject.getUnansweredQuestions() + "," + testObject.getScore() + "," + testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
 
-                if (quest.getQuestionType().equals("MC") || quest.getQuestionType().equals("MA")) {
-                    query += "'," + quest.getOptionACorrect() + ",'" + quest.getOptionB() + "'," + quest.getOptionBCorrect() + ",'" + quest.getOptionC() + "'," + quest.getOptionCCorrect() + ",'" + quest.getOptionD() + "'," + quest.getOptionDCorrect() + ")";
-
-                } else //if(quest.getQuestionType().equals("TF") || quest.getQuestionType().equals("FIB"))
-                {
-                    query += "')";
-                }
-
-                stmt.executeUpdate(query);
-            }
+            stmt.executeUpdate(query);
+            int a = 1;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
-            System.exit(0);
+           // System.exit(0);
         }
-        
-        
-        
-            while (i < numberOfQuest) {
-                //for (int i = 0; i < numberOfQuest; i++) {
-                while (numberOfQuestOfAllDificultyType[0] > 0) {
-                    questionType = getRandomQuestionType();
-                    query = "Select * from Question where questionType = '" + questionType + "' and difficulty = 'E'";
-                    Question questionObject = getQuestionFromDB(con, query, questionType);
-                    //add this question to the questionlist only if it is not already present
-                    if (!questionList.contains(questionObject)) {
-                        questionList.add(questionObject);
-                        numberOfQuestOfAllDificultyType[0]--;
-                        i++;
-                    }
-                }
-                while (numberOfQuestOfAllDificultyType[1] > 0) {
-                    questionType = getRandomQuestionType();
-                    query = "Select * from Question where questionType = '" + questionType + "' and difficulty = 'M'";
-                    Question questionObject = getQuestionFromDB(con, query, questionType);
-                    //add this question to the questionlist only if it is not already present
-                    if (!questionList.contains(questionObject)) {
-                        questionList.add(questionObject);
-                        numberOfQuestOfAllDificultyType[1]--;
-                        i++;
-                    }
-                }
-                while (numberOfQuestOfAllDificultyType[2] > 0) {
-                    questionType = getRandomQuestionType();
-                    query = "Select * from Question where questionType = '" + questionType + "' and difficulty = 'H'";
-                    Question questionObject = getQuestionFromDB(con, query, questionType);
-                    //add this question to the questionlist only if it is not already present
-                    if (!questionList.contains(questionObject)) {
-                        questionList.add(questionObject);
-                        numberOfQuestOfAllDificultyType[2]--;
-                        i++;
-                    }
-                }
-            }
-            Collections.shuffle(questionList);
-            return questionList;
-        } catch (SQLException e) {
-            System.out.println("Exception creating connection: " + e);
-            return questionList;
-            //System.exit(0);
-        }
+
     }
-     */
+
     /**
      * method to getNummberOfTestsTakenOverAPeriod (last month/quarter)
      *
@@ -427,120 +370,5 @@ public class DatabaseManager {
         }
     }
 
-     */
- /*
-    public void readDataForReport2a() {
-        //query to be executed, find sailor with least salary
-        String query = "SELECT * FROM SAILOR WHERE SALARY =(SELECT MIN(SALARY) FROM SAILOR) ORDER BY SAILORID";
-        ResultSet rs = null;
-        try (Connection con = DriverManager.getConnection(url, username, password)) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-
-            System.out.println("Report 2a. Sailor with least salary.");
-            //access resultset for every record present in the records set
-            while (rs.next()) {
-                int sailorID = rs.getInt("SAILORID");
-                String lastName = rs.getString("LASTNAME");
-                String firstname = rs.getString("FIRSTNAME");
-                String position = rs.getString("POSITION");
-                String salary = rs.getString("SALARY");
-                //prints the sailor details on the screen
-                System.out.println("Employee ID: " + sailorID + "\n"
-                        + "Last Name:   " + lastName.trim() + "\n"
-                        + "First Name:  " + firstname.trim() + "\n"
-                        + "Position:   " + position.trim() + "\n"
-                        + "Salary:      " + salary + "\n");
-            }
-        } catch (SQLException e) {
-            System.out.println("Exception creating connection: " + e);
-            System.exit(0);
-        }
-    }
-
-    public void readDataForReport2b() {
-        //query to be executed to find sailors with maximum salary
-        String query = "SELECT * FROM SAILOR WHERE SALARY =(SELECT MAX(SALARY) FROM SAILOR) ORDER BY SAILORID";
-        ResultSet rs = null;
-        try (Connection con = DriverManager.getConnection(url, username, password)) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-
-            System.out.println("Report 2b. Sailor with highest salary.");
-            //access resultset for every record present in the records set
-            while (rs.next()) {
-                int sailorID = rs.getInt("SAILORID");
-                String lastName = rs.getString("LASTNAME");
-                String firstname = rs.getString("FIRSTNAME");
-                String position = rs.getString("POSITION");
-                String salary = rs.getString("SALARY");
-                //prints the sailor details on the screen
-                System.out.println("Employee ID: " + sailorID + "\n"
-                        + "Last Name:   " + lastName.trim() + "\n"
-                        + "First Name:  " + firstname.trim() + "\n"
-                        + "Position:   " + position.trim() + "\n"
-                        + "Salary:      " + salary + "\n");
-            }
-        } catch (SQLException e) {
-            System.out.println("Exception creating connection: " + e);
-            System.exit(0);
-        }
-    }
-
-    public void readDataForReport2c() {
-        //query to find sailors with above average salary
-        String query = "SELECT * FROM SAILOR WHERE SALARY >(SELECT AVG(SALARY) FROM SAILOR) ORDER BY SAILORID";
-        ResultSet rs = null;
-        try (Connection con = DriverManager.getConnection(url, username, password)) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-
-            System.out.println("Report 2c. Sailors with above average salary.");
-            //access resultset for every record present in the records set
-            while (rs.next()) {
-                int sailorID = rs.getInt("SAILORID");
-                String lastName = rs.getString("LASTNAME");
-                String firstname = rs.getString("FIRSTNAME");
-                String position = rs.getString("POSITION");
-                String salary = rs.getString("SALARY");
-                //prints the sailor details on the screen
-                System.out.println("Employee ID: " + sailorID + "\n"
-                        + "Last Name:   " + lastName.trim() + "\n"
-                        + "First Name:  " + firstname.trim() + "\n"
-                        + "Position:   " + position.trim() + "\n"
-                        + "Salary:      " + salary + "\n");
-            }
-        } catch (SQLException e) {
-            System.out.println("Exception creating connection: " + e);
-            System.exit(0);
-        }
-    }
-
-    public void readDataForReport3() {
-        String query = "SELECT * FROM SAILOR WHERE LASTNAME LIKE 'R%' AND SALARY > 58534";
-        ResultSet rs = null;
-        try (Connection con = DriverManager.getConnection(url, username, password)) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-
-            System.out.println("Report 3. Sailor with Last name starting from 'R' and salary >58534");
-            while (rs.next()) {
-                int sailorID = rs.getInt("SAILORID");
-                String lastName = rs.getString("LASTNAME");
-                String firstname = rs.getString("FIRSTNAME");
-                String position = rs.getString("POSITION");
-                String salary = rs.getString("SALARY");
-                //prints the sailor details on the screen
-                System.out.println("Employee ID: " + sailorID + "\n"
-                        + "Last Name:   " + lastName.trim() + "\n"
-                        + "First Name:  " + firstname.trim() + "\n"
-                        + "Position:   " + position.trim() + "\n"
-                        + "Salary:      " + salary + "\n");
-            }
-        } catch (SQLException e) {
-            System.out.println("Exception creating connection: " + e);
-            System.exit(0);
-        }
-    }
      */
 }
