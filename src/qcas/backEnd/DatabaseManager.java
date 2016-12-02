@@ -27,8 +27,8 @@ import java.sql.DriverManager;
 public class DatabaseManager {
 
     String url;
-    String username = "scott";
-    String password = "tiger123";
+    String username = "rajeev";
+    String password = "rajeev123";
     String query;
     Connection conn = null;
 
@@ -43,7 +43,7 @@ public class DatabaseManager {
         //password for database
         //password = "app";
 
-        url = "jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
+        url = "jdbc:mysql://qcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
         //jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas?zeroDateTimeBehavior=convertToNull
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         conn = DriverManager.getConnection(url, username, password);
@@ -58,14 +58,7 @@ public class DatabaseManager {
      * @return
      */
     public User login(String userName, String userPassword, String userType) {
-        /* Connection con = DriverManager.getConnection(conn, username, password);
-        if (!con.isClosed()) {
-            con.close();
-        }
-         */
-//username and password will be varchar in database usertype is int
-        String query = "SELECT * FROM user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
-        //int userType = 0;
+        String query = "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
         User user = new User();
 
         ResultSet rs = null;
@@ -74,14 +67,12 @@ public class DatabaseManager {
             rs = stmt.executeQuery(query);
             //access resultset for every record present in the records set
             while (rs.next()) {
-                int userID = rs.getInt("USERID");
-                //String password = rs.getString("PASSWORD");
-                // userType = rs.getInt("USERTYPE");
+                int userID = rs.getInt("ID");
                 String firstname = rs.getString("FIRSTNAME");
                 String lastName = rs.getString("LASTNAME");
-                //char gender = (rs.getString("Gender")).charAt(0);
                 user = new User(userID, userName, userPassword, userType, firstname, lastName);
             }
+            
             return user;//null if wrong credentials
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);

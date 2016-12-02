@@ -16,21 +16,19 @@ import javafx.stage.Stage;
  * @author aayush
  */
 public class QCAS extends Application {
+    
+    private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-
-        Scene scene = new Scene(root, 300, 275);
+        Scene scene = new Scene(root, 630, 450);
         stage.setTitle("Home Screen");
-        //scenetitle.setId("welcome-text");
-        //actiontarget.setId("actiontarget");
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
         stage.show();
-
     }
-
+    
     /**
      * @param args the command line arguments
      */
