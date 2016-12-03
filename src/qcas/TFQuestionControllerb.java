@@ -8,9 +8,9 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +18,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import qcas.backEnd.Test;
 
@@ -28,19 +30,18 @@ import qcas.backEnd.Test;
  *
  * @author aayush
  */
-public class MAQuestionController implements Initializable {
+public class TFQuestionControllerb implements Initializable {
 
     Test testobject = new Test();
     @FXML
     private Label lblQuestion;
     @FXML
-    private CheckBox cbA;
+    private RadioButton rbTrue;
     @FXML
-    private CheckBox cbB;
+    private RadioButton rbFalse;
     @FXML
-    private CheckBox cbC;
-    @FXML
-    private CheckBox cbD;
+    private ToggleGroup tgAnswers;
+    private String answer;
 
     /**
      * Initializes the controller class.
@@ -48,6 +49,18 @@ public class MAQuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        rbTrue.setToggleGroup(tgAnswers);
+        rbFalse.setToggleGroup(tgAnswers);
+
+        tgAnswers.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                    Toggle old_toggle, Toggle new_toggle) {
+                if (tgAnswers.getSelectedToggle() != null) {
+                    answer = ((RadioButton) tgAnswers.getSelectedToggle()).getText(); // ; .getUserData().toString();
+                    //System.out.println(tgAnswers.getSelectedToggle().getUserData().toString());
+                }
+            }
+        });
     }
 
     @FXML
@@ -56,51 +69,32 @@ public class MAQuestionController implements Initializable {
 
     @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
+        String a = answer; //.g;
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         int currentQuestion = testobject.getCurrentQuestionNumber();
         String correctAnswer = testobject.getQuestionList().get(currentQuestion).getAnswer();
-        testobject.setCurrentQuestionNumber(currentQuestion + 1);
-        String selectedAnswers = "";
-        if (cbA.isSelected()) {
-            selectedAnswers += cbA.getText();
-        }
-        if (cbB.isSelected()) {
-            if(selectedAnswers.length()>0)
-                selectedAnswers+=",";
-            selectedAnswers += cbB.getText();
-        }
-        if (cbC.isSelected()) {
-            if(selectedAnswers.length()>0)
-                selectedAnswers+=",";
-            selectedAnswers += cbC.getText();
-        }
-        if (cbD.isSelected()) {
-            if(selectedAnswers.length()>0)
-                selectedAnswers+=",";
-            selectedAnswers += cbD.getText();
-        }
-
+        testobject.setCurrentQuestionNumber(currentQuestion + 1); //.getQuestionList().get(currectQuestion).getAnswer();
         Parent root1 = null;
-        if (selectedAnswers == "") {
+        FXMLLoader fxmlLoader = null;
+        if (a == null) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
-        } else if (correctAnswer.equals(selectedAnswers)) {
+        } else if (correctAnswer.equals(answer)) {
             testobject.setCorrectQuestions(testobject.getCorrectQuestions() + 1);
-        } else if (!correctAnswer.equals(selectedAnswers)) {
+        } else if (!correctAnswer.equals(answer)) {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
-        FXMLLoader fxmlLoader = null;
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
-
         } else {
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
 
             if (nextQuestionType.equals("MC")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
+                //Parent root = (Parent) fxmlLoader.load();
                 root1 = (Parent) fxmlLoader.load();
                 MCQuestionController controller = fxmlLoader.<MCQuestionController>getController();
                 controller.initData(testobject);
@@ -110,9 +104,9 @@ public class MAQuestionController implements Initializable {
                 MAQuestionController controller = fxmlLoader.<MAQuestionController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("TF")) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("TrueFalseQ.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("TFQuestion.fxml"));
                 root1 = (Parent) fxmlLoader.load();
-                TrueFalseQController controller = fxmlLoader.<TrueFalseQController>getController();
+                TFQuestionControllerb controller = fxmlLoader.<TFQuestionControllerb>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("FIB")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
@@ -120,10 +114,12 @@ public class MAQuestionController implements Initializable {
                 FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
                 controller.initData(testobject);
             }
-        }
-        stage.setScene(new Scene(root1));
-        stage.show();
 
+            //Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        }
     }
 
     @FXML
@@ -141,17 +137,10 @@ public class MAQuestionController implements Initializable {
     }
 
     @FXML
-    public void initData(Test test) {
+    public void initData(Test test
+    ) {
         testobject = test;
         lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
-        cbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
-        cbB.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionB());
-        cbC.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionC());
-        cbD.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionD());
     }
 
-    public List<String> splitAnswer(String answer) {
-        List<String> finAnswers = Arrays.asList(answer.split(","));
-        return finAnswers;
-    }
 }

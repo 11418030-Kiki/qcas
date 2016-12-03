@@ -247,7 +247,7 @@ public class DatabaseManager {
             String optionD = rs.getString("optionD");
             boolean optionDCorrect = rs.getBoolean("optionDCorrect");
 
-            questionObject = new Question(questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect);
+            questionObject = new Question(questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect, "");
         }
         return questionObject;
     }
