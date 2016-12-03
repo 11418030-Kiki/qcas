@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="733.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphs.ProfController">
+   <children>
+      <BarChart fx:id="StudentsPerformance" layoutX="14.0" layoutY="283.0" title="StudentsPerformance">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <PieChart fx:id="NumberOfStudents" layoutX="573.0" layoutY="283.0" prefHeight="346.0" prefWidth="396.0" title="NumberOfStudents" />
+      <Button fx:id="ImportTest" layoutX="225.0" layoutY="115.0" mnemonicParsing="false" onAction="#ImportAskPage" prefHeight="39.0" prefWidth="266.0" text="ImportTest" />
+   </children>
+</AnchorPane>

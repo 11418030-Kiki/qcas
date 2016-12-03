@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphs.AskImportfileController">
+   <children>
+      <CheckBox fx:id="ICanSee" layoutX="178.0" layoutY="103.0" mnemonicParsing="false" onAction="#ICanSee" text="ICanSee" />
+   </children>
+</AnchorPane>
