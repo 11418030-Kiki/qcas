@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="216.0" layoutY="14.0" prefHeight="35.0" prefWidth="141.0" text="WELCOME">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutY="110.0" prefHeight="219.0" prefWidth="200.0">
+         <children>
+            <SplitPane orientation="VERTICAL" prefHeight="332.0" prefWidth="100.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="83.0" prefWidth="203.0">
+                     <children>
+                        <Button layoutX="62.0" layoutY="39.0" mnemonicParsing="false" text="Import Questions">
+                           <tooltip>
+                              <Tooltip text="QUESTIONS" />
+                           </tooltip>
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="108.0" fitWidth="66.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/question-mark_318-52837.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="192.0">
+               <children>
+                  <Button layoutX="73.0" layoutY="39.0" mnemonicParsing="false" text="Student Reports">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="66.0" fitWidth="66.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/download.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <Button layoutX="506.0" layoutY="16.0" mnemonicParsing="false" text="Logout" />
+      <ImageView fitHeight="35.0" fitWidth="57.0" layoutX="471.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Logout-512.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -5,15 +5,20 @@
  */
 package qcas;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
@@ -32,7 +37,7 @@ import javafx.scene.control.Label;
  *
  * @author aayush
  */
-public class FXMLHomeController {
+public class FXMLHomeController extends AnchorPane implements Initializable {
 
     @FXML
     private Text actiontarget;
@@ -40,22 +45,24 @@ public class FXMLHomeController {
     private TextField usernamefield;
     @FXML
     private PasswordField passwordField;
+    
+    private QCAS application;
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         Login login = new Login();
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
         String username = usernamefield.getText();
         String passsword = passwordField.getText();
         DatabaseManager dbManager = new DatabaseManager();
         //actiontarget.setText("invalid credentials");
         User user = dbManager.login(username, passsword, "student");
+        
+        Node node = (Node)event.getSource();
+        Stage stage = (Stage)node.getScene().getWindow();
         if (user != null && user.getUserID() > 0) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TakeTest.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
-                //Stage stage = new Stage();
                 stage.setScene(new Scene(root1));
                 stage.show();
             } catch (Exception e) {
@@ -63,7 +70,18 @@ public class FXMLHomeController {
             }
         } else {
             passwordField.clear(); //.setText("");
-            actiontarget.setText("invalid credentials");
+            actiontarget.setText("Invalid Credentials!");
         }
+    }
+    
+    public void setApp(QCAS application){
+        this.application = application;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        actiontarget.setText("");
+        usernamefield.setPromptText("demo");
+        passwordField.setPromptText("demo");
     }
 }

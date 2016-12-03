@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package qcas;
+package graphs;
 
+import java.io.IOException;
+import java.util.EventObject;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,27 +15,36 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author aayush
+ * @author Pansul47
  */
-public class QCAS extends Application {
+public class Graphs extends Application {
     
-    private Stage stage;
-
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-        Scene scene = new Scene(root, 630, 450);
-        stage.setTitle("Home Screen");
+        Parent root = FXMLLoader.load(getClass().getResource("prof.fxml"));
+        
+        Scene scene = new Scene(root);
+        
         stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
         stage.show();
     }
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
-    }
 
+                
+    }
+    
+        public void goToWindow (EventObject eventObject, String fxmlName) {
+    Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource(fxmlName));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        }
 }

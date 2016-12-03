@@ -12,8 +12,7 @@
       <Label fx:id="lblQuestion" layoutX="38.0" layoutY="64.0" text="Label" />
       <TextField fx:id="txtAnswer" layoutX="147.0" layoutY="124.0" />
       <Label layoutX="38.0" layoutY="124.0" text="Answer" />
-      <Button fx:id="btnPrevious" layoutX="41.0" layoutY="229.0" mnemonicParsing="false" text="Previous Question" />
-      <Button fx:id="btnNext" layoutX="226.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
-      <Button fx:id="btnEndTest" layoutX="385.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
+      <Button fx:id="btnNext" layoutX="38.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="262.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

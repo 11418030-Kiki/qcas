@@ -27,8 +27,8 @@ import java.sql.DriverManager;
 public class DatabaseManager {
 
     String url;
-    String username = "scott";
-    String password = "tiger123";
+    String username = "rajeev";
+    String password = "rajeev123";
     String query;
     Connection conn = null;
 
@@ -42,6 +42,7 @@ public class DatabaseManager {
         //username = "app";
         //password for database
         //password = "app";
+
         url = "jdbc:mysql://qcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
         //jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas?zeroDateTimeBehavior=convertToNull
         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -57,14 +58,7 @@ public class DatabaseManager {
      * @return
      */
     public User login(String userName, String userPassword, String userType) {
-        /* Connection con = DriverManager.getConnection(conn, username, password);
-        if (!con.isClosed()) {
-            con.close();
-        }
-         */
-//username and password will be varchar in database usertype is int
-        String query = "SELECT * FROM user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
-        //int userType = 0;
+        String query = "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
         User user = new User();
 
         ResultSet rs = null;
@@ -73,20 +67,47 @@ public class DatabaseManager {
             rs = stmt.executeQuery(query);
             //access resultset for every record present in the records set
             while (rs.next()) {
-                int userID = rs.getInt("USERID");
-                //String password = rs.getString("PASSWORD");
-                // userType = rs.getInt("USERTYPE");
-                String firstname = rs.getString("FIRSTNAME");
-                String lastName = rs.getString("LASTNAME");
-                //char gender = (rs.getString("Gender")).charAt(0);
+                int userID = rs.getInt("userID");
+                String firstname = rs.getString("firstNAME");
+                String lastName = rs.getString("lastNAME");
                 user = new User(userID, userName, userPassword, userType, firstname, lastName);
             }
+
             return user;//null if wrong credentials
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             //System.exit(0);
             return user; //null 
         }
+    }
+
+    public int[] getDateDetails() throws SQLException {
+//String query2 = "SELECT * FROM qcas.test where  YEAR(testdate) = YEAR(dateadd(yy, -1, getdate()))\n AND MONTH(testdate) = MONTH(dateddd(mm, -1, getdate()))";
+        int[] arr = new int[3];
+        
+//        String query_0 = "SELECT count(*) as rc_0 FROM qcas.test where testdate < dateadd(month, -1, getdate())";
+//        String query_1 = "SELECT count(*) as rc_1 FROM qcas.test where testdate < dateadd(month, -3, getdate())";
+//        String query_2 = "SELECT count(*) as rc_2 FROM qcas.test where testdate < dateadd(month, -12, getdate())";
+
+        String query_0 = "SELECT count(*) as rc_0 FROM qcas.test";
+        String query_1 = "SELECT count(*) as rc_1 FROM qcas.test";
+        String query_2 = "SELECT count(*) as rc_2 FROM qcas.test";
+
+        ResultSet rs = null;
+        Connection con = DriverManager.getConnection(url, username, password);
+
+        for (int i = 0; i < 3; i++) {
+            Statement stmt = con.createStatement();
+            rs = stmt.executeQuery("query_" + i);
+            //access resultset for every record present in the records set
+
+            while (rs.next()) {
+
+                arr[i] = rs.getInt("rc_" + i);
+
+            }
+        }
+        return arr;//null if wrong credentials
     }
 
     /**

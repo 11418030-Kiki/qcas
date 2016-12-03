@@ -137,8 +137,7 @@ public class TFQuestionController implements Initializable {
     }
 
     @FXML
-    public void initData(Test test
-    ) {
+    public void initData(Test test) {
         testobject = test;
         lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
     }

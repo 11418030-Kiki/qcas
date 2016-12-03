@@ -113,9 +113,9 @@ public class MCQuestionController implements Initializable {
                 MAQuestionController controller = fxmlLoader.<MAQuestionController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("TF")) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("TFQuestion.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("TrueFalseQ.fxml"));
                 root1 = (Parent) fxmlLoader.load();
-                TFQuestionController controller = fxmlLoader.<TFQuestionController>getController();
+                TrueFalseQController controller = fxmlLoader.<TrueFalseQController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("FIB")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
