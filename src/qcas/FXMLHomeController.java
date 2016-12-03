@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package qcas;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -62,7 +61,7 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
         Stage stage = (Stage)node.getScene().getWindow();
         if (user != null && user.getUserID() > 0) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TakeTest.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InstructorPage.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
                 stage.setScene(new Scene(root1));
                 stage.show();
