@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -43,7 +44,8 @@ public class FXMLHomeController {
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         Login login = new Login();
-
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
         String username = usernamefield.getText();
         String passsword = passwordField.getText();
         DatabaseManager dbManager = new DatabaseManager();
@@ -53,7 +55,7 @@ public class FXMLHomeController {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TakeTest.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
+                //Stage stage = new Stage();
                 stage.setScene(new Scene(root1));
                 stage.show();
             } catch (Exception e) {
@@ -63,13 +65,5 @@ public class FXMLHomeController {
             passwordField.clear(); //.setText("");
             actiontarget.setText("invalid credentials");
         }
-
-        /*
-        if (user != null && user.getUserID() > 0) {
-            actiontarget.setText("login successful");
-        } else {
-            actiontarget.setText("invalid credentials");
-        }
-         */
     }
 }

@@ -6,21 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="qcas.MAQuestionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.MAQuestionController">
    <children>
       <Label layoutX="57.0" layoutY="29.0" text="Multiple Choice Question (Multiple Correct Answers)" />
-      <Label layoutX="57.0" layoutY="76.0" text="Label" />
-      <Label layoutX="57.0" layoutY="123.0" text="a)" />
-      <Label layoutX="57.0" layoutY="173.0" text="b)" />
-      <Label layoutX="57.0" layoutY="223.0" text="c)" />
-      <Label layoutX="57.0" layoutY="273.0" text="d)" />
-      <CheckBox layoutX="92.0" layoutY="123.0" mnemonicParsing="false" text="CheckBox" />
-      <CheckBox layoutX="92.0" layoutY="173.0" mnemonicParsing="false" text="CheckBox" />
-      <CheckBox layoutX="92.0" layoutY="223.0" mnemonicParsing="false" text="CheckBox" />
-      <CheckBox layoutX="92.0" layoutY="273.0" mnemonicParsing="false" text="CheckBox" />
-      <Button layoutX="92.0" layoutY="326.0" mnemonicParsing="false" text="Previous Question" />
-      <Button layoutX="277.0" layoutY="326.0" mnemonicParsing="false" text="Next Question" />
-      <Button layoutX="435.0" layoutY="326.0" mnemonicParsing="false" text="End Test" />
+      <Label fx:id="lblQuestion" layoutX="57.0" layoutY="76.0" text="Label" />
+      <CheckBox fx:id="cbA" layoutX="57.0" layoutY="121.0" mnemonicParsing="false" text="CheckBox" />
+      <CheckBox fx:id="cbB" layoutX="57.0" layoutY="171.0" mnemonicParsing="false" text="CheckBox" />
+      <CheckBox fx:id="cbC" layoutX="57.0" layoutY="221.0" mnemonicParsing="false" text="CheckBox" />
+      <CheckBox fx:id="cbD" layoutX="57.0" layoutY="271.0" mnemonicParsing="false" text="CheckBox" />
+      <Button fx:id="btnPrevious" layoutX="92.0" layoutY="326.0" mnemonicParsing="false" text="Previous Question" />
+      <Button fx:id="btnNext" layoutX="277.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="435.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

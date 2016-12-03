@@ -22,6 +22,15 @@ public class Question {
     private boolean optionCCorrect;
     private String optionD;
     private boolean optionDCorrect;
+    private String answer;
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
 
     /**
      *
@@ -220,7 +229,7 @@ public class Question {
      * @param optD
      * @param optDCorrect
      */
-    public Question(String questType, String questDifficulty, String question, String optA, boolean optACorrect, String optB, boolean optBCorrect, String optC, boolean optCCorrect, String optD, boolean optDCorrect) {
+    public Question(String questType, String questDifficulty, String question, String optA, boolean optACorrect, String optB, boolean optBCorrect, String optC, boolean optCCorrect, String optD, boolean optDCorrect, String answer) {
         this.questionType = questType;
         this.difficulty = questDifficulty;
         this.question = question;
@@ -232,5 +241,6 @@ public class Question {
         this.optionCCorrect = optCCorrect; //default is false
         this.optionD = optD;
         this.optionDCorrect = optDCorrect; //default is false
+        this.answer = answer;
     }
 }

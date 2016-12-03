@@ -42,8 +42,7 @@ public class DatabaseManager {
         //username = "app";
         //password for database
         //password = "app";
-
-        url = "jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
+        url = "jdbc:mysql://qcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
         //jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas?zeroDateTimeBehavior=convertToNull
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         conn = DriverManager.getConnection(url, username, password);
@@ -214,7 +213,7 @@ public class DatabaseManager {
             String optionD = rs.getString("optionD");
             boolean optionDCorrect = rs.getBoolean("optionDCorrect");
 
-            questionObject = new Question(questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect);
+            questionObject = new Question(questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect, "");
         }
         return questionObject;
     }
@@ -333,7 +332,7 @@ public class DatabaseManager {
             int a = 1;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
-           // System.exit(0);
+            // System.exit(0);
         }
 
     }

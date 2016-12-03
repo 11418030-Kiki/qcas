@@ -8,9 +8,6 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcas.backEnd.Test;
 
@@ -34,19 +30,15 @@ import qcas.backEnd.Test;
  *
  * @author aayush
  */
-public class MCQuestionController implements Initializable {
+public class TFQuestionControllerb implements Initializable {
 
     Test testobject = new Test();
     @FXML
     private Label lblQuestion;
     @FXML
-    private RadioButton rbA;
+    private RadioButton rbTrue;
     @FXML
-    private RadioButton rbB;
-    @FXML
-    private RadioButton rbC;
-    @FXML
-    private RadioButton rbD;
+    private RadioButton rbFalse;
     @FXML
     private ToggleGroup tgAnswers;
     private String answer;
@@ -57,10 +49,8 @@ public class MCQuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        rbA.setToggleGroup(tgAnswers);
-        rbB.setToggleGroup(tgAnswers);
-        rbC.setToggleGroup(tgAnswers);
-        rbD.setToggleGroup(tgAnswers);
+        rbTrue.setToggleGroup(tgAnswers);
+        rbFalse.setToggleGroup(tgAnswers);
 
         tgAnswers.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
@@ -94,7 +84,6 @@ public class MCQuestionController implements Initializable {
         } else if (!correctAnswer.equals(answer)) {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
-
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
@@ -102,8 +91,10 @@ public class MCQuestionController implements Initializable {
             controller.initData(testobject);
         } else {
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
+
             if (nextQuestionType.equals("MC")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
+                //Parent root = (Parent) fxmlLoader.load();
                 root1 = (Parent) fxmlLoader.load();
                 MCQuestionController controller = fxmlLoader.<MCQuestionController>getController();
                 controller.initData(testobject);
@@ -115,7 +106,7 @@ public class MCQuestionController implements Initializable {
             } else if (nextQuestionType.equals("TF")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("TFQuestion.fxml"));
                 root1 = (Parent) fxmlLoader.load();
-                TFQuestionController controller = fxmlLoader.<TFQuestionController>getController();
+                TFQuestionControllerb controller = fxmlLoader.<TFQuestionControllerb>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("FIB")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
@@ -123,16 +114,17 @@ public class MCQuestionController implements Initializable {
                 FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
                 controller.initData(testobject);
             }
-        }
 
-        //Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
+            //Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        }
     }
 
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
-        Node node = (Node) event.getSource();
+         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
@@ -145,13 +137,10 @@ public class MCQuestionController implements Initializable {
     }
 
     @FXML
-    public void initData(Test test) {
+    public void initData(Test test
+    ) {
         testobject = test;
         lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
-        rbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
-        rbB.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionB());
-        rbC.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionC());
-        rbD.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionD());
     }
 
 }

@@ -19,9 +19,10 @@ public class QCAS extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("TakeTest.fxml"));
 
-        Scene scene = new Scene(root, 300, 275);
+        Scene scene = new Scene(root, 500, 375);
+//        Scene scene = new Scene(root, 300, 275);
         stage.setTitle("Home Screen");
         //scenetitle.setId("welcome-text");
         //actiontarget.setId("actiontarget");
