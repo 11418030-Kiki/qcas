@@ -85,8 +85,8 @@ public class DatabaseManager {
 //String query2 = "SELECT * FROM qcas.test where  YEAR(testdate) = YEAR(dateadd(yy, -1, getdate()))\n AND MONTH(testdate) = MONTH(dateddd(mm, -1, getdate()))";
         int[] arr = new int[3];
         String query_1 = "SELECT count(*) as rc FROM qcas.test where testdate < dateadd(month, -1, getdate())";
-        String query_2 = "SELECT count(*) FROM qcas.test where testdate < dateadd(month, -3, getdate())";
-        String query_3 = "SELECT count(*) FROM qcas.test where testdate < dateadd(month, -12, getdate())";
+        String query_2 = "SELECT count(*) as rc FROM qcas.test where testdate < dateadd(month, -3, getdate())";
+        String query_3 = "SELECT count(*) as rc FROM qcas.test where testdate < dateadd(month, -12, getdate())";
         ResultSet rs = null;
         Connection con = DriverManager.getConnection(url, username, password);
 
