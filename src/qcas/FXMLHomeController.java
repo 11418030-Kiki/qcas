@@ -50,7 +50,6 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
-        Login login = new Login();
 
         String username = usernamefield.getText();
         String passsword = passwordField.getText();

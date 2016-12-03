@@ -5,15 +5,11 @@
  */
 package qcas.backEnd;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Random;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -67,9 +63,9 @@ public class DatabaseManager {
             rs = stmt.executeQuery(query);
             //access resultset for every record present in the records set
             while (rs.next()) {
-                int userID = rs.getInt("ID");
-                String firstname = rs.getString("FIRSTNAME");
-                String lastName = rs.getString("LASTNAME");
+                int userID = rs.getInt("userID");
+                String firstname = rs.getString("firstNAME");
+                String lastName = rs.getString("lastNAME");
                 user = new User(userID, userName, userPassword, userType, firstname, lastName);
             }
             
@@ -131,15 +127,17 @@ public class DatabaseManager {
 
             for (Question quest : arrQuestion) {
                 // Add a record into the QUIZ table of the database
-                query = "INSERT INTO QUIZ VALUES ('" + quest.getQuestionType() + "','" + quest.getDifficulty() + "','" + quest.getQuestion() + "','" + quest.getOptionA();
+                query = "INSERT INTO qcas.questions VALUES (NULL,'" + quest.getQuestionType() + "','" + quest.getDifficulty() + "','" + quest.getQuestion() + "','" + quest.getOptionA();
 
-                if (quest.getQuestionType().equals("MC") || quest.getQuestionType().equals("MA")) {
+                //if (quest.getQuestionType().equals("MC") || quest.getQuestionType().equals("MA")) {
                     query += "'," + quest.getOptionACorrect() + ",'" + quest.getOptionB() + "'," + quest.getOptionBCorrect() + ",'" + quest.getOptionC() + "'," + quest.getOptionCCorrect() + ",'" + quest.getOptionD() + "'," + quest.getOptionDCorrect() + ")";
 
-                } else //if(quest.getQuestionType().equals("TF") || quest.getQuestionType().equals("FIB"))
-                {
-                    query += "')";
-                }
+                //} else if(quest.getQuestionType().equals("TF") || quest.getQuestionType().equals("FIB")){
+                    
+                //}
+                
+                //query += "')";
+                
 
                 stmt.executeUpdate(query);
             }
