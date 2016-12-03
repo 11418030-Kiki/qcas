@@ -87,9 +87,10 @@ public class DatabaseManager {
         String query_1 = "SELECT count(*) as rc FROM qcas.test where testdate < dateadd(month, -1, getdate())";
         String query_2 = "SELECT count(*) FROM qcas.test where testdate < dateadd(month, -3, getdate())";
         String query_3 = "SELECT count(*) FROM qcas.test where testdate < dateadd(month, -12, getdate())";
+        ResultSet rs = null;
+        Connection con = DriverManager.getConnection(url, username, password);
+
         for (int i = 0; i < 3; i++) {
-            ResultSet rs = null;
-            Connection con = DriverManager.getConnection(url, username, password);
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery("query_" + i);
             //access resultset for every record present in the records set
