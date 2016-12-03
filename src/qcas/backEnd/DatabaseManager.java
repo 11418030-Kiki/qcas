@@ -85,18 +85,18 @@ public class DatabaseManager {
 //String query2 = "SELECT * FROM qcas.test where  YEAR(testdate) = YEAR(dateadd(yy, -1, getdate()))\n AND MONTH(testdate) = MONTH(dateddd(mm, -1, getdate()))";
         int[] arr = new int[3];
         
-//        String query_1 = "SELECT count(*) as rc_1 FROM qcas.test where testdate < dateadd(month, -1, getdate())";
-//        String query_2 = "SELECT count(*) as rc_2 FROM qcas.test where testdate < dateadd(month, -3, getdate())";
-//        String query_3 = "SELECT count(*) as rc_3 FROM qcas.test where testdate < dateadd(month, -12, getdate())";
+//        String query_0 = "SELECT count(*) as rc_0 FROM qcas.test where testdate < dateadd(month, -1, getdate())";
+//        String query_1 = "SELECT count(*) as rc_1 FROM qcas.test where testdate < dateadd(month, -3, getdate())";
+//        String query_2 = "SELECT count(*) as rc_2 FROM qcas.test where testdate < dateadd(month, -12, getdate())";
 
+        String query_0 = "SELECT count(*) as rc_0 FROM qcas.test";
         String query_1 = "SELECT count(*) as rc_1 FROM qcas.test";
         String query_2 = "SELECT count(*) as rc_2 FROM qcas.test";
-        String query_3 = "SELECT count(*) as rc_3 FROM qcas.test";
 
         ResultSet rs = null;
         Connection con = DriverManager.getConnection(url, username, password);
 
-        for (int i = 1; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery("query_" + i);
             //access resultset for every record present in the records set
