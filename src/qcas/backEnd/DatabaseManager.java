@@ -96,7 +96,7 @@ public class DatabaseManager {
         ResultSet rs = null;
         Connection con = DriverManager.getConnection(url, username, password);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i < 4; i++) {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery("query_" + i);
             //access resultset for every record present in the records set
