@@ -67,18 +67,40 @@ public class DatabaseManager {
             rs = stmt.executeQuery(query);
             //access resultset for every record present in the records set
             while (rs.next()) {
-                int userID = rs.getInt("ID");
-                String firstname = rs.getString("FIRSTNAME");
-                String lastName = rs.getString("LASTNAME");
+                int userID = rs.getInt("userID");
+                String firstname = rs.getString("firstNAME");
+                String lastName = rs.getString("lastNAME");
                 user = new User(userID, userName, userPassword, userType, firstname, lastName);
             }
-            
+
             return user;//null if wrong credentials
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             //System.exit(0);
             return user; //null 
         }
+    }
+
+    public int[] getDateDetails() throws SQLException {
+//String query2 = "SELECT * FROM qcas.test where  YEAR(testdate) = YEAR(dateadd(yy, -1, getdate()))\n AND MONTH(testdate) = MONTH(dateddd(mm, -1, getdate()))";
+        int[] arr = new int[3];
+        String query_1 = "SELECT count(*) as rc FROM qcas.test where testdate < dateadd(month, -1, getdate())";
+        String query_2 = "SELECT count(*) FROM qcas.test where testdate < dateadd(month, -3, getdate())";
+        String query_3 = "SELECT count(*) FROM qcas.test where testdate < dateadd(month, -12, getdate())";
+        for (int i = 0; i < 3; i++) {
+            ResultSet rs = null;
+            Connection con = DriverManager.getConnection(url, username, password);
+            Statement stmt = con.createStatement();
+            rs = stmt.executeQuery("query_" + i);
+            //access resultset for every record present in the records set
+
+            while (rs.next()) {
+
+                arr[i] = rs.getInt("rc");
+
+            }
+        }
+        return arr;//null if wrong credentials
     }
 
     /**
@@ -324,7 +346,7 @@ public class DatabaseManager {
             int a = 1;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
-           // System.exit(0);
+            // System.exit(0);
         }
 
     }
