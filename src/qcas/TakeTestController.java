@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -48,9 +49,24 @@ public class TakeTestController implements Initializable {
         // TODO
     }
 
+    private ArrayList<Question> getQList() {
+        ArrayList<Question> questionList = new ArrayList<Question>();
+        questionList.add(new Question(1,"MC", "E", "ABCDE1", "A", true, "B", false, "C", false, "D", false, "A"));
+        questionList.add(new Question(2,"MA", "E", "ABCDE2", "A", true, "B", true, "C", false, "D", false, "A,B"));
+       questionList.add(new Question(3,"FIB", "E", "ABCDE4 __________", "aayushb1", false, "", false, "", false, "", false, "aayushb1"));
+        questionList.add(new Question(4,"MA", "M", "ABCDE5", "A", true, "B", true, "C", true, "D", false, "A,B,C")); 
+        questionList.add(new Question(5,"TF", "E", "ABCDE3", "True", false, "", false, "", false, "", false, "True"));
+        
+        // questionList.add(new Question("MA", "H", "ABCDE6", "A", true, "B", true, "C", true, "D", true));
+
+        return questionList;
+    }
+
     @FXML
     protected void handleTakeTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //read the combobox selected value
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
         String numberOfQues = (String) cmbNoOfQuestions.getValue();
         String difficultyLevel = (String) cmbDifficultyLevel.getValue();
         int numberOfQuestions;
@@ -59,30 +75,55 @@ public class TakeTestController implements Initializable {
         if (!(numberOfQues.equals(cmbNoOfQuestions.getPromptText())) && !(difficultyLevel.equals(cmbDifficultyLevel.getPromptText()))) {
             //convert number of question value to int
             numberOfQuestions = Integer.parseInt((String) cmbNoOfQuestions.getValue());
-            DatabaseManager dbManager = new DatabaseManager();
+            //DatabaseManager dbManager = new DatabaseManager();
             questionList = new ArrayList<Question>();
             //create a test object
             Test test = new Test(1, numberOfQuestions, difficultyLevel);
-            questionList = test.generateTest(1, numberOfQuestions, difficultyLevel);
+            //here
+            //questionList = test.generateTest(1, numberOfQuestions, difficultyLevel);
+            questionList = getQList();
             test.setQuestionList(questionList);
+            test.setNumberOfQuestions(5);
+            String[] answers = new String[5];
+            answers[0] = "A";
+            answers[1] = "A,B";
+            answers[2] = "True";
+            answers[3] = "aayushb1";
+            answers[4] = "A,B,C";
+            //answers[5] = "A,B,C,D";
+
+            test.setAnswerArrayList(answers);
+            test.setCurrentQuestionNumber(0);
             //procedd only if number of questions returned is equal to the number of questions selected by the user
             if (questionList != null && questionList.size() == numberOfQuestions) {
                 try {
+                    Parent root1 = null;
+                    //here
+                    //String nextQuestionType = questionList.get(0).getQuestionType();
                     String nextQuestionType = questionList.get(0).getQuestionType();
                     FXMLLoader fxmlLoader = null;
                     if (nextQuestionType.equals("MC")) {
                         fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
+                        //Parent root = (Parent) fxmlLoader.load();
+                        root1 = (Parent) fxmlLoader.load();
+                        MCQuestionController controller = fxmlLoader.<MCQuestionController>getController();
+                        controller.initData(test);
                     } else if (nextQuestionType.equals("MA")) {
                         fxmlLoader = new FXMLLoader(getClass().getResource("MAQuestion.fxml"));
+                        root1 = (Parent) fxmlLoader.load();
+                        MAQuestionController controller = fxmlLoader.<MAQuestionController>getController();
+                        controller.initData(test);
                     } else if (nextQuestionType.equals("TF")) {
                         fxmlLoader = new FXMLLoader(getClass().getResource("TFQuestion.fxml"));
+                        root1 = (Parent) fxmlLoader.load();
+                        TFQuestionController controller = fxmlLoader.<TFQuestionController>getController();
+                        controller.initData(test);
                     } else if (nextQuestionType.equals("FIB")) {
                         fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
+                        root1 = (Parent) fxmlLoader.load();
+                        FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
+                        controller.initData(test);
                     }
-
-                    Parent root1 = (Parent) fxmlLoader.load();
-                    root1.setUserData(test);
-                    Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
                     stage.show();
 

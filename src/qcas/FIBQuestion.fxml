@@ -6,15 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="qcas.FIBQuestionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.FIBQuestionController">
    <children>
       <Label layoutX="38.0" layoutY="27.0" text="Fill in the blanks type question" />
-      <Label layoutX="38.0" layoutY="64.0" text="Label" />
-      <TextField layoutX="147.0" layoutY="124.0" />
+      <Label fx:id="lblQuestion" layoutX="38.0" layoutY="64.0" text="Label" />
+      <TextField fx:id="txtAnswer" layoutX="147.0" layoutY="124.0" />
       <Label layoutX="38.0" layoutY="124.0" text="Answer" />
-      <Button layoutX="41.0" layoutY="229.0" mnemonicParsing="false" text="Previous Question" />
-      <Button layoutX="226.0" layoutY="229.0" mnemonicParsing="false" text="Next Question" />
-      <Button layoutX="385.0" layoutY="229.0" mnemonicParsing="false" text="End Test" />
+      <Button fx:id="btnNext" layoutX="38.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="262.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

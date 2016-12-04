@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package qcas;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

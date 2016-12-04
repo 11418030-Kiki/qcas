@@ -20,7 +20,8 @@ public class Test {
     private int numberOfQuestions;
     private String difficulty;
     private ArrayList<Question> questionList;
-    private ArrayList<String> answerArrayList;
+    //private ArrayList<String> answerArrayList;
+    private String[] answerArrayList;
     private int[] isAnswerCorrect;
     private int correctQuestions;
     private int incorrectQuestions;
@@ -55,10 +56,10 @@ public class Test {
     public void setQuestionList(ArrayList<Question> questionList) {
         this.questionList = questionList;
     }
-    public ArrayList<String> getAnswerArrayList() {
+    public String[] getAnswerArrayList() {
         return this.answerArrayList;
     }
-    public void setAnswerArrayList(ArrayList<String> answerArrayList) {
+    public void setAnswerArrayList(String[] answerArrayList) {
         this.answerArrayList = answerArrayList;
     }
     public int[] getIsAnswerCorrectArray() {
@@ -76,7 +77,7 @@ public class Test {
     public int getIncorrectQuestions() {
         return this.incorrectQuestions;
     }
-    public void setInCorrectQuestions(int incorrectQuestions) {
+    public void setIncorrectQuestions(int incorrectQuestions) {
         this.incorrectQuestions = incorrectQuestions;
     }
     public int getUnansweredQuestions() {
