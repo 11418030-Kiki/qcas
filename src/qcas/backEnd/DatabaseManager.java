@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.Random;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * DatabaseManager handles database operations, creates connection, inserts and
@@ -80,30 +83,35 @@ public class DatabaseManager {
     public int[] getDateDetails() throws SQLException {
 //String query2 = "SELECT * FROM qcas.test where  YEAR(testdate) = YEAR(dateadd(yy, -1, getdate()))\n AND MONTH(testdate) = MONTH(dateddd(mm, -1, getdate()))";
         int[] arr = new int[3];
-        
+
 //        String query_0 = "SELECT count(*) as rc_0 FROM qcas.test where testdate < dateadd(month, -1, getdate())";
 //        String query_1 = "SELECT count(*) as rc_1 FROM qcas.test where testdate < dateadd(month, -3, getdate())";
 //        String query_2 = "SELECT count(*) as rc_2 FROM qcas.test where testdate < dateadd(month, -12, getdate())";
-
         String query_0 = "SELECT count(*) as rc_0 FROM qcas.test";
         String query_1 = "SELECT count(*) as rc_1 FROM qcas.test";
         String query_2 = "SELECT count(*) as rc_2 FROM qcas.test";
 
         ResultSet rs = null;
-        Connection con = DriverManager.getConnection(url, username, password);
+        //Connection con = DriverManager.getConnection(url, username, password);
+        try (Connection con = DriverManager.getConnection(url, username, password)) {
+            for (int i = 0; i < 3; i++) {
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery("query_" + i);
+                //access resultset for every record present in the records set
 
-        for (int i = 0; i < 3; i++) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery("query_" + i);
-            //access resultset for every record present in the records set
+                while (rs.next()) {
 
-            while (rs.next()) {
+                    arr[i] = rs.getInt("rc_" + i);
 
-                arr[i] = rs.getInt("rc_" + i);
-
+                }
             }
+            return arr;//null if wrong credentials
+        }catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            //System.exit(0);
+           // return user; //null 
         }
-        return arr;//null if wrong credentials
+        return arr;
     }
 
     /**
@@ -159,15 +167,11 @@ public class DatabaseManager {
                 query = "INSERT INTO qcas.questions VALUES (NULL,'" + quest.getQuestionType() + "','" + quest.getDifficulty() + "','" + quest.getQuestion() + "','" + quest.getOptionA();
 
                 //if (quest.getQuestionType().equals("MC") || quest.getQuestionType().equals("MA")) {
-                    query += "'," + quest.getOptionACorrect() + ",'" + quest.getOptionB() + "'," + quest.getOptionBCorrect() + ",'" + quest.getOptionC() + "'," + quest.getOptionCCorrect() + ",'" + quest.getOptionD() + "'," + quest.getOptionDCorrect() + ")";
+                query += "'," + quest.getOptionACorrect() + ",'" + quest.getOptionB() + "'," + quest.getOptionBCorrect() + ",'" + quest.getOptionC() + "'," + quest.getOptionCCorrect() + ",'" + quest.getOptionD() + "'," + quest.getOptionDCorrect() + ")";
 
                 //} else if(quest.getQuestionType().equals("TF") || quest.getQuestionType().equals("FIB")){
-                    
                 //}
-                
                 //query += "')";
-                
-
                 stmt.executeUpdate(query);
             }
         } catch (SQLException e) {
@@ -221,7 +225,7 @@ public class DatabaseManager {
         //access resultset for every record present in the records set
         while (rs.next()) {
             int questionID = rs.getInt("questionID");
-            String difficulty = rs.getString("difficulty");
+            String difficulty = rs.getString("difficultyLevel");
             String question = rs.getString("question");
             String optionA = rs.getString("optionA");
             boolean optionACorrect = rs.getBoolean("optionACorrect");
@@ -231,8 +235,27 @@ public class DatabaseManager {
             boolean optionCCorrect = rs.getBoolean("optionCCorrect");
             String optionD = rs.getString("optionD");
             boolean optionDCorrect = rs.getBoolean("optionDCorrect");
-
-            questionObject = new Question(questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect);
+            StringBuilder answerString = new StringBuilder();
+            if(questionType.equals("MC") || questionType.equals("MA")){
+                if(optionACorrect){
+                    answerString.append("A").append(",");
+                }
+                if(optionBCorrect){
+                    answerString.append("B").append(",");
+                }
+                if(optionCCorrect){
+                    answerString.append("C").append(",");
+                }
+                if(optionDCorrect){
+                    answerString.append("D").append(",");
+                }
+                if(answerString.length()>0){
+                    answerString.setLength(answerString.length()-1);
+                }
+            }else if(questionType.equals("TF") || questionType.equals("FIB")){
+                answerString.append(optionA);
+            }
+            questionObject = new Question(questionID,questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect,answerString.toString());
         }
         return questionObject;
     }
@@ -248,26 +271,29 @@ public class DatabaseManager {
      */
     public ArrayList<Question> generateTest(int numberOfQuest, String testDifficultyLevel) throws SQLException {
         //query to be executed, finds sailor details with1 max salary in every position
-        String query = "Select * from question where difficulty = '" + testDifficultyLevel + "'";
+        String query = "Select * from qcas.questions where difficultyLevel = '" + testDifficultyLevel + "'";
         String questionType;
         ArrayList<Question> questionList = new ArrayList<>();
+        HashMap<Integer,Question> uniqueQuesMap = new HashMap();
         ResultSet rs = null;
         try (Connection con = DriverManager.getConnection(url, username, password)) {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            for (int i = 0; i < numberOfQuest; i++) {
+            while(uniqueQuesMap.size()<3){
                 questionType = getRandomQuestionType();
-                query = "Select * from Question where questionType = '" + questionType + "' and difficulty = '" + testDifficultyLevel + "'";
+                query = "Select * from qcas.questions where questionType = '" + questionType + "' and difficultyLevel = '" + testDifficultyLevel + "'";
                 Question questionObject = getQuestionFromDB(con, query, questionType);
-                questionList.add(questionObject);
+                uniqueQuesMap.put(questionObject.getQuestionID(),questionObject);
+            }
+            for(Map.Entry<Integer,Question> entry:uniqueQuesMap.entrySet()){
+                questionList.add(entry.getValue());
             }
             Collections.shuffle(questionList);
-            return questionList;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
-            return questionList;
             //System.exit(0);
         }
+        return questionList;
     }
 
     /**
@@ -289,7 +315,7 @@ public class DatabaseManager {
                 //for (int i = 0; i < numberOfQuest; i++) {
                 while (numberOfQuestOfAllDificultyType[0] > 0) {
                     questionType = getRandomQuestionType();
-                    query = "Select * from Question where questionType = '" + questionType + "' and difficulty = 'E'";
+                    query = "Select * from Question where questionType = '" + questionType + "' and difficultyLevel = 'E'";
                     Question questionObject = getQuestionFromDB(con, query, questionType);
                     //add this question to the questionlist only if it is not already present
                     if (!questionList.contains(questionObject)) {
@@ -300,7 +326,7 @@ public class DatabaseManager {
                 }
                 while (numberOfQuestOfAllDificultyType[1] > 0) {
                     questionType = getRandomQuestionType();
-                    query = "Select * from Question where questionType = '" + questionType + "' and difficulty = 'M'";
+                    query = "Select * from Question where questionType = '" + questionType + "' and difficultyLevel = 'M'";
                     Question questionObject = getQuestionFromDB(con, query, questionType);
                     //add this question to the questionlist only if it is not already present
                     if (!questionList.contains(questionObject)) {
@@ -311,7 +337,7 @@ public class DatabaseManager {
                 }
                 while (numberOfQuestOfAllDificultyType[2] > 0) {
                     questionType = getRandomQuestionType();
-                    query = "Select * from Question where questionType = '" + questionType + "' and difficulty = 'H'";
+                    query = "Select * from Question where questionType = '" + questionType + "' and difficultyLevel = 'H'";
                     Question questionObject = getQuestionFromDB(con, query, questionType);
                     //add this question to the questionlist only if it is not already present
                     if (!questionList.contains(questionObject)) {

@@ -21,7 +21,7 @@ public class QCAS extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("QuestionUploader.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Demo.fxml"));
         Scene scene = new Scene(root, 630, 450);
         stage.setTitle("Home Screen");
         stage.setScene(scene);

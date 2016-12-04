@@ -11,6 +11,8 @@ package qcas.backEnd;
  */
 public class Question {
 
+    
+    private Integer questionID;
     private String questionType;
     private String difficulty;
     private String question;
@@ -22,7 +24,7 @@ public class Question {
     private boolean optionCCorrect;
     private String optionD;
     private boolean optionDCorrect;
-   
+    private String answerString;
 
     /**
      *
@@ -221,7 +223,8 @@ public class Question {
      * @param optD
      * @param optDCorrect
      */
-    public Question(String questType, String questDifficulty, String question, String optA, boolean optACorrect, String optB, boolean optBCorrect, String optC, boolean optCCorrect, String optD, boolean optDCorrect) {
+    public Question(Integer questionID, String questType, String questDifficulty, String question, String optA, boolean optACorrect, String optB, boolean optBCorrect, String optC, boolean optCCorrect, String optD, boolean optDCorrect, String answerString) {
+        this.questionID=questionID;
         this.questionType = questType;
         this.difficulty = questDifficulty;
         this.question = question;
@@ -233,5 +236,22 @@ public class Question {
         this.optionCCorrect = optCCorrect; //default is false
         this.optionD = optD;
         this.optionDCorrect = optDCorrect; //default is false
+        this.answerString=answerString;
+    }
+
+    public String getAnswerString() {
+        return answerString;
+    }
+
+    public void setAnswerString(String answerString) {
+        this.answerString = answerString;
+    }
+
+    public Integer getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(Integer questionID) {
+        this.questionID = questionID;
     }
 }
