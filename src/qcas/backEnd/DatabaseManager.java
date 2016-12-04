@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Random;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSetMetaData;
 
 /**
  * DatabaseManager handles database operations, creates connection, inserts and
@@ -89,24 +90,36 @@ public class DatabaseManager {
 //        String query_1 = "SELECT count(*) as rc_1 FROM qcas.test where testdate < dateadd(month, -3, getdate())";
 //        String query_2 = "SELECT count(*) as rc_2 FROM qcas.test where testdate < dateadd(month, -12, getdate())";
 
-        String query_0 = "SELECT count(*) as rc_0 FROM qcas.test";
+        String query_0 = "SELECT count(*) FROM qcas.test";
         String query_1 = "SELECT count(*) as rc_1 FROM qcas.test";
         String query_2 = "SELECT count(*) as rc_2 FROM qcas.test";
 
         ResultSet rs = null;
         Connection con = DriverManager.getConnection(url, username, password);
+        
+        Statement stmt = con.createStatement();
+        rs = stmt.executeQuery("SELECT count(*) as rc_0 FROM qcas.test");
+        
+        while(rs.next()){
+            ResultSetMetaData rsmd = rs.getMetaData();
+            System.out.println(rsmd.getColumnCount());
+                        System.out.println(rsmd.getColumnName(2));
 
-        for (int i = 0; i < 3; i++) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery("query_" + i);
-            //access resultset for every record present in the records set
-
-            while (rs.next()) {
-
-                arr[i] = rs.getInt("rc_" + i);
-
-            }
+            int abc = rs.getInt(2);
         }
+        
+
+//        for (int i = 0; i < 3; i++) {
+//            Statement stmt = con.createStatement();
+//            rs = stmt.executeQuery("query_" + i);
+//            //access resultset for every record present in the records set
+//
+//            while (rs.next()) {
+//
+//                arr[i] = rs.getInt("rc_" + i);
+//
+//            }
+//        }
         return arr;//null if wrong credentials
     }
 
