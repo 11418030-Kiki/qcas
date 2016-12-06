@@ -26,14 +26,7 @@ import qcas.backEnd.Login;
 import qcas.backEnd.Test;
 import qcas.backEnd.User;
 
-/*
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
- */
+
 /**
  *
  * @author aayush
@@ -48,7 +41,7 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
     private PasswordField passwordField;
 
     private QCAS application;
-   User userObject = new User();
+    User userObject = new User();
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
@@ -61,22 +54,23 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
 
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        //if (user != null && user.getUserID() > 0) {
-        if (true) {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                GenTestController controller = fxmlLoader.<GenTestController>getController();
-                controller.initData(user);
-                stage.setTitle("Take Test");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
+        if (user != null && user.getUserID() > 0) {
+            if (true) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    GenTestController controller = fxmlLoader.<GenTestController>getController();
+                    controller.initData(user);
+                    stage.setTitle("Take Test");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                passwordField.clear(); //.setText("");
+                actiontarget.setText("Invalid Credentials!");
             }
-        } else {
-            passwordField.clear(); //.setText("");
-            actiontarget.setText("Invalid Credentials!");
         }
     }
 

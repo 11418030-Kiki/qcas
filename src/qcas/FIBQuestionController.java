@@ -8,6 +8,7 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,9 +45,6 @@ public class FIBQuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (testobject.getCurrentQuestionNumber() == (testobject.getNumberOfQuestions() - 2)) {
-            //btnNext.
-
-//((Button)btnNext)
         }
     }
 
@@ -55,13 +53,13 @@ public class FIBQuestionController implements Initializable {
     }
 
     @FXML
-    protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
+    protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         String userAnswer = ((TextField) txtAnswer).getText();
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         int currentQuestion = testobject.getCurrentQuestionNumber();
         String correctAnswer = testobject.getQuestionList().get(currentQuestion).getAnswerString();
-        testobject.setCurrentQuestionNumber(currentQuestion + 1); //.getQuestionList().get(currectQuestion).getAnswer();
+        testobject.setCurrentQuestionNumber(currentQuestion + 1);
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
         if (userAnswer.equals("")) {
@@ -73,9 +71,11 @@ public class FIBQuestionController implements Initializable {
         }
 
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            //createTestResult();
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
+            // createTestResult();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
@@ -106,29 +106,47 @@ public class FIBQuestionController implements Initializable {
             }
 
         }
-        
+
         stage.setScene(new Scene(root1));
         stage.show();
     }
 
     @FXML
-    protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
+    protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
+        //createTestResult();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
         fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
         root1 = (Parent) fxmlLoader.load();
+        stage.setTitle("Test Report");
         EndTestController controller = fxmlLoader.<EndTestController>getController();
         controller.initData(testobject);
         stage.setScene(new Scene(root1));
         stage.show();
     }
 
+    /*
+    void createTestResult() {
+        int currentQuestion = testobject.getCurrentQuestionNumber();
+        int totalQuestion = testobject.getNumberOfQuestions();
+        if (currentQuestion < totalQuestion - 1) {
+            int questionsLeft = totalQuestion - currentQuestion;
+            testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + questionsLeft);
+        }
+
+        int Score = testobject.getCorrectQuestions();
+        testobject.setScore(testobject.getCorrectQuestions());
+        double scaledScore = testobject.getCorrectQuestions() * 100.0 / testobject.getNumberOfQuestions();
+        testobject.setScaledScore(scaledScore);
+
+    }
+     */
     @FXML
     public void initData(Test test) {
         testobject = test;
-        lblQuestion.setText("Q "+ (testobject.getCurrentQuestionNumber() +1)+". "+(testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
+        lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 
 }
