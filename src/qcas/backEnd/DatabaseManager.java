@@ -33,6 +33,10 @@ public class DatabaseManager {
 
     /**
      * constructor for db manager class
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.sql.SQLException
+     * @throws java.lang.IllegalAccessException
      */
     public DatabaseManager() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //url for database
@@ -57,19 +61,20 @@ public class DatabaseManager {
      * @return
      */
     public User login(String userName, String userPassword, String userType) {
-        String query = "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
+        String query3= "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
         User user = new User();
 
         ResultSet rs = null;
         try (Connection con = DriverManager.getConnection(url, username, password)) {
             Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
+            rs = stmt.executeQuery(query3);
             //access resultset for every record present in the records set
             while (rs.next()) {
                 int userID = rs.getInt("userID");
                 String firstname = rs.getString("firstNAME");
                 String lastName = rs.getString("lastNAME");
-                user = new User(userID, userName, userPassword, userType, firstname, lastName);
+                String course = rs.getString("course");
+                user = new User(userID, userName, userPassword, userType, firstname, lastName, course);
             }
 
             return user;//null if wrong credentials
@@ -135,8 +140,8 @@ public class DatabaseManager {
                 String password = rs.getString("PASSWORD");
                 String firstname = rs.getString("FIRSTNAME");
                 String lastName = rs.getString("LASTNAME");
-                char gender = (rs.getString("Gender")).charAt(0);
-                user = new User(userID, userName, password, userType, firstname, lastName);
+                String course = (rs.getString("course"));
+                user = new User(userID, userName, password, userType, firstname, lastName,course);
 
             }
             return user;
@@ -374,6 +379,23 @@ public class DatabaseManager {
             query = "INSERT INTO TEST (testID," + "29 - November - 2016" + "," + testObject.getUserID() + "," + testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() + "," + testObject.getIncorrectQuestions() + "," + testObject.getUnansweredQuestions() + "," + testObject.getScore() + "," + testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
 
             stmt.executeUpdate(query);
+            int a = 1;
+        } catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            // System.exit(0);
+        }
+
+    }
+     public void saveUserDetails(User userObject) throws SQLException {
+        String query2;
+
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            Statement stmt = con.createStatement();
+
+            query2 = "INSERT INTO user values(" + userObject.getUserID() + ",'" +  userObject.getUserName() + "','" + userObject.getPassword() + "','" + userObject.getUserType() + "','" + userObject.getFirstName() + "','" + userObject.getLastName() + "','" + userObject.getCourse() + "')";
+
+            stmt.executeUpdate(query2);
             int a = 1;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
