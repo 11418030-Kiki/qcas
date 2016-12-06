@@ -131,7 +131,7 @@ public class MCQuestionController implements Initializable {
         }
 
         //Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
 
@@ -147,26 +147,9 @@ public class MCQuestionController implements Initializable {
         stage.setTitle("Test Report");
         EndTestController controller = fxmlLoader.<EndTestController>getController();
         controller.initData(testobject);
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
-
-    /*
-    public void createTestResult() {
-        int currentQuestion = testobject.getCurrentQuestionNumber();
-        int totalQuestion = testobject.getNumberOfQuestions();
-        if (currentQuestion < totalQuestion - 1) {
-            int questionsLeft = totalQuestion - currentQuestion;
-            testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + questionsLeft);
-        }
-
-        int Score = testobject.getCorrectQuestions();
-        testobject.setScore(testobject.getCorrectQuestions());
-        double scaledScore = testobject.getCorrectQuestions() * 100.0 / testobject.getNumberOfQuestions();
-        testobject.setScaledScore(scaledScore);
-
-    }
-    */
 
     @FXML
     public void initData(Test test) {

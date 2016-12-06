@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.StudentDashboardController">
+   <children>
+      <Button layoutX="299.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleTakeTestAction" text="Start Quiz" />
+      <Button layoutX="534.0" layoutY="74.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <ImageView fitHeight="52.0" fitWidth="54.0" layoutX="535.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Logout-512.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="208.0" fitWidth="295.0" layoutX="175.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/QUIZ5.png" />
+         </image>
+      </ImageView>
+      <Text fill="#6a42da" layoutX="59.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Student Dashboard" textAlignment="CENTER" wrappingWidth="455.13671875">
+         <font>
+            <Font name="Britannic Bold" size="30.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

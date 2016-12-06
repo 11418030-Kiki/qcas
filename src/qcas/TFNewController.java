@@ -71,13 +71,11 @@ public class TFNewController implements Initializable {
     }
 
     @FXML
-    protected void handlePreviousButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
-    }
-
-    @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         String a;
-        if (answer.equals("True")) {
+        if (answer == null) {
+            a = null;
+        } else if (answer.equals("True")) {
             a = "T";
         } else {
             a = "F";
@@ -133,7 +131,7 @@ public class TFNewController implements Initializable {
             }
 
             //Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
+            stage.setScene(new Scene(root1, 630, 510));
             stage.show();
 
         }
@@ -151,30 +149,13 @@ public class TFNewController implements Initializable {
         stage.setTitle("Test Report");
         EndTestController controller = fxmlLoader.<EndTestController>getController();
         controller.initData(testobject);
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
 
-    /*
-    private void createTestResult() {
-        int currentQuestion = testobject.getCurrentQuestionNumber();
-        int totalQuestion = testobject.getNumberOfQuestions();
-        if (currentQuestion < totalQuestion - 1) {
-            int questionsLeft = totalQuestion - currentQuestion;
-            testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + questionsLeft);
-        }
-
-        int Score = testobject.getCorrectQuestions();
-        testobject.setScore(testobject.getCorrectQuestions());
-        double scaledScore = testobject.getCorrectQuestions() * 100.0 / testobject.getNumberOfQuestions();
-        testobject.setScaledScore(scaledScore);
-
-    }
-     */
     @FXML
     public void initData(Test test) {
         testobject = test;
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
-        //lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
     }
 }

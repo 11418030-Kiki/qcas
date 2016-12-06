@@ -26,7 +26,7 @@ public class Test {
     private int correctQuestions;
     private int incorrectQuestions;
     private int unansweredQuestions;
-    private Date testDate;
+    private String testDate;
     private int currentQuestionNumber;
     private int score;
     private Double scaledScore;
@@ -105,11 +105,11 @@ public class Test {
         this.unansweredQuestions = unansweredQuestions;
     }
 
-    public Date getTestDate() {
+    public String getTestDate() {
         return this.testDate;
     }
 
-    public void setTestDate(Date date) {
+    public void setTestDate(String date) {
         this.testDate = date;
     }
 
@@ -126,7 +126,7 @@ public class Test {
     }
 
     public void setScore(int score) {
-        this.score = currentQuestionNumber;
+        this.score = score;
     }
 
     public Double getScaledScore() {
