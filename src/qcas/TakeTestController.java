@@ -124,7 +124,7 @@ public class TakeTestController implements Initializable {
                         FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
                         controller.initData(test);
                     }
-                    stage.setScene(new Scene(root1));
+                    stage.setScene(new Scene(root1, 630, 510));
                     stage.show();
 
                 } catch (Exception e) {
@@ -141,7 +141,7 @@ public class TakeTestController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
 }

@@ -129,7 +129,7 @@ public class MCQuestionController implements Initializable {
         }
 
         //Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
 
@@ -143,7 +143,7 @@ public class MCQuestionController implements Initializable {
         root1 = (Parent) fxmlLoader.load();
         EndTestController controller = fxmlLoader.<EndTestController>getController();
         controller.initData(testobject);
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
 

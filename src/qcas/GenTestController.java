@@ -127,7 +127,7 @@ public class GenTestController implements Initializable {
                     }
 
                     //stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setScene(new Scene(root1));
+                    stage.setScene(new Scene(root1, 630, 510));
                     stage.show();
 
                 } catch (Exception e) {
@@ -141,12 +141,20 @@ public class GenTestController implements Initializable {
 
     @FXML
     protected void handleCancelTestButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+            stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
 
     @FXML
     public void initData(User user) {

@@ -26,7 +26,7 @@ public class QCAS extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
         //stage.getIcons().add(new Image("https://example.com/javaicon.png"));
         Scene scene = new Scene(root, 630, 510);
-        stage.setTitle("Home Screen");
+        stage.setTitle("Welcome to QCAS");
         // stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
