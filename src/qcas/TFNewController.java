@@ -8,6 +8,9 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,7 +25,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import qcas.backEnd.Test;
 
 /**
@@ -30,7 +35,7 @@ import qcas.backEnd.Test;
  *
  * @author aayush
  */
-public class TFQuestionControllerb implements Initializable {
+public class TFNewController implements Initializable {
 
     Test testobject = new Test();
     @FXML
@@ -39,6 +44,7 @@ public class TFQuestionControllerb implements Initializable {
     private RadioButton rbTrue;
     @FXML
     private RadioButton rbFalse;
+
     @FXML
     private ToggleGroup tgAnswers;
     private String answer;
@@ -85,11 +91,13 @@ public class TFQuestionControllerb implements Initializable {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
+            stage.setTitle("Test");
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
 
             if (nextQuestionType.equals("MC")) {
@@ -104,9 +112,9 @@ public class TFQuestionControllerb implements Initializable {
                 MAQuestionController controller = fxmlLoader.<MAQuestionController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("TF")) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("TFQuestion.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("TFNew.fxml"));
                 root1 = (Parent) fxmlLoader.load();
-                TFQuestionControllerb controller = fxmlLoader.<TFQuestionControllerb>getController();
+                TFNewController controller = fxmlLoader.<TFNewController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("FIB")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
@@ -124,7 +132,7 @@ public class TFQuestionControllerb implements Initializable {
 
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
-         Node node = (Node) event.getSource();
+        Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
@@ -137,10 +145,9 @@ public class TFQuestionControllerb implements Initializable {
     }
 
     @FXML
-    public void initData(Test test
-    ) {
+    public void initData(Test test) {
         testobject = test;
-        lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
+        lblQuestion.setText("Q "+ (testobject.getCurrentQuestionNumber() +1)+". "+(testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
+        //lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
     }
-
 }

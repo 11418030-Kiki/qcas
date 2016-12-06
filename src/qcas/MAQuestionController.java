@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import qcas.backEnd.Test;
 
 /**
@@ -66,23 +67,26 @@ public class MAQuestionController implements Initializable {
             selectedAnswers += cbA.getText();
         }
         if (cbB.isSelected()) {
-            if(selectedAnswers.length()>0)
-                selectedAnswers+=",";
+            if (selectedAnswers.length() > 0) {
+                selectedAnswers += ",";
+            }
             selectedAnswers += cbB.getText();
         }
         if (cbC.isSelected()) {
-            if(selectedAnswers.length()>0)
-                selectedAnswers+=",";
+            if (selectedAnswers.length() > 0) {
+                selectedAnswers += ",";
+            }
             selectedAnswers += cbC.getText();
         }
         if (cbD.isSelected()) {
-            if(selectedAnswers.length()>0)
-                selectedAnswers+=",";
+            if (selectedAnswers.length() > 0) {
+                selectedAnswers += ",";
+            }
             selectedAnswers += cbD.getText();
         }
 
         Parent root1 = null;
-        if (selectedAnswers == "") {
+        if (selectedAnswers.equals("")) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
         } else if (correctAnswer.equals(selectedAnswers)) {
             testobject.setCorrectQuestions(testobject.getCorrectQuestions() + 1);
@@ -91,6 +95,7 @@ public class MAQuestionController implements Initializable {
         }
         FXMLLoader fxmlLoader = null;
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            stage.setTitle("TestReport");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
@@ -99,6 +104,7 @@ public class MAQuestionController implements Initializable {
         } else {
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
 
+            stage.setTitle("Test");
             if (nextQuestionType.equals("MC")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
                 root1 = (Parent) fxmlLoader.load();
@@ -110,9 +116,9 @@ public class MAQuestionController implements Initializable {
                 MAQuestionController controller = fxmlLoader.<MAQuestionController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("TF")) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("TrueFalseQ.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("TFNew.fxml"));
                 root1 = (Parent) fxmlLoader.load();
-                TrueFalseQController controller = fxmlLoader.<TrueFalseQController>getController();
+                TFNewController controller = fxmlLoader.<TFNewController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("FIB")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
@@ -128,7 +134,7 @@ public class MAQuestionController implements Initializable {
 
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
-         Node node = (Node) event.getSource();
+        Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
@@ -143,7 +149,7 @@ public class MAQuestionController implements Initializable {
     @FXML
     public void initData(Test test) {
         testobject = test;
-        lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
+        lblQuestion.setText("Q "+ (testobject.getCurrentQuestionNumber() +1)+". "+(testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         cbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
         cbB.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionB());
         cbC.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionC());

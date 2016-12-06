@@ -20,17 +20,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import qcas.backEnd.DatabaseManager;
 import qcas.backEnd.Login;
 import qcas.backEnd.Question;
 import qcas.backEnd.Test;
+import qcas.backEnd.User;
 
 /**
  * FXML Controller class
  *
  * @author aayush
  */
-public class TakeTestController implements Initializable {
+public class GenTestController implements Initializable {
 
     @FXML
     private ComboBox<String> cmbNoOfQuestions;
@@ -38,27 +40,26 @@ public class TakeTestController implements Initializable {
     private ComboBox<String> cmbDifficultyLevel;
     @FXML
     private Text actiontarget;
+    User userObject = new User();
 
-    // @FXML
-    //private Combobox usernamefield;
     /**
      * Initializes the controller class.
      */
     @Override
+
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
     private ArrayList<Question> getQList() {
         ArrayList<Question> questionList = new ArrayList<Question>();
-        questionList.add(new Question(1,"MC", "E", "ABCDE1", "A", true, "B", false, "C", false, "D", false, "A"));
-        questionList.add(new Question(2,"MA", "E", "ABCDE2", "A", true, "B", true, "C", false, "D", false, "A,B"));
-       questionList.add(new Question(3,"FIB", "E", "ABCDE4 __________", "aayushb1", false, "", false, "", false, "", false, "aayushb1"));
-        questionList.add(new Question(4,"MA", "M", "ABCDE5", "A", true, "B", true, "C", true, "D", false, "A,B,C")); 
-        questionList.add(new Question(5,"TF", "E", "ABCDE3", "True", false, "", false, "", false, "", false, "True"));
-        
+        questionList.add(new Question(1, "MC", "E", "ABCDE1", "A", true, "B", false, "C", false, "D", false, "A"));
+        questionList.add(new Question(2, "MA", "E", "ABCDE2", "A", true, "B", true, "C", false, "D", false, "A,B"));
+        questionList.add(new Question(3, "FIB", "E", "ABCDE4 __________", "aayushb1", false, "", false, "", false, "", false, "aayushb1"));
+        questionList.add(new Question(4, "TF", "E", "ABCDE3", "True", false, "", false, "", false, "", false, "True"));
+        questionList.add(new Question(5, "MA", "M", "ABCDE5", "A", true, "B", true, "C", true, "D", false, "A,B,C"));
+        //questionList.add(new Question(5, "TF", "E", "ABCDE3", "True", false, "", false, "", false, "", false, "True"));
         // questionList.add(new Question("MA", "H", "ABCDE6", "A", true, "B", true, "C", true, "D", true));
-
         return questionList;
     }
 
@@ -71,8 +72,8 @@ public class TakeTestController implements Initializable {
         String difficultyLevel = (String) cmbDifficultyLevel.getValue();
         int numberOfQuestions;
         ArrayList<Question> questionList = null;
-        //procedd only if both the value from both the combobox have been selected
-        if (!(numberOfQues.equals(cmbNoOfQuestions.getPromptText())) && !(difficultyLevel.equals(cmbDifficultyLevel.getPromptText()))) {
+        //proceed only if both the value from both the combobox have been selected
+        if (numberOfQues != null && difficultyLevel != null && !(numberOfQues.equals(cmbNoOfQuestions.getPromptText())) && !(difficultyLevel.equals(cmbDifficultyLevel.getPromptText()))) {
             //convert number of question value to int
             numberOfQuestions = Integer.parseInt((String) cmbNoOfQuestions.getValue());
             //DatabaseManager dbManager = new DatabaseManager();
@@ -87,8 +88,8 @@ public class TakeTestController implements Initializable {
             String[] answers = new String[5];
             answers[0] = "A";
             answers[1] = "A,B";
-            answers[2] = "True";
-            answers[3] = "aayushb1";
+            answers[2] = "aayushb1";
+            answers[3] = "True";
             answers[4] = "A,B,C";
             //answers[5] = "A,B,C,D";
 
@@ -124,6 +125,8 @@ public class TakeTestController implements Initializable {
                         FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
                         controller.initData(test);
                     }
+
+                    //stage.initStyle(StageStyle.UNDECORATED);
                     stage.setScene(new Scene(root1));
                     stage.show();
 
@@ -143,5 +146,10 @@ public class TakeTestController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.show();
+    }
+
+    @FXML
+    public void initData(User user) {
+        userObject = user;
     }
 }

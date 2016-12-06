@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import qcas.backEnd.Test;
 
 /**
@@ -34,12 +35,19 @@ public class FIBQuestionController implements Initializable {
     @FXML
     private TextField txtAnswer;
 
+    @FXML
+    // private Button btnNext;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        if (testobject.getCurrentQuestionNumber() == (testobject.getNumberOfQuestions() - 2)) {
+            //btnNext.
+
+//((Button)btnNext)
+        }
     }
 
     @FXML
@@ -48,7 +56,7 @@ public class FIBQuestionController implements Initializable {
 
     @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
-        String userAnswer = txtAnswer.toString(); //.g;
+        String userAnswer = ((TextField) txtAnswer).getText();
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         int currentQuestion = testobject.getCurrentQuestionNumber();
@@ -56,7 +64,7 @@ public class FIBQuestionController implements Initializable {
         testobject.setCurrentQuestionNumber(currentQuestion + 1); //.getQuestionList().get(currectQuestion).getAnswer();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
-        if (userAnswer == "") {
+        if (userAnswer.equals("")) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
         } else if (correctAnswer.equals(userAnswer)) {
             testobject.setCorrectQuestions(testobject.getCorrectQuestions() + 1);
@@ -65,12 +73,14 @@ public class FIBQuestionController implements Initializable {
         }
 
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
 
+            stage.setTitle("Test");
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
 
             if (nextQuestionType.equals("MC")) {
@@ -84,9 +94,9 @@ public class FIBQuestionController implements Initializable {
                 MAQuestionController controller = fxmlLoader.<MAQuestionController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("TF")) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("TFQuestion.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("TFNew.fxml"));
                 root1 = (Parent) fxmlLoader.load();
-                TFQuestionController controller = fxmlLoader.<TFQuestionController>getController();
+                TFNewController controller = fxmlLoader.<TFNewController>getController();
                 controller.initData(testobject);
             } else if (nextQuestionType.equals("FIB")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("FIBQuestion.fxml"));
@@ -96,13 +106,14 @@ public class FIBQuestionController implements Initializable {
             }
 
         }
+        
         stage.setScene(new Scene(root1));
         stage.show();
     }
 
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
-         Node node = (Node) event.getSource();
+        Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
@@ -117,7 +128,7 @@ public class FIBQuestionController implements Initializable {
     @FXML
     public void initData(Test test) {
         testobject = test;
-        lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
+        lblQuestion.setText("Q "+ (testobject.getCurrentQuestionNumber() +1)+". "+(testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 
 }

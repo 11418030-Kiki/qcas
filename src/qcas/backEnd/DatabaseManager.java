@@ -279,7 +279,7 @@ public class DatabaseManager {
         try (Connection con = DriverManager.getConnection(url, username, password)) {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            while(uniqueQuesMap.size()<3){
+            while(uniqueQuesMap.size()<numberOfQuest){
                 questionType = getRandomQuestionType();
                 query = "Select * from qcas.questions where questionType = '" + questionType + "' and difficultyLevel = '" + testDifficultyLevel + "'";
                 Question questionObject = getQuestionFromDB(con, query, questionType);
