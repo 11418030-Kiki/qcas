@@ -249,7 +249,7 @@ public class DatabaseManager {
                 if(optionDCorrect){
                     answerString.append(optionD);
                 }
-            }if(questionType.equals("MA")){
+            }else if(questionType.equals("MA")){
                 if(optionACorrect){
                     answerString.append("A").append(",");
                 }
