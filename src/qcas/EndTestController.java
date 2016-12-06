@@ -49,8 +49,6 @@ public class EndTestController implements Initializable {
         testobject.setScore(testobject.getCorrectQuestions());
         double scaledScore = testobject.getCorrectQuestions() * 100.0 / testobject.getNumberOfQuestions();
         testobject.setScaledScore(scaledScore);
-        testobject = test;
-        // lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
         DateFormat df = new SimpleDateFormat("DD/MM/YYYY");
         Date dateobj = new Date();
         //System.out.println(df.format(dateobj));

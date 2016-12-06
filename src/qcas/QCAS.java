@@ -25,7 +25,7 @@ public class QCAS extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
         //stage.getIcons().add(new Image("https://example.com/javaicon.png"));
-        Scene scene = new Scene(root, 630, 450);
+        Scene scene = new Scene(root, 630, 510);
         stage.setTitle("Home Screen");
         // stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);

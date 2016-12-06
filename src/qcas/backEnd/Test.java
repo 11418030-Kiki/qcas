@@ -182,6 +182,25 @@ public class Test {
      */
     public int[] getRandomNumberOfQuestionForAllDifficultyTypes(int noOfQues) {
         int[] numberOfQuestion = new int[3];
+        if(noOfQues==5)
+        {
+            numberOfQuestion[0] =2;
+            numberOfQuestion[1] =2;
+            numberOfQuestion[2] =1;
+        }
+        else if(noOfQues==10)
+        {
+            numberOfQuestion[0] =3;
+            numberOfQuestion[1] =4;
+            numberOfQuestion[2] =3;
+        }
+        else if(noOfQues==15)
+        {
+            numberOfQuestion[0] =5;
+            numberOfQuestion[1] =6;
+            numberOfQuestion[2] =4;
+        }
+        /*
         Random random = new Random();
         //number of easy question 1 to (n-2) questions
         int randomEasy = random.nextInt(noOfQues - 2) + 1;
@@ -192,6 +211,7 @@ public class Test {
         numberOfQuestion[0] = randomEasy;
         numberOfQuestion[1] = randomMedium;
         numberOfQuestion[2] = randomDifficult;
+        */
         return numberOfQuestion;
     }
 

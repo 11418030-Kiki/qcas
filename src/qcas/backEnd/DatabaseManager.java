@@ -238,8 +238,21 @@ public class DatabaseManager {
             String optionD = rs.getString("optionD");
             boolean optionDCorrect = rs.getBoolean("optionDCorrect");
             StringBuilder answerString = new StringBuilder();
-            if (questionType.equals("MC") || questionType.equals("MA")) {
-                if (optionACorrect) {
+            if(questionType.equals("MC")){
+                if(optionACorrect){
+                    answerString.append(optionA);
+                }
+                if(optionBCorrect){
+                    answerString.append(optionB);
+                }
+                if(optionCCorrect){
+                    answerString.append(optionC);
+                }
+                if(optionDCorrect){
+                    answerString.append(optionD);
+                }
+            }else if(questionType.equals("MA")){
+                if(optionACorrect){
                     answerString.append("A").append(",");
                 }
                 if (optionBCorrect) {

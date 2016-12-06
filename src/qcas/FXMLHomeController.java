@@ -16,16 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
-import qcas.backEnd.Login;
-import qcas.backEnd.Test;
 import qcas.backEnd.User;
-
 
 /**
  *
@@ -39,6 +37,8 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
     private TextField usernamefield;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private ComboBox<String> cmbLoginType;
 
     private QCAS application;
     User userObject = new User();
@@ -47,29 +47,32 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
 
         String username = usernamefield.getText();
-        String passsword = passwordField.getText();
+        String password = passwordField.getText();
         DatabaseManager dbManager = new DatabaseManager();
         //actiontarget.setText("invalid credentials");
-        User user = dbManager.login(username, passsword, "student");
-
+        User user = null;
+        if (!username.isEmpty() && !password.isEmpty() && !cmbLoginType.getValue().isEmpty()) {
+            user = dbManager.login(username, password, cmbLoginType.getValue());
+        } else {
+            usernamefield.clear();
+            passwordField.clear();
+            actiontarget.setText("Please enter a valid username and password !");
+            return;
+        }
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        if (user != null && user.getUserID() > 0) {
-            if (true) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
-                    GenTestController controller = fxmlLoader.<GenTestController>getController();
-                    controller.initData(user);
-                    stage.setTitle("Take Test");
-                    stage.setScene(new Scene(root1));
-                    stage.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                passwordField.clear(); //.setText("");
-                actiontarget.setText("Invalid Credentials!");
+        //if (user != null && user.getUserID() > 0) {
+        while (true) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                GenTestController controller = fxmlLoader.<GenTestController>getController();
+                controller.initData(user);
+                stage.setTitle("Take Test");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -81,8 +84,8 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         actiontarget.setText("");
-        usernamefield.setPromptText("username");
-        passwordField.setPromptText("password");
+        usernamefield.setPromptText("Username");
+        passwordField.setPromptText("Password");
     }
 
     @FXML

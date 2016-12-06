@@ -74,14 +74,15 @@ public class GenTestController implements Initializable {
         if (numberOfQues != null && difficultyLevel != null && !(numberOfQues.equals(cmbNoOfQuestions.getPromptText())) && !(difficultyLevel.equals(cmbDifficultyLevel.getPromptText()))) {
             //convert number of question value to int
             numberOfQuestions = Integer.parseInt((String) cmbNoOfQuestions.getValue());
-            //DatabaseManager dbManager = new DatabaseManager();
+
             questionList = new ArrayList<Question>();
             //create a test object
             Test test = new Test(userObject, numberOfQuestions, difficultyLevel);
-            //here
+
             questionList = test.generateTest(numberOfQuestions, difficultyLevel);
             //questionList = getQList();
             test.setQuestionList(questionList);
+            /*
             //test.setNumberOfQuestions(5);
             String[] answers = new String[5];
             answers[0] = "A";
@@ -90,6 +91,7 @@ public class GenTestController implements Initializable {
             answers[3] = "True";
             answers[4] = "A,B,C";
             //answers[5] = "A,B,C,D";
+             */
 
 //            test.setAnswerArrayList(answers);
             test.setCurrentQuestionNumber(0);
