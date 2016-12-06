@@ -42,7 +42,7 @@ public class StudentDashboardController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             GenTestController controller = fxmlLoader.<GenTestController>getController();
-            stage.setTitle("Welcome to Student Dashboard");
+            stage.setTitle("Take a Test");
             stage.setScene(new Scene(root, 630, 510));
             stage.show();
         } catch (Exception e) {

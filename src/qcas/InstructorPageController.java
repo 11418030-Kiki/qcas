@@ -73,4 +73,7 @@ public class InstructorPageController implements Initializable {
         //dashboardChart.getData().addAll(set4);
         
     }
+    
+    
+    
 }

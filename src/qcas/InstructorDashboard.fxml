@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.InstructorDashboardController">
+   <children>
+      <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="487.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Logout-512.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="89.0" fitWidth="127.0" layoutX="41.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/upload-icon-3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="115.0" fitWidth="163.0" layoutX="52.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/studentreports.gif" />
+         </image>
+      </ImageView>
+      <Button layoutX="495.0" layoutY="91.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <Button layoutX="191.0" layoutY="132.0" mnemonicParsing="false" onAction="#importQuestions" text="Import Questions" />
+      <Button layoutX="194.0" layoutY="269.0" mnemonicParsing="false" text="Student Reports" />
+      <Text fill="#da1a3a" layoutX="32.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Instructor Dashboard">
+         <font>
+            <Font name="Britannic Bold" size="30.0" />
+         </font>
+      </Text>
+      <BarChart fx:id="barGraphStudents" layoutX="342.0" layoutY="144.0" prefHeight="200.0" prefWidth="213.0" title="Number of Students">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

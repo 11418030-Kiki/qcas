@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -69,19 +73,17 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         if (user != null && user.getUserID() > 0) {
+            System.out.println("RRB-->"+cmbLoginType.getValue());
             try {
                 if (cmbLoginType.getValue().equalsIgnoreCase("student")) {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
-                    StudentDashboardController controller = fxmlLoader.getController();
                     stage.setTitle("Welcome to Student Dashboard");
                     stage.setScene(new Scene(root, 630, 510));
                     stage.show();
-                } else {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
+                }else {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InstructorDashboard.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
-                    GenTestController controller = fxmlLoader.<GenTestController>getController();
-                    controller.initData(user);
                     stage.setTitle("Welcome to Instructor Dashboard");
                     stage.setScene(new Scene(root, 630, 510));
                     stage.show();

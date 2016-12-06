@@ -146,6 +146,22 @@ public class GenTestController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
             Parent root = (Parent) fxmlLoader.load();
+            StudentDashboardController controller = fxmlLoader.getController();
+            stage.setTitle("Welcome to Student Dashboard");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void logoutApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
             FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
             stage.setTitle("Welcome to QCAS");
             stage.setScene(new Scene(root, 630, 510));
@@ -154,7 +170,6 @@ public class GenTestController implements Initializable {
             e.printStackTrace();
         }
     }
-    
 
     @FXML
     public void initData(User user) {
