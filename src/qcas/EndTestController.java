@@ -64,8 +64,8 @@ public class EndTestController implements Initializable {
         testobject = test;
         int currentQuestion = testobject.getCurrentQuestionNumber();
         int totalQuestion = testobject.getNumberOfQuestions();
-        if (currentQuestion < totalQuestion - 1) {
-            int questionsLeft = totalQuestion - currentQuestion;
+        if (currentQuestion < totalQuestion) {
+            int questionsLeft = totalQuestion - testobject.getCorrectQuestions() - testobject.getIncorrectQuestions() - testobject.getUnansweredQuestions();
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + questionsLeft);
         } else if (currentQuestion == totalQuestion) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
