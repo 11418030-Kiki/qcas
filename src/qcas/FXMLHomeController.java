@@ -29,14 +29,6 @@ import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
 import qcas.backEnd.User;
 
-/*
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
- */
 /**
  *
  * @author aayush
@@ -78,6 +70,8 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
                 if (cmbLoginType.getValue().equalsIgnoreCase("student")) {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
+                    StudentDashboardController controller = fxmlLoader.getController();
+                    controller.initData(user);
                     stage.setTitle("Welcome to Student Dashboard");
                     stage.setScene(new Scene(root, 630, 510));
                     stage.show();

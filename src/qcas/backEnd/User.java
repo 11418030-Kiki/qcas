@@ -18,7 +18,7 @@ public class User {
     private String userType; //1 for admin 2 for teacher 3 for students
     private String firstName;
     private String lastName;
-    private char gender;
+    private String course;
 
     /**
      *
@@ -120,18 +120,19 @@ public class User {
      *
      * @return
      */
-    public char getGender() {
-        return this.gender;
+    public String getCourse() {
+        return this.course;
     }
 
     /**
      *
-     * @param gender
+     * @param course
+     * 
      */
-    public void setGender(char gender) {
-        this.gender = gender;
+    public void setCourse(String course) {
+        this.course= course;
     }
-
+   
     /**
      *
      */
@@ -147,15 +148,16 @@ public class User {
      * @param userType
      * @param firstName
      * @param lastName
-     * @param gender
+     * @param course
      */
-    public User(int UserID, String userName, String password, String userType, String firstName, String lastName) {
+    public User(int UserID, String userName, String password, String userType, String firstName, String lastName, String course) {
         this.userID = UserID;
         this.userName = userName;
         this.password = password;
         this.userType = userType;
         this.firstName = firstName;
         this.lastName = lastName;
-        //this.gender = gender;
+        this.course = course;
+
     }
 }

@@ -17,6 +17,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import qcas.backEnd.Test;
+import qcas.backEnd.User;
 
 /**
  * FXML Controller class
@@ -24,6 +26,8 @@ import javafx.stage.Stage;
  * @author RRB
  */
 public class StudentDashboardController implements Initializable {
+
+    User userObject = new User();
 
     /**
      * Initializes the controller class.
@@ -43,6 +47,8 @@ public class StudentDashboardController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();
             GenTestController controller = fxmlLoader.<GenTestController>getController();
             stage.setTitle("Take a Test");
+            controller.initData(userObject);
+            stage.setTitle("Welcome to Student Dashboard");
             stage.setScene(new Scene(root, 630, 510));
             stage.show();
         } catch (Exception e) {
@@ -64,5 +70,11 @@ public class StudentDashboardController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initData(User user) {
+        userObject = user;
+
     }
 }

@@ -8,11 +8,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.FIBQuestionController">
    <children>
-      <Label layoutX="38.0" layoutY="27.0" text="Fill in the blanks type question" />
-      <Label fx:id="lblQuestion" layoutX="38.0" layoutY="64.0" text="Label" />
+      <Label layoutX="57.0" layoutY="29.0" text="Fill in the blanks type question" />
+      <Label fx:id="lblQuestion" layoutX="57.0" layoutY="76.0" text="Label" />
       <TextField fx:id="txtAnswer" layoutX="147.0" layoutY="124.0" />
-      <Label layoutX="38.0" layoutY="124.0" text="Answer" />
-      <Button fx:id="btnNext" layoutX="38.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
-      <Button fx:id="btnEndTest" layoutX="262.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
+      <Label layoutX="57.0" layoutY="124.0" text="Answer" />
+      <Button fx:id="btnNext" layoutX="57.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="277.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>
