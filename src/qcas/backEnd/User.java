@@ -132,7 +132,7 @@ public class User {
     public void setCourse(String course) {
         this.course= course;
     }
-
+   
     /**
      *
      */
@@ -158,5 +158,6 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.course = course;
+
     }
 }

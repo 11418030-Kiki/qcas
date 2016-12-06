@@ -8,6 +8,7 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -70,12 +71,17 @@ public class TFNewController implements Initializable {
     }
 
     @FXML
-    protected void handlePreviousButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
-    }
+    protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
+        String a;
+        if (answer == null) {
+            a = null;
+        } else if (answer.equals("True")) {
+            a = "T";
+        } else {
+            a = "F";
+        }
 
-    @FXML
-    protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
-        String a = answer; //.g;
+        //String a = answer; //.g;
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         int currentQuestion = testobject.getCurrentQuestionNumber();
@@ -94,6 +100,7 @@ public class TFNewController implements Initializable {
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
+            // createTestResult();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
@@ -124,30 +131,31 @@ public class TFNewController implements Initializable {
             }
 
             //Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
+            stage.setScene(new Scene(root1, 630, 510));
             stage.show();
 
         }
     }
 
     @FXML
-    protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
+    protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
+        //createTestResult();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
         fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
         root1 = (Parent) fxmlLoader.load();
+        stage.setTitle("Test Report");
         EndTestController controller = fxmlLoader.<EndTestController>getController();
         controller.initData(testobject);
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
 
     @FXML
     public void initData(Test test) {
         testobject = test;
-        lblQuestion.setText("Q "+ (testobject.getCurrentQuestionNumber() +1)+". "+(testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
-        //lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
+        lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 }

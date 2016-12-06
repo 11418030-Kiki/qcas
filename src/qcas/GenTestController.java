@@ -58,8 +58,6 @@ public class GenTestController implements Initializable {
         questionList.add(new Question(3, "FIB", "E", "ABCDE4 __________", "aayushb1", false, "", false, "", false, "", false, "aayushb1"));
         questionList.add(new Question(4, "TF", "E", "ABCDE3", "True", false, "", false, "", false, "", false, "True"));
         questionList.add(new Question(5, "MA", "M", "ABCDE5", "A", true, "B", true, "C", true, "D", false, "A,B,C"));
-        //questionList.add(new Question(5, "TF", "E", "ABCDE3", "True", false, "", false, "", false, "", false, "True"));
-        // questionList.add(new Question("MA", "H", "ABCDE6", "A", true, "B", true, "C", true, "D", true));
         return questionList;
     }
 
@@ -76,24 +74,16 @@ public class GenTestController implements Initializable {
         if (numberOfQues != null && difficultyLevel != null && !(numberOfQues.equals(cmbNoOfQuestions.getPromptText())) && !(difficultyLevel.equals(cmbDifficultyLevel.getPromptText()))) {
             //convert number of question value to int
             numberOfQuestions = Integer.parseInt((String) cmbNoOfQuestions.getValue());
-            //DatabaseManager dbManager = new DatabaseManager();
+
             questionList = new ArrayList<Question>();
             //create a test object
-            Test test = new Test(1, numberOfQuestions, difficultyLevel);
-            //here
-            //questionList = test.generateTest(1, numberOfQuestions, difficultyLevel);
-            questionList = getQList();
-            test.setQuestionList(questionList);
-            test.setNumberOfQuestions(5);
-            String[] answers = new String[5];
-            answers[0] = "A";
-            answers[1] = "A,B";
-            answers[2] = "aayushb1";
-            answers[3] = "True";
-            answers[4] = "A,B,C";
-            //answers[5] = "A,B,C,D";
+            Test test = new Test(userObject, numberOfQuestions, difficultyLevel);
 
-            test.setAnswerArrayList(answers);
+            questionList = test.generateTest(numberOfQuestions, difficultyLevel);
+        
+            test.setQuestionList(questionList);
+       
+
             test.setCurrentQuestionNumber(0);
             //procedd only if number of questions returned is equal to the number of questions selected by the user
             if (questionList != null && questionList.size() == numberOfQuestions) {
@@ -105,7 +95,6 @@ public class GenTestController implements Initializable {
                     FXMLLoader fxmlLoader = null;
                     if (nextQuestionType.equals("MC")) {
                         fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
-                        //Parent root = (Parent) fxmlLoader.load();
                         root1 = (Parent) fxmlLoader.load();
                         MCQuestionController controller = fxmlLoader.<MCQuestionController>getController();
                         controller.initData(test);
@@ -127,7 +116,7 @@ public class GenTestController implements Initializable {
                     }
 
                     //stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setScene(new Scene(root1));
+                    stage.setScene(new Scene(root1, 630, 510));
                     stage.show();
 
                 } catch (Exception e) {
@@ -141,12 +130,20 @@ public class GenTestController implements Initializable {
 
     @FXML
     protected void handleCancelTestButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+            stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    
 
     @FXML
     public void initData(User user) {

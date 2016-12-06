@@ -8,6 +8,7 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,7 +57,7 @@ public class MAQuestionController implements Initializable {
     }
 
     @FXML
-    protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
+    protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         int currentQuestion = testobject.getCurrentQuestionNumber();
@@ -64,25 +65,25 @@ public class MAQuestionController implements Initializable {
         testobject.setCurrentQuestionNumber(currentQuestion + 1);
         String selectedAnswers = "";
         if (cbA.isSelected()) {
-            selectedAnswers += cbA.getText();
+            selectedAnswers += "A"; //cbA.getText();
         }
         if (cbB.isSelected()) {
             if (selectedAnswers.length() > 0) {
                 selectedAnswers += ",";
             }
-            selectedAnswers += cbB.getText();
+            selectedAnswers += "B";//cbB.getText();
         }
         if (cbC.isSelected()) {
             if (selectedAnswers.length() > 0) {
                 selectedAnswers += ",";
             }
-            selectedAnswers += cbC.getText();
+            selectedAnswers += "C";//cbC.getText();
         }
         if (cbD.isSelected()) {
             if (selectedAnswers.length() > 0) {
                 selectedAnswers += ",";
             }
-            selectedAnswers += cbD.getText();
+            selectedAnswers += "D";//cbD.getText();
         }
 
         Parent root1 = null;
@@ -98,6 +99,7 @@ public class MAQuestionController implements Initializable {
             stage.setTitle("TestReport");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
+            //createTestResult();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
 
@@ -127,29 +129,31 @@ public class MAQuestionController implements Initializable {
                 controller.initData(testobject);
             }
         }
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
 
     }
 
     @FXML
-    protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
+    protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
+       // createTestResult();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
         fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
         root1 = (Parent) fxmlLoader.load();
+        stage.setTitle("Test Report");
         EndTestController controller = fxmlLoader.<EndTestController>getController();
         controller.initData(testobject);
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
-
+   
     @FXML
     public void initData(Test test) {
         testobject = test;
-        lblQuestion.setText("Q "+ (testobject.getCurrentQuestionNumber() +1)+". "+(testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
+        lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         cbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
         cbB.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionB());
         cbC.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionC());
