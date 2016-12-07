@@ -64,13 +64,19 @@ public class EndTestController implements Initializable {
         testobject = test;
         int currentQuestion = testobject.getCurrentQuestionNumber();
         int totalQuestion = testobject.getNumberOfQuestions();
+
+        //  int questionsLeft = totalQuestion - testobject.getCorrectQuestions() - testobject.getIncorrectQuestions() - testobject.getUnansweredQuestions();
+        int totalAttempted = testobject.getCorrectQuestions() + testobject.getIncorrectQuestions() + testobject.getUnansweredQuestions();
+        int totalLeft = totalQuestion - totalAttempted;
+        testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + totalLeft);
+        /*
         if (currentQuestion < totalQuestion) {
             int questionsLeft = totalQuestion - testobject.getCorrectQuestions() - testobject.getIncorrectQuestions() - testobject.getUnansweredQuestions();
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + questionsLeft);
         } else if (currentQuestion == totalQuestion) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
         }
-
+         */
         int Score = testobject.getCorrectQuestions();
         testobject.setScore(testobject.getCorrectQuestions());
         double scaledScore = testobject.getCorrectQuestions() * 100.0 / testobject.getNumberOfQuestions();
