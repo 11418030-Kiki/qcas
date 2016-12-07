@@ -45,6 +45,8 @@ public class TFNewController implements Initializable {
     private RadioButton rbTrue;
     @FXML
     private RadioButton rbFalse;
+    @FXML
+    private Label lblHeading;
 
     @FXML
     private ToggleGroup tgAnswers;
@@ -155,6 +157,11 @@ public class TFNewController implements Initializable {
 
     @FXML
     public void initData(Test test) {
+       // @FXML
+      //  private Label lblHeading;
+        lblHeading.getText();
+      //  test.getQuestionList(test.)()
+       // lblHeading.setText(lblHeading.getText()+", Difficulty Level: " );//(test.getQuestionList(test.getCurrentQuestionNumber())). );
         testobject = test;
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
