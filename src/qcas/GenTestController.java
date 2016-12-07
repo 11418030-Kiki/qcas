@@ -20,9 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import qcas.backEnd.DatabaseManager;
-import qcas.backEnd.Login;
 import qcas.backEnd.Question;
 import qcas.backEnd.Test;
 import qcas.backEnd.User;
@@ -80,10 +77,20 @@ public class GenTestController implements Initializable {
             Test test = new Test(userObject, numberOfQuestions, difficultyLevel);
 
             questionList = test.generateTest(numberOfQuestions, difficultyLevel);
-        
+            //questionList = getQList();
             test.setQuestionList(questionList);
-       
+            /*
+            //test.setNumberOfQuestions(5);
+            String[] answers = new String[5];
+            answers[0] = "A";
+            answers[1] = "A,B";
+            answers[2] = "aayushb1";
+            answers[3] = "True";
+            answers[4] = "A,B,C";
+            //answers[5] = "A,B,C,D";
+             */
 
+//            test.setAnswerArrayList(answers);
             test.setCurrentQuestionNumber(0);
             //procedd only if number of questions returned is equal to the number of questions selected by the user
             if (questionList != null && questionList.size() == numberOfQuestions) {
@@ -115,8 +122,7 @@ public class GenTestController implements Initializable {
                         controller.initData(test);
                     }
 
-                    //stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setScene(new Scene(root1, 630, 510));
+                    stage.setScene(new Scene(root1));
                     stage.show();
 
                 } catch (Exception e) {
@@ -130,34 +136,17 @@ public class GenTestController implements Initializable {
 
     @FXML
     protected void handleCancelTestButtonAction(ActionEvent event) throws IOException {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            StudentDashboardController controller = fxmlLoader.getController();
-            stage.setTitle("Welcome to Student Dashboard");
-            stage.setScene(new Scene(root, 630, 510));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
 
-    @FXML
-    private void logoutApp(ActionEvent event) {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
-            stage.setTitle("Welcome to QCAS");
-            stage.setScene(new Scene(root, 630, 510));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // GenTestController controller = fxmlLoader.<GenTestController>getController();
+        //controller.initData(user);
+        //stage.setTitle("Take Test");
+        //stage.setScene(new Scene(root1));
+        //stage.show();
     }
 
     @FXML
