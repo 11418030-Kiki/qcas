@@ -69,7 +69,7 @@ public class FIBQuestionController implements Initializable {
         FXMLLoader fxmlLoader = null;
         if (userAnswer.equals("")) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
-        } else if (correctAnswer.equals(userAnswer)) {
+        } else if (correctAnswer.equalsIgnoreCase(userAnswer)) {
             testobject.setCorrectQuestions(testobject.getCorrectQuestions() + 1);
         } else if (!correctAnswer.equals(userAnswer)) {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
