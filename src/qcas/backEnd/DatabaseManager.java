@@ -130,9 +130,9 @@ public class DatabaseManager {
         arr.add(query1);
         arr.add(query2);
         double result[] = new double[3];
-        double result1=0.00;
-        double result2=0.00;
-        double result3=0.00;
+        double result1 = 0.00;
+        double result2 = 0.00;
+        double result3 = 0.00;
         try {
             // Connection con = DriverManager.getConnection(url, username, password);
 
@@ -140,30 +140,30 @@ public class DatabaseManager {
             //query = "SELECT count(*) as rc_0 FROM qcas.test";
             // stmt.executeUpdate(query);
             //query = "SELECT count(*) as rc_0 FROM qcas.test";
-                ResultSet rs = null;
-                Statement stmt0 = conn.createStatement();
-                rs = stmt0.executeQuery(query0);
-                int count=0;
-                while (rs.next()) {
-                    result1 = rs.getDouble("rc_0");
-                    System.out.println("Test Count -->" + rs.getDouble("rc_0"));
-                }
-                Statement stmt1 = conn.createStatement();
-                rs = stmt1.executeQuery(query1);
-                 while (rs.next()) {
-                    result2 = rs.getDouble("rc_1");
-                    System.out.println("Test Count -->" + rs.getDouble("rc_1"));
-                }
-                Statement stmt2 = conn.createStatement();
-                rs = stmt2.executeQuery(query2);
-                 while (rs.next()) {
-                    result3 = rs.getDouble("rc_2");
-                    System.out.println("Test Count -->" + rs.getDouble("rc_2"));
-                }
-                result[0]=result1;
-                result[1]=result2;
-                result[2]=result3;
-            
+            ResultSet rs = null;
+            Statement stmt0 = conn.createStatement();
+            rs = stmt0.executeQuery(query0);
+            int count = 0;
+            while (rs.next()) {
+                result1 = rs.getDouble("rc_0");
+                System.out.println("Test Count -->" + rs.getDouble("rc_0"));
+            }
+            Statement stmt1 = conn.createStatement();
+            rs = stmt1.executeQuery(query1);
+            while (rs.next()) {
+                result2 = rs.getDouble("rc_1");
+                System.out.println("Test Count -->" + rs.getDouble("rc_1"));
+            }
+            Statement stmt2 = conn.createStatement();
+            rs = stmt2.executeQuery(query2);
+            while (rs.next()) {
+                result3 = rs.getDouble("rc_2");
+                System.out.println("Test Count -->" + rs.getDouble("rc_2"));
+            }
+            result[0] = result1;
+            result[1] = result2;
+            result[2] = result3;
+
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             System.exit(0);
@@ -405,6 +405,14 @@ public class DatabaseManager {
                 questionList.add(entry.getValue());
             }
             Collections.shuffle(questionList);
+            String qType = questionList.get(questionList.size()-1).getQuestionType();
+            while (qType.equalsIgnoreCase("TF")) {
+                if (qType.equalsIgnoreCase("TF")) {
+                    Collections.shuffle(questionList);
+                }
+                qType = questionList.get(questionList.size()-1).getQuestionType();
+            }
+
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             //System.exit(0);
