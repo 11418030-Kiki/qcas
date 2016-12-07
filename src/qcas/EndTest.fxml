@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.EndTestController">
    <children>
-      <Button layoutX="379.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleTakeTestButtonAction" text="Print PDF" />
+      <Button layoutX="377.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleTakeTestButtonAction" text="Print PDF" />
       <BarChart fx:id="StudentResult" barGap="1.0" categoryGap="1.0" layoutX="83.0" layoutY="125.0" prefHeight="243.0" prefWidth="227.0" title="Performance Result">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
@@ -30,6 +30,6 @@
             <Image url="@../Resources/Logout-512.png" />
          </image>
       </ImageView>
-      <Button layoutX="502.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <Label fx:id="lblResult" layoutX="385.0" layoutY="149.0" prefHeight="174.0" prefWidth="179.0" text="Label" wrapText="true" />
    </children>
 </AnchorPane>

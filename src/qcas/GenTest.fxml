@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -45,7 +46,7 @@
         <!-- <ChoiceBox fx:id="cboxDificulty" layoutX="389.0" layoutY="212.0" prefWidth="150.0" />-->
         <Button fx:id="btnStartTest" layoutX="113.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleTakeTestButtonAction" text="Start Test" />
         <Button fx:id="btnCancel" layoutX="268.0" layoutY="206.0" mnemonicParsing="false" text="Cancel" />
-      <Text fx:id="actiontarget" fill="RED" layoutX="10.0" layoutY="10.0" />
+      <Text fx:id="actiontarget" fill="RED" layoutX="115.0" layoutY="280.0" />
         
         <!--<ComboBox fx:id="cmbNoOfQuestions" layoutX="253.0" layoutY="52.0" prefWidth="150.0" />-->
         <!--  <items>
