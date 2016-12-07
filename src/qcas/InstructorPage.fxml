@@ -9,65 +9,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="216.0" layoutY="14.0" prefHeight="35.0" prefWidth="141.0" text="WELCOME">
+      <Label layoutX="66.0" layoutY="14.0" prefHeight="35.0" prefWidth="457.0" text="Welcome to Instructor Dashboard" textFill="#dd0027">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Britannic Bold" size="30.0" />
          </font>
       </Label>
-      <VBox layoutY="110.0" prefHeight="219.0" prefWidth="200.0">
-         <children>
-            <SplitPane orientation="VERTICAL" prefHeight="332.0" prefWidth="100.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="83.0" prefWidth="203.0">
-                     <children>
-                        <Button layoutX="62.0" layoutY="39.0" mnemonicParsing="false" text="Import Questions">
-                           <tooltip>
-                              <Tooltip text="QUESTIONS" />
-                           </tooltip>
-                           <font>
-                              <Font name="System Bold Italic" size="15.0" />
-                           </font>
-                        </Button>
-                        <ImageView fitHeight="108.0" fitWidth="66.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Resources/question-mark_318-52837.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="331.0" prefWidth="192.0">
-               <children>
-                  <Button layoutX="73.0" layoutY="39.0" mnemonicParsing="false" text="Student Reports">
-                     <font>
-                        <Font name="System Bold Italic" size="15.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="66.0" fitWidth="66.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Resources/download.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-      <Button layoutX="506.0" layoutY="16.0" mnemonicParsing="false" text="Logout" />
-      <ImageView fitHeight="35.0" fitWidth="57.0" layoutX="471.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="548.0" layoutY="65.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <ImageView fitHeight="35.0" fitWidth="57.0" layoutX="558.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/Logout-512.png" />
          </image>
       </ImageView>
-      <BarChart fx:id="numberofstudents" layoutX="255.0" layoutY="107.0" prefHeight="186.0" prefWidth="285.0" title="Number of Students">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
+      <Button layoutX="191.0" layoutY="179.0" mnemonicParsing="false" onAction="#importQuestions" text="Import Questions" />
+      <Button layoutX="195.0" layoutY="323.0" mnemonicParsing="false" text="Student Reports" />
+      <ImageView fitHeight="80.0" fitWidth="109.0" layoutX="51.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/upload-icon-3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="136.0" fitWidth="129.0" layoutX="43.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/studentreports.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
