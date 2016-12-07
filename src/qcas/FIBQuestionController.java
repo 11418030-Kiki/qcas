@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,6 +38,8 @@ public class FIBQuestionController implements Initializable {
     private TextField txtAnswer;
     @FXML
     private Label lblHeading;
+    @FXML
+    private TextArea txtQuestion;
 
     @FXML
     // private Button btnNext;
@@ -66,7 +69,7 @@ public class FIBQuestionController implements Initializable {
         FXMLLoader fxmlLoader = null;
         if (userAnswer.equals("")) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
-        } else if (correctAnswer.equals(userAnswer)) {
+        } else if (correctAnswer.equalsIgnoreCase(userAnswer)) {
             testobject.setCorrectQuestions(testobject.getCorrectQuestions() + 1);
         } else if (!correctAnswer.equals(userAnswer)) {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
@@ -136,7 +139,7 @@ public class FIBQuestionController implements Initializable {
 
         String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
         lblHeading.setText(lblHeading.getText() + " - " + difficulty);
-
+        //  txtQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 

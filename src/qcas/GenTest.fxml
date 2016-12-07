@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -11,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.GenTestController">
     <children>
-        <Label layoutX="41.0" layoutY="57.0" text="Number of Questions" />
+        <Label layoutX="41.0" layoutY="57.0" text="Number of Questions*" />
         <ComboBox fx:id="cmbNoOfQuestions" layoutX="253.0" layoutY="52.0" prefWidth="150.0" promptText="Select">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -22,7 +23,7 @@
             </items>
         </ComboBox>
             
-        <Label layoutX="46.0" layoutY="118.0" text="DIfficulty Level" />
+        <Label layoutX="46.0" layoutY="118.0" text="DIfficulty Level*" />
         <ComboBox fx:id="cmbDifficultyLevel" layoutX="253.0" layoutY="113.0" prefWidth="150.0" promptText="Select">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -44,10 +45,8 @@
         </ChoiceBox>-->
         <!-- <ChoiceBox fx:id="cboxDificulty" layoutX="389.0" layoutY="212.0" prefWidth="150.0" />-->
         <Button fx:id="btnStartTest" layoutX="113.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleTakeTestButtonAction" text="Start Test" />
-        <Button fx:id="btnCancel" layoutX="268.0" layoutY="206.0" mnemonicParsing="false" text="Cancel" />
-      
-        <Text fx:id="actiontarget"
-              GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        <Button fx:id="btnCancel" layoutX="268.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleCancelTestButtonAction" text="Dashboard" />
+      <Text fx:id="actiontarget" fill="RED" layoutX="115.0" layoutY="280.0" />
         
         <!--<ComboBox fx:id="cmbNoOfQuestions" layoutX="253.0" layoutY="52.0" prefWidth="150.0" />-->
         <!--  <items>

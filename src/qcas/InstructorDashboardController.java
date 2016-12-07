@@ -23,6 +23,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
 
@@ -32,16 +33,38 @@ import qcas.backEnd.DatabaseManager;
  * @author RRB
  */
 public class InstructorDashboardController implements Initializable {
-    
+
+    @FXML
+    private ImageView imgHome;
     @FXML
     private BarChart<?, ?> StudentsPerformance;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
         displayChart();
+        /*
+        imgHome.setOnMouseClicked(event -> {
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+                stage.setTitle("Welcome to QCAS");
+                stage.setScene(new Scene(root, 630, 510));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //imgLogout .setStyle("-fx-image: url(\""+ IMAGE2 + "\");");
+        });
+*/
     }
 
     @FXML
@@ -104,12 +127,11 @@ public class InstructorDashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    
-  public void displayChart(){
+
+    public void displayChart() {
         try {
-            double[]fromData=new double[8];
-            
+            double[] fromData = new double[8];
+
             DatabaseManager dbManager = new DatabaseManager();
             double result[]=dbManager.getInstructorGraph();
             
@@ -137,7 +159,7 @@ public class InstructorDashboardController implements Initializable {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(InstructorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
 }

@@ -605,6 +605,14 @@ public class DatabaseManager {
                 questionList.add(entry.getValue());
             }
             Collections.shuffle(questionList);
+            String qType = questionList.get(questionList.size() - 1).getQuestionType();
+            while (qType.equalsIgnoreCase("TF")) {
+                if (qType.equalsIgnoreCase("TF")) {
+                    Collections.shuffle(questionList);
+                }
+                qType = questionList.get(questionList.size() - 1).getQuestionType();
+            }
+
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             //System.exit(0);
@@ -612,7 +620,6 @@ public class DatabaseManager {
         return questionList;
     }
 
-    //*/
     /**
      * for mixed difficulty test
      *
@@ -674,6 +681,13 @@ public class DatabaseManager {
                 }
             }
             Collections.shuffle(questionList);
+            String qType = questionList.get(questionList.size() - 1).getQuestionType();
+            while (qType.equalsIgnoreCase("TF")) {
+                if (qType.equalsIgnoreCase("TF")) {
+                    Collections.shuffle(questionList);
+                }
+                qType = questionList.get(questionList.size() - 1).getQuestionType();
+            }
             return questionList;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);

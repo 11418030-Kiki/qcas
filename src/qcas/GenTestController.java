@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcas.backEnd.Question;
@@ -38,6 +39,8 @@ public class GenTestController implements Initializable {
     @FXML
     private Text actiontarget;
     User userObject = new User();
+    @FXML
+    private ImageView imgHome;
 
     /**
      * Initializes the controller class.
@@ -45,7 +48,24 @@ public class GenTestController implements Initializable {
     @Override
 
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        /*imgHome.setOnMouseClicked(event -> {
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+                stage.setTitle("Welcome to QCAS");
+                stage.setScene(new Scene(root, 630, 510));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //imgLogout .setStyle("-fx-image: url(\""+ IMAGE2 + "\");");
+        });
+        */
     }
 
     private ArrayList<Question> getQList() {
@@ -121,7 +141,7 @@ public class GenTestController implements Initializable {
                         FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
                         controller.initData(test);
                     }
-
+                    stage.setTitle("Test");
                     stage.setScene(new Scene(root1));
                     stage.show();
 
@@ -136,10 +156,15 @@ public class GenTestController implements Initializable {
 
     @FXML
     protected void handleCancelTestButtonAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        StudentDashboardController controller = fxmlLoader.getController();
+        controller.initData(userObject);
+        stage.setTitle("Welcome to Student Dashboard");
+        stage.setScene(new Scene(root, 630, 510));
         stage.show();
 
         // GenTestController controller = fxmlLoader.<GenTestController>getController();
