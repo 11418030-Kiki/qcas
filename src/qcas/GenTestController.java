@@ -22,7 +22,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import qcas.backEnd.DatabaseManager;
-import qcas.backEnd.Login;
 import qcas.backEnd.Question;
 import qcas.backEnd.Test;
 import qcas.backEnd.User;

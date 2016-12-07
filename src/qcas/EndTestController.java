@@ -41,7 +41,7 @@ public class EndTestController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       String s="here";
     }
 
     @FXML

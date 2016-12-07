@@ -83,7 +83,6 @@ public class TFNewController implements Initializable {
             a = "F";
         }
 
-        //String a = answer; //.g;
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         int currentQuestion = testobject.getCurrentQuestionNumber();
@@ -99,6 +98,7 @@ public class TFNewController implements Initializable {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            currentQuestion++;
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
@@ -107,7 +107,8 @@ public class TFNewController implements Initializable {
             controller.initData(testobject);
         } else {
             stage.setTitle("Test");
-            String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
+            currentQuestion++;
+            String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
 
             if (nextQuestionType.equals("MC")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
@@ -157,12 +158,15 @@ public class TFNewController implements Initializable {
 
     @FXML
     public void initData(Test test) {
-       // @FXML
-      //  private Label lblHeading;
-        lblHeading.getText();
-      //  test.getQuestionList(test.)()
-       // lblHeading.setText(lblHeading.getText()+", Difficulty Level: " );//(test.getQuestionList(test.getCurrentQuestionNumber())). );
+        // @FXML
+        //  private Label lblHeading;
+        //lblHeading.getText();
         testobject = test;
+        String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
+        lblHeading.setText(lblHeading.getText() + " - " + difficulty);
+        //  test.getQuestionList(test.)()
+        // lblHeading.setText(lblHeading.getText()+", Difficulty Level: " );//(test.getQuestionList(test.getCurrentQuestionNumber())). );
+
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 }

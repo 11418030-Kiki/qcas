@@ -43,6 +43,8 @@ public class MAQuestionController implements Initializable {
     private CheckBox cbC;
     @FXML
     private CheckBox cbD;
+    @FXML
+    private Label lblHeading;
 
     /**
      * Initializes the controller class.
@@ -95,16 +97,18 @@ public class MAQuestionController implements Initializable {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
         FXMLLoader fxmlLoader = null;
+        //if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            currentQuestion++;
             stage.setTitle("TestReport");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
             //createTestResult();
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
-
         } else {
-            String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
+            currentQuestion++;
+            String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
 
             stage.setTitle("Test");
             if (nextQuestionType.equals("MC")) {
@@ -138,7 +142,7 @@ public class MAQuestionController implements Initializable {
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-       // createTestResult();
+        // createTestResult();
         Parent root1 = null;
         FXMLLoader fxmlLoader = null;
         fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
@@ -149,10 +153,13 @@ public class MAQuestionController implements Initializable {
         stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
-   
+
     @FXML
     public void initData(Test test) {
         testobject = test;
+        String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
+        lblHeading.setText(lblHeading.getText() + " - " + difficulty);
+
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         cbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
         cbB.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionB());
