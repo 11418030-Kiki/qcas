@@ -52,6 +52,8 @@ public class MCQuestionController implements Initializable {
     @FXML
     private ToggleGroup tgAnswers;
     private String answer;
+    @FXML
+    private Label lblHeading;
 
     /**
      * Initializes the controller class.
@@ -98,6 +100,7 @@ public class MCQuestionController implements Initializable {
         }
 
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            currentQuestion++;
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
@@ -106,7 +109,9 @@ public class MCQuestionController implements Initializable {
             controller.initData(testobject);
         } else {
             stage.setTitle("Test");
-            String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
+            currentQuestion++;
+            String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
+
             if (nextQuestionType.equals("MC")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
                 root1 = (Parent) fxmlLoader.load();
@@ -154,6 +159,10 @@ public class MCQuestionController implements Initializable {
     @FXML
     public void initData(Test test) {
         testobject = test;
+        String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
+        lblHeading.setText(lblHeading.getText() + " - " + difficulty);
+
+       // String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber() + 1)).getDifficulty();
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         //lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
         rbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());

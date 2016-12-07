@@ -35,6 +35,8 @@ public class FIBQuestionController implements Initializable {
     private Label lblQuestion;
     @FXML
     private TextField txtAnswer;
+    @FXML
+    private Label lblHeading;
 
     @FXML
     // private Button btnNext;
@@ -71,6 +73,7 @@ public class FIBQuestionController implements Initializable {
         }
 
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            currentQuestion++;
             //createTestResult();
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
@@ -79,9 +82,9 @@ public class FIBQuestionController implements Initializable {
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
-
+            currentQuestion++;
             stage.setTitle("Test");
-            String nextQuestionType = testobject.getQuestionList().get(currentQuestion + 1).getQuestionType();
+            String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
 
             if (nextQuestionType.equals("MC")) {
                 fxmlLoader = new FXMLLoader(getClass().getResource("MCQuestion.fxml"));
@@ -106,7 +109,7 @@ public class FIBQuestionController implements Initializable {
             }
 
         }
-        
+
         stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
@@ -126,10 +129,14 @@ public class FIBQuestionController implements Initializable {
         stage.setScene(new Scene(root1, 630, 510));
         stage.show();
     }
-    
+
     @FXML
     public void initData(Test test) {
         testobject = test;
+
+        String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
+        lblHeading.setText(lblHeading.getText() + " - " + difficulty);
+
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 
