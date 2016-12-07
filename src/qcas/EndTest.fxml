@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -9,8 +11,8 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.EndTestController">
    <children>
-      <Button layoutX="119.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleTakeTestButtonAction" text="Button" />
-      <BarChart layoutX="24.0" layoutY="103.0" prefHeight="243.0" prefWidth="286.0">
+      <Button layoutX="379.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleTakeTestButtonAction" text="Print PDF" />
+      <BarChart fx:id="StudentResult" barGap="1.0" categoryGap="1.0" layoutX="83.0" layoutY="125.0" prefHeight="243.0" prefWidth="227.0" title="Performance Result">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -18,6 +20,16 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
-      <ComboBox layoutX="41.0" layoutY="43.0" prefHeight="31.0" prefWidth="252.0" />
+      <Text fill="#da1a3a" layoutX="56.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Performance Report Card">
+         <font>
+            <Font name="Britannic Bold" size="30.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="67.0" fitWidth="65.0" layoutX="496.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/Logout-512.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="502.0" layoutY="90.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
    </children>
 </AnchorPane>

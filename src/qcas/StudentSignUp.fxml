@@ -61,9 +61,9 @@
             
             </children>
         </GridPane>
-        <Text layoutX="288.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="96.0">
+        <Text fill="#da1a3a" layoutX="288.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="109.0">
             <font>
-                <Font name="System Bold Italic" size="24.0" />
+                <Font name="Britannic Bold" size="30.0" />
             </font>
         </Text>
         <Button layoutX="322.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="33.0" prefWidth="71.0" text="Sign up" />

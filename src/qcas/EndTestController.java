@@ -16,6 +16,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +25,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
 import qcas.backEnd.Test;
@@ -35,6 +39,9 @@ import qcas.backEnd.Test;
 public class EndTestController implements Initializable {
 
     Test testobject = new Test();
+
+    @FXML
+    private BarChart<?, ?> StudentResult;
 
     /**
      * Initializes the controller class.
@@ -93,6 +100,44 @@ public class EndTestController implements Initializable {
             testobject.setResult("Fail");
         }
         testobject.saveTestDetails(testobject);
+        this.displayChart();
+    }
+
+    public void displayChart() {
+        double[] fromData = new double[8];
+        testobject.getCorrectQuestions();
+
+        fromData[0] = testobject.getCorrectQuestions();
+        fromData[1] = testobject.getIncorrectQuestions();
+        fromData[2] = testobject.getUnansweredQuestions();
+
+        XYChart.Series set1 = new XYChart.Series<>();
+        XYChart.Series set2 = new XYChart.Series<>();
+        XYChart.Series set3 = new XYChart.Series<>();
+        set1.getData().add(new XYChart.Data("Correct", fromData[0]));
+        set2.getData().add(new XYChart.Data("Incorrect", fromData[1]));
+        set3.getData().add(new XYChart.Data("Unanswered", fromData[2]));
+
+        StudentResult.getData().addAll(set1);
+        StudentResult.getData().addAll(set2);
+        StudentResult.getData().addAll(set3);
+
+    }
+
+    @FXML
+    private void logoutApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+            stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
