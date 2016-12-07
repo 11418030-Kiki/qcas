@@ -153,4 +153,20 @@ public class GenTestController implements Initializable {
     public void initData(User user) {
         userObject = user;
     }
+
+    @FXML
+    private void logoutApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+            stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -45,7 +45,7 @@
    
        <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="4" GridPane.rowIndex="8" />
    
-       <Text fx:id="actiontarget" fill="RED" GridPane.columnIndex="15" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" />
+       <Text fx:id="actiontarget" fill="RED" GridPane.columnIndex="15" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="18" />
       <ImageView fitHeight="110.0" fitWidth="567.0" pickOnBounds="true">
          <image>
             <Image url="@../Resources/CMU-Banner-Image.png" />

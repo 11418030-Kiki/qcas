@@ -28,7 +28,7 @@ import javafx.scene.chart.XYChart;
 public class InstructorPageController implements Initializable {
 
     @FXML
-    private BarChart<?, ?> StudentsPerformance;
+    private BarChart<String, Number> StudentsPerformance;
 
     @FXML
     private BarChart<String, Integer> barChart;
@@ -73,17 +73,22 @@ public class InstructorPageController implements Initializable {
         fromData[1] = 5.7;
         fromData[2] = 4.3;
 
-        XYChart.Series set1 = new XYChart.Series<>();
-        XYChart.Series set2 = new XYChart.Series<>();
-        XYChart.Series set3 = new XYChart.Series<>();
-        XYChart.Series set4 = new XYChart.Series<>();
+         XYChart.Series<String,Number> series1 = new XYChart.Series<String,Number>();
+        series1.setName("Number of test");
+        XYChart.Series<String,Number> series2 = new XYChart.Series<String,Number>();
+        series2.setName("Average Score");
+        XYChart.Series<String,Number> series3 = new XYChart.Series<String,Number>();
+        series3.setName("Hard level Ave Score");
+//        XYChart.Series set2 = new XYChart.Series<>();
+//        XYChart.Series set3 = new XYChart.Series<>();
+//        XYChart.Series set4 = new XYChart.Series<>();
         //for(int i =0;i<fromData.length;i++){
         //    if(i == 0){
-        set1.getData().add(new XYChart.Data("Number of test", fromData[0]));
+        series1.getData().add(new XYChart.Data("", fromData[0]));
         //    }else if(i==1){
-        set2.getData().add(new XYChart.Data("Average Score", fromData[1]));
+        series2.getData().add(new XYChart.Data("", fromData[1]));
         //    }else if(i==2){
-        set3.getData().add(new XYChart.Data("Hard level Ave Score", fromData[2]));
+        series3.getData().add(new XYChart.Data("", fromData[2]));
         /*    }else if(i==3){
                 set3.getData().add(new XYChart.Data("Medium level Ave Score",fromData[i]));
             }else if(i==4){
@@ -96,9 +101,9 @@ public class InstructorPageController implements Initializable {
                 set4.getData().add(new XYChart.Data("Fail Student",fromData[i]));
             }
         }*/
-        StudentsPerformance.getData().addAll(set1);
-        StudentsPerformance.getData().addAll(set2);
-        StudentsPerformance.getData().addAll(set3);
+        StudentsPerformance.getData().addAll(series1);
+        StudentsPerformance.getData().addAll(series2);
+        StudentsPerformance.getData().addAll(series3);
         //dashboardChart.getData().addAll(set4);
 
     }

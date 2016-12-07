@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="630.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="qcas.StudentReportsController">
+<AnchorPane id="AnchorPane" prefHeight="810.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.StudentReportsController">
     <children>
-        <BarChart fx:id="numberTestsBar" layoutX="82.0" layoutY="131.0" prefHeight="205.0" prefWidth="213.0" title="Number of Tests">
+        <BarChart fx:id="numberTestsBar" layoutX="82.0" layoutY="151.0" prefHeight="205.0" prefWidth="213.0" title="Number of Tests">
             <xAxis>
                 <CategoryAxis side="BOTTOM" />
             </xAxis>
@@ -21,8 +20,8 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </BarChart>
-        <PieChart fx:id="averageScorePie" layoutX="362.0" layoutY="131.0" prefHeight="189.0" prefWidth="181.0" title="Average Score" />
-        <BarChart fx:id="difficultyLevelBar" layoutX="82.0" layoutY="353.0" prefHeight="214.0" prefWidth="222.0" title="Scores by Difficulty">
+        <PieChart fx:id="averageScorePie" layoutX="409.0" layoutY="396.0" prefHeight="214.0" prefWidth="229.0" title="Scores by difficulty" />
+        <BarChart fx:id="difficultyLevelBar" layoutX="77.0" layoutY="396.0" prefHeight="214.0" prefWidth="265.0" title="Average Score">
             <xAxis>
                 <CategoryAxis side="BOTTOM" />
             </xAxis>
@@ -30,13 +29,13 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </BarChart>
-        <PieChart fx:id="passFailPie" layoutX="362.0" layoutY="353.0" prefHeight="205.0" prefWidth="191.0" title="Pass or Fail" />
+        <PieChart fx:id="passFailPie" layoutX="370.0" layoutY="151.0" prefHeight="245.0" prefWidth="239.0" title="Pass or Fail" />
         <Text fill="#da1a3a" layoutX="82.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Historical Reports">
             <font>
                 <Font name="Britannic Bold" size="30.0" />
             </font>
         </Text>
-        <ComboBox fx:id="comboReportPeriod" layoutX="240.0" layoutY="86.0" prefWidth="150.0" promptText="Please Select">
+        <ComboBox fx:id="comboReportPeriod" layoutX="240.0" layoutY="103.0" onAction="#displayGraphAction" prefWidth="150.0" promptText="Please Select">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:id="lastmonth" fx:value="LastQuarter" />
@@ -45,12 +44,24 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <Text layoutX="104.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Select Period" />
-        <ImageView fitHeight="54.0" fitWidth="50.0" layoutX="554.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+        <Text layoutX="104.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Select Period" />
+        <ImageView fitHeight="54.0" fitWidth="50.0" layoutX="629.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Resources/Logout-512.png" />
             </image>
         </ImageView>
-        <Button layoutX="553.0" layoutY="78.0" mnemonicParsing="false" text="Logout" />
+        <Button layoutX="627.0" layoutY="78.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <Text fx:id="difficulty1" layoutX="433.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy" wrappingWidth="168.5625" />
+      <Text fx:id="difficulty2" layoutX="545.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medium" wrappingWidth="168.5625" />
+      <Text fx:id="difficulty3" layoutX="434.0" layoutY="672.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hard" wrappingWidth="112.0" />
+      <Text fx:id="difficulty4" layoutX="545.0" layoutY="672.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mixed" />
+      <Text fx:id="passText" layoutX="433.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.0" />
+      <Text fx:id="failText" layoutX="433.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.0" />
+      <ImageView fitHeight="50.0" fitWidth="54.0" layoutX="561.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/home.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="560.0" layoutY="78.0" mnemonicParsing="false" onAction="#homeApp" text="Home" />
     </children>
 </AnchorPane>
