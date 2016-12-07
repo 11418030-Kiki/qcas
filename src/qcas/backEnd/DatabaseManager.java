@@ -130,46 +130,246 @@ public class DatabaseManager {
         arr.add(query1);
         arr.add(query2);
         double result[] = new double[3];
-        double result1=0.00;
-        double result2=0.00;
-        double result3=0.00;
+        double result1 = 0.00;
+        double result2 = 0.00;
+        double result3 = 0.00;
         try {
-            // Connection con = DriverManager.getConnection(url, username, password);
+            ResultSet rs = null;
+            Statement stmt0 = conn.createStatement();
+            rs = stmt0.executeQuery(query0);
+            int count = 0;
+            while (rs.next()) {
+                result1 = rs.getDouble("rc_0");
+                System.out.println("Test Count -->" + rs.getDouble("rc_0"));
+            }
+            Statement stmt1 = conn.createStatement();
+            rs = stmt1.executeQuery(query1);
+            while (rs.next()) {
+                result2 = rs.getDouble("rc_1");
+                System.out.println("Test Count -->" + rs.getDouble("rc_1"));
+            }
+            Statement stmt2 = conn.createStatement();
+            rs = stmt2.executeQuery(query2);
+            while (rs.next()) {
+                result3 = rs.getDouble("rc_2");
+                System.out.println("Test Count -->" + rs.getDouble("rc_2"));
+            }
+            result[0] = result1;
+            result[1] = result2;
+            result[2] = result3;
 
-            // Add a record into the QUIZ table of the database
-            //query = "SELECT count(*) as rc_0 FROM qcas.test";
-            // stmt.executeUpdate(query);
-            //query = "SELECT count(*) as rc_0 FROM qcas.test";
-                ResultSet rs = null;
-                Statement stmt0 = conn.createStatement();
-                rs = stmt0.executeQuery(query0);
-                int count=0;
-                while (rs.next()) {
-                    result1 = rs.getDouble("rc_0");
-                    System.out.println("Test Count -->" + rs.getDouble("rc_0"));
-                }
-                Statement stmt1 = conn.createStatement();
-                rs = stmt1.executeQuery(query1);
-                 while (rs.next()) {
-                    result2 = rs.getDouble("rc_1");
-                    System.out.println("Test Count -->" + rs.getDouble("rc_1"));
-                }
-                Statement stmt2 = conn.createStatement();
-                rs = stmt2.executeQuery(query2);
-                 while (rs.next()) {
-                    result3 = rs.getDouble("rc_2");
-                    System.out.println("Test Count -->" + rs.getDouble("rc_2"));
-                }
-                result[0]=result1;
-                result[1]=result2;
-                result[2]=result3;
-            
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             System.exit(0);
         }
         return result;
     }
+
+    /**
+     *
+     * @param period
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public double[] getStudentNumberGraph(String period) throws SQLException, ClassNotFoundException {
+        // Create a simple query
+        String query0 = "SELECT count(*) as count FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL -1 MONTH) ";
+        String query1 = "SELECT count(*) as count FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL -3 MONTH) ";
+        String query2 = "SELECT count(*) as count FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL -12 MONTH)";
+
+        double result[] = new double[3];
+        double result1 = 0.00;
+        double result2 = 0.00;
+        double result3 = 0.00;
+        try {
+
+            ResultSet rs = null;
+
+            if (period.equals("LastMonth")) {
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query0);
+                while (rs.next()) {
+                    result1 = rs.getDouble("count");
+                    System.out.println("Get Student Graph1 -->" + rs.getDouble("count"));
+                }
+            } else if (period.equals("LastQuarter")) {
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query1);
+                while (rs.next()) {
+                    result1 = rs.getDouble("count");
+                    System.out.println("Get Student Graph2 -->" + rs.getDouble("count"));
+                }
+            } else if (period.equals("LastYear")) {
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query2);
+                while (rs.next()) {
+                    result1 = rs.getDouble("count");
+                    System.out.println("Get Student Graph3 -->" + rs.getDouble("count"));
+                }
+            }
+            result[0] = result1;
+
+        } catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            System.exit(0);
+        }
+        return result;
+    }
+    
+    public double[] getStudentAvgGraph(String period) throws SQLException, ClassNotFoundException {
+        // Create a simple query
+        String query0 = "SELECT avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL -1 MONTH) ";
+        String query1 = "SELECT avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL -3 MONTH) ";
+        String query2 = "SELECT avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL -12 MONTH)";
+
+        double result[] = new double[3];
+        double result1 = 0.00;
+
+        try {
+
+            ResultSet rs = null;
+
+            if (period.equals("LastMonth")) {
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query0);
+                while (rs.next()) {
+                    result1 = rs.getDouble("ave");
+                    System.out.println("Get Avg Graph1 -->" + rs.getDouble("ave"));
+                }
+            } else if (period.equals("LastQuarter")) {
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query1);
+                while (rs.next()) {
+                    result1 = rs.getDouble("ave");
+                    System.out.println("Get Avg Graph2 -->" + rs.getDouble("ave"));
+                }
+            } else if (period.equals("LastYear")) {
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query2);
+                while (rs.next()) {
+                    result1 = rs.getDouble("ave");
+                    System.out.println("Get Avg Graph3 -->" + rs.getDouble("ave"));
+                }
+            }
+            result[0] = result1;
+
+        } catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            System.exit(0);
+        }
+        return result;
+    }
+    
+        public double[] getStudentDifficultyGraph(String period) throws SQLException, ClassNotFoundException {
+        // Create a simple query
+        int periodValue=0;
+        if(period.equals("LastMonth")){
+            periodValue=-1;
+        }else if(period.equals("LastQuarter")){
+            periodValue=-3;
+        }else if(period.equals("LastYear")){
+            periodValue=-12;
+        }
+        String query0 = "Select avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL "+periodValue+" MONTH) and difficultyLevel = \"Easy\"";
+        String query1 = "Select avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL "+periodValue+" MONTH) and difficultyLevel = \"Medium\"";
+        String query2 = "Select avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL "+periodValue+" MONTH) and difficultyLevel = \"Hard\"";
+        String query3 = "Select avg(scaledScore) as ave FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL "+periodValue+" MONTH) and difficultyLevel = \"Mixed\"";
+
+        double result[] = new double[4];
+        double result1 = 0.00;
+        double result2 = 0.00;
+        double result3 = 0.00;
+        double result4 = 0.00;
+        
+        try {
+
+            ResultSet rs = null;
+            
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query0);
+                while (rs.next()) {
+                    result1 = rs.getDouble("ave");
+                    System.out.println("Get Difficulty Easy -->" + rs.getDouble("ave"));
+                }
+                
+                Statement stmt1 = conn.createStatement();
+                rs = stmt1.executeQuery(query1);
+                while (rs.next()) {
+                    result2 = rs.getDouble("ave");
+                    System.out.println("Get Difficulty Medium -->" + rs.getDouble("ave"));
+                }
+                
+                Statement stmt2 = conn.createStatement();
+                rs = stmt2.executeQuery(query2);
+                while (rs.next()) {
+                    result3 = rs.getDouble("ave");
+                    System.out.println("Get Difficulty Hard -->" + rs.getDouble("ave"));
+                }
+                
+                Statement stmt3 = conn.createStatement();
+                rs = stmt3.executeQuery(query3);
+                while (rs.next()) {
+                    result4 = rs.getDouble("ave");
+                    System.out.println("Get Difficulty Mixed -->" + rs.getDouble("ave"));
+                }
+             
+            result[0] = result1;
+            result[1] = result2;
+            result[2] = result3;
+            result[3] = result4;
+
+        } catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            System.exit(0);
+        }
+        return result;
+    }
+        
+         public double[] getPassFailPiechart(String period) throws SQLException, ClassNotFoundException {
+        // Create a simple query
+        int periodValue = 0;
+        if (period.equals("LastMonth")) {
+            periodValue = -1;
+        } else if (period.equals("LastQuarter")) {
+            periodValue = -3;
+        } else if (period.equals("LastYear")) {
+            periodValue = -12;
+        }
+        String query0 = "Select count(*) as count FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL " + periodValue + " MONTH) and Result = \"Pass\"";
+        String query1 = "Select count(*) as count FROM qcas.test where testdate > DATE_ADD(NOW(),INTERVAL " + periodValue + " MONTH) and Result = \"Fail\"";
+
+        double result[] = new double[4];
+        double result1 = 0.00;
+        double result2 = 0.00;
+
+        try {
+
+            ResultSet rs = null;
+            Statement stmt0 = conn.createStatement();
+            rs = stmt0.executeQuery(query0);
+            while (rs.next()) {
+                result1 = rs.getDouble("count");
+                System.out.println("Get Students Passed -->" + rs.getDouble("count"));
+            }
+
+            Statement stmt1 = conn.createStatement();
+            rs = stmt1.executeQuery(query1);
+            while (rs.next()) {
+                result2 = rs.getDouble("count");
+                System.out.println("Get Students Failed -->" + rs.getDouble("count"));
+            }
+
+            result[0] = result1;
+            result[1] = result2;
+
+        } catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            System.exit(0);
+        }
+        return result;
+    }
+        
 
     /**
      * method to get user details from database
