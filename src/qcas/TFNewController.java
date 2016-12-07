@@ -95,9 +95,9 @@ public class TFNewController implements Initializable {
         FXMLLoader fxmlLoader = null;
         if (a == null) {
             testobject.setUnansweredQuestions(testobject.getUnansweredQuestions() + 1);
-        } else if (correctAnswer.equals(answer)) {
+        } else if (correctAnswer.equals(a)) {
             testobject.setCorrectQuestions(testobject.getCorrectQuestions() + 1);
-        } else if (!correctAnswer.equals(answer)) {
+        } else if (!correctAnswer.equals(a)) {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
