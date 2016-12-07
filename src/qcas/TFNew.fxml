@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.TFNewController">
    <children>
-      <Label layoutX="57.0" layoutY="29.0" text="Multiple Choice Question (Single correct Answer)" />
+      <Label fx:id="lblHeading" layoutX="57.0" layoutY="29.0" text="Multiple Choice Question (Single correct Answer)" />
       <Label fx:id="lblQuestion" layoutX="57.0" layoutY="76.0" text="Label" />
       <RadioButton fx:id="rbTrue" layoutX="58.0" layoutY="123.0" mnemonicParsing="false" text="True">
          <toggleGroup>
