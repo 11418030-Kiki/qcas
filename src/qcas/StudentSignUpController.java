@@ -8,7 +8,6 @@ package qcas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,16 +22,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
-import qcas.backEnd.Question;
-import qcas.backEnd.Test;
 import qcas.backEnd.User;
+
 /**
  * FXML Controller class
  *
  * @author Shikha
  */
 public class StudentSignUpController implements Initializable {
-  @FXML
+
+    @FXML
     private ComboBox<String> cmbSignupType;
 //    @FXML
 //    private Text actiontarget;
@@ -46,19 +45,22 @@ public class StudentSignUpController implements Initializable {
     private TextField usernamefield;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Text actiontarget;
+
     /**
      * Initializes the controller class.
      */
-    @Override  
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-//        usernamefield.setPromptText("Username");
-//        passwordField.setPromptText("Password");
-//        Course.setPromptText("course");
-//        firstName.setPromptText("firstname");
-//        lastName.setPromptText("lastname");    
-    }    
-    
+        usernamefield.setPromptText("Username");
+        passwordField.setPromptText("Password");
+        Course.setPromptText("Course");
+        firstName.setPromptText("First Name");
+        lastName.setPromptText("Last Name");
+    }
+
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
 
@@ -67,29 +69,51 @@ public class StudentSignUpController implements Initializable {
         String firstname = firstName.getText();
         String lastname = lastName.getText();
         String course = Course.getText();
-        int userID=0;
+        int userID = 0;
         DatabaseManager dbManager = new DatabaseManager();
-        
-        //actiontarget.setText("invalid credentials");
-        User user = new User(userID, username, password,  cmbSignupType.getValue(), firstname, lastname, course);
-        if(!username.isEmpty() && !password.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty()&& !course.isEmpty() && !cmbSignupType.getValue().isEmpty()){
+        User user;
+        if (!username.isEmpty() && !password.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty() && !course.isEmpty() && !cmbSignupType.getValue().isEmpty()) {
+            user = new User(userID, username, password, cmbSignupType.getValue().toLowerCase(), firstname, lastname, course);
             dbManager.saveUserDetails(user);
-        }else{
-            usernamefield.clear();
-            passwordField.clear();
-//            actiontarget.setText("Please enter a valid username and password !");
+        } else {
+            actiontarget.setText("Please enter all the required fields!");
             return;
         }
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                GenTestController controller = fxmlLoader.<GenTestController>getController();
-                controller.initData(user);
-                stage.setTitle("Take Test");
-                stage.setScene(new Scene(root1));
-                stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        GenTestController controller = fxmlLoader.<GenTestController>getController();
+        controller.initData(user);
+        stage.setTitle("Take Test");
+        stage.setScene(new Scene(root1));
+        stage.show();
 
+    }
+
+    @FXML
+    private void logoutApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+            stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void resetAllFields(ActionEvent event) {
+        usernamefield.clear();
+        passwordField.clear();
+        firstName.clear();
+        lastName.clear();
+        Course.clear();
     }
 }

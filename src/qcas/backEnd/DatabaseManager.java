@@ -33,6 +33,7 @@ public class DatabaseManager {
 
     /**
      * constructor for db manager class
+     *
      * @throws java.lang.ClassNotFoundException
      * @throws java.lang.InstantiationException
      * @throws java.sql.SQLException
@@ -61,7 +62,7 @@ public class DatabaseManager {
      * @return
      */
     public User login(String userName, String userPassword, String userType) {
-        String query3= "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
+        String query3 = "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
         User user = new User();
 
         ResultSet rs = null;
@@ -119,6 +120,57 @@ public class DatabaseManager {
         return arr;
     }
 
+    public double[] getInstructorGraph() throws SQLException, ClassNotFoundException {
+        // Create a simple query
+        ArrayList<String> arr = new ArrayList<>();
+        String query0 = "SELECT count(*) as rc_0 FROM qcas.test";
+        String query1 = "Select sum(scaledScore)/count(*) as rc_1 FROM qcas.test ";
+        String query2 = "Select sum(scaledScore)/count(scaledScore) as rc_2 FROM qcas.test where difficultyLevel = \"Hard\"";
+        arr.add(query0);
+        arr.add(query1);
+        arr.add(query2);
+        double result[] = new double[3];
+        double result1=0.00;
+        double result2=0.00;
+        double result3=0.00;
+        try {
+            // Connection con = DriverManager.getConnection(url, username, password);
+
+            // Add a record into the QUIZ table of the database
+            //query = "SELECT count(*) as rc_0 FROM qcas.test";
+            // stmt.executeUpdate(query);
+            //query = "SELECT count(*) as rc_0 FROM qcas.test";
+                ResultSet rs = null;
+                Statement stmt0 = conn.createStatement();
+                rs = stmt0.executeQuery(query0);
+                int count=0;
+                while (rs.next()) {
+                    result1 = rs.getDouble("rc_0");
+                    System.out.println("Test Count -->" + rs.getDouble("rc_0"));
+                }
+                Statement stmt1 = conn.createStatement();
+                rs = stmt1.executeQuery(query1);
+                 while (rs.next()) {
+                    result2 = rs.getDouble("rc_1");
+                    System.out.println("Test Count -->" + rs.getDouble("rc_1"));
+                }
+                Statement stmt2 = conn.createStatement();
+                rs = stmt2.executeQuery(query2);
+                 while (rs.next()) {
+                    result3 = rs.getDouble("rc_2");
+                    System.out.println("Test Count -->" + rs.getDouble("rc_2"));
+                }
+                result[0]=result1;
+                result[1]=result2;
+                result[2]=result3;
+            
+        } catch (SQLException e) {
+            System.out.println("Exception creating connection: " + e);
+            System.exit(0);
+        }
+        return result;
+    }
+
     /**
      * method to get user details from database
      *
@@ -141,7 +193,7 @@ public class DatabaseManager {
                 String firstname = rs.getString("FIRSTNAME");
                 String lastName = rs.getString("LASTNAME");
                 String course = (rs.getString("course"));
-                user = new User(userID, userName, password, userType, firstname, lastName,course);
+                user = new User(userID, userName, password, userType, firstname, lastName, course);
 
             }
             return user;
@@ -444,25 +496,26 @@ public class DatabaseManager {
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             Statement stmt = con.createStatement();
-            query = "INSERT INTO qcas.test values (" + null + ", '" + testObject.getTestDate() + "'," + testObject.getUserID() +","+ testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() +","+ testObject.getIncorrectQuestions()+"," + testObject.getUnansweredQuestions()+"," + testObject.getScore() + ","+testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
+            query = "INSERT INTO qcas.test values (" + null + ", '" + testObject.getTestDate() + "'," + testObject.getUserID() + "," + testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() + "," + testObject.getIncorrectQuestions() + "," + testObject.getUnansweredQuestions() + "," + testObject.getScore() + "," + testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
 
 //            query = "INSERT INTO TEST (testID," + "29 - November - 2016" + "," + testObject.getUserID() + "," + testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() + "," + testObject.getIncorrectQuestions() + "," + testObject.getUnansweredQuestions() + "," + testObject.getScore() + "," + testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
             stmt.executeUpdate(query);
-           // int a = 1;
+            // int a = 1;
         } catch (SQLException e) {
             System.out.println("Exception creating connection: " + e);
             // System.exit(0);
         }
 
     }
-     public void saveUserDetails(User userObject) throws SQLException {
+
+    public void saveUserDetails(User userObject) throws SQLException {
         String query2;
 
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             Statement stmt = con.createStatement();
 
-            query2 = "INSERT INTO user values(" + userObject.getUserID() + ",'" +  userObject.getUserName() + "','" + userObject.getPassword() + "','" + userObject.getUserType() + "','" + userObject.getFirstName() + "','" + userObject.getLastName() + "','" + userObject.getCourse() + "')";
+            query2 = "INSERT INTO user values(" + userObject.getUserID() + ",'" + userObject.getUserName() + "','" + userObject.getPassword() + "','" + userObject.getUserType() + "','" + userObject.getFirstName() + "','" + userObject.getLastName() + "','" + userObject.getCourse() + "')";
 
             stmt.executeUpdate(query2);
             int a = 1;

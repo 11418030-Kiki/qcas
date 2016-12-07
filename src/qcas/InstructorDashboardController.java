@@ -6,8 +6,11 @@
 package qcas;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +24,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
+import qcas.backEnd.DatabaseManager;
 
 /**
  * FXML Controller class
@@ -28,13 +32,16 @@ import javafx.stage.Stage;
  * @author RRB
  */
 public class InstructorDashboardController implements Initializable {
-
+    
+    @FXML
+    private BarChart<?, ?> StudentsPerformance;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        displayChart();
     }
 
     @FXML
@@ -100,6 +107,38 @@ public class InstructorDashboardController implements Initializable {
         bc.getData().add(series2);
         bc.getData().add(series3);
         return bc;
+    }
+    
+    
+  public void displayChart(){
+        try {
+            double[]fromData=new double[8];
+            
+            DatabaseManager dbManager = new DatabaseManager();
+            double result[]=dbManager.getInstructorGraph();
+            
+            fromData[0]=result[0];fromData[1]=result[1];fromData[2]=result[2];
+            
+            XYChart.Series set1= new XYChart.Series<>();
+            XYChart.Series set2= new XYChart.Series<>();
+            XYChart.Series set3= new XYChart.Series<>();
+            set1.getData().add(new XYChart.Data("Number of test",fromData[0]));
+            set2.getData().add(new XYChart.Data("Average Score",fromData[1]));
+            set3.getData().add(new XYChart.Data("Hard level Ave Score",fromData[2]));
+
+            StudentsPerformance.getData().addAll(set1);
+            StudentsPerformance.getData().addAll(set2);
+            StudentsPerformance.getData().addAll(set3);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InstructorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(InstructorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(InstructorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(InstructorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }

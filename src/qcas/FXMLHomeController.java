@@ -90,6 +90,22 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
             actiontarget.setText("Invalid Credentials!");
         }
     }
+    
+    @FXML
+    private void signUpAction(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentSignUp.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            StudentSignUpController controller = fxmlLoader.<StudentSignUpController>getController();
+            stage.setTitle("Sign-up on QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setApp(QCAS application) {
         this.application = application;

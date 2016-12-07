@@ -34,7 +34,7 @@
             <Font name="Britannic Bold" size="30.0" />
          </font>
       </Text>
-      <BarChart fx:id="barGraphStudents" layoutX="342.0" layoutY="144.0" prefHeight="200.0" prefWidth="213.0" title="Number of Students">
+      <BarChart fx:id="StudentsPerformance" layoutX="342.0" layoutY="144.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="240.0" title="Number of Students">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
