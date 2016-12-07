@@ -24,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
@@ -47,6 +48,8 @@ public class TFNewController implements Initializable {
     private RadioButton rbFalse;
     @FXML
     private Label lblHeading;
+    @FXML
+    private TextArea txtQuestion;
 
     @FXML
     private ToggleGroup tgAnswers;
@@ -166,7 +169,7 @@ public class TFNewController implements Initializable {
         lblHeading.setText(lblHeading.getText() + " - " + difficulty);
         //  test.getQuestionList(test.)()
         // lblHeading.setText(lblHeading.getText()+", Difficulty Level: " );//(test.getQuestionList(test.getCurrentQuestionNumber())). );
-
+        //txtQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
     }
 }

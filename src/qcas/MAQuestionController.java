@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import qcas.backEnd.Test;
@@ -45,6 +46,8 @@ public class MAQuestionController implements Initializable {
     private CheckBox cbD;
     @FXML
     private Label lblHeading;
+    @FXML
+    private TextArea txtQuestion;
 
     /**
      * Initializes the controller class.
@@ -160,6 +163,7 @@ public class MAQuestionController implements Initializable {
         String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
         lblHeading.setText(lblHeading.getText() + " - " + difficulty);
 
+       // txtQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         cbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
         cbB.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionB());

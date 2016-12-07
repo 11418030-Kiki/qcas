@@ -9,15 +9,15 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.MCQuestionController">
    <children>
       <Label fx:id="lblHeading" layoutX="57.0" layoutY="29.0" text="Multiple Choice Question (Single correct Answer)" />
-      <Label fx:id="lblQuestion" layoutX="57.0" layoutY="76.0" text="Label" />
-      <RadioButton fx:id="rbA" layoutX="57.0" layoutY="121.0" mnemonicParsing="false" text="RadioButton">
+      <Label fx:id="lblQuestion" layoutX="57.0" layoutY="65.0" prefHeight="65.0" prefWidth="439.0" text="Label" wrapText="true" />
+      <RadioButton fx:id="rbA" layoutX="57.0" layoutY="155.0" mnemonicParsing="false" text="RadioButton">
          <toggleGroup>
             <ToggleGroup fx:id="tgAnswers" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="rbB" layoutX="57.0" layoutY="171.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
-      <RadioButton fx:id="rbC" layoutX="57.0" layoutY="221.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
-      <RadioButton fx:id="rbD" layoutX="57.0" layoutY="271.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
-      <Button fx:id="btnNext" layoutX="57.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
-      <Button fx:id="btnEndTest" layoutX="277.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
+      <RadioButton fx:id="rbB" layoutX="57.0" layoutY="205.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
+      <RadioButton fx:id="rbC" layoutX="57.0" layoutY="255.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
+      <RadioButton fx:id="rbD" layoutX="57.0" layoutY="305.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
+      <Button fx:id="btnNext" layoutX="57.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="277.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

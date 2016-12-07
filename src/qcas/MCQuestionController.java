@@ -24,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
@@ -54,6 +55,8 @@ public class MCQuestionController implements Initializable {
     private String answer;
     @FXML
     private Label lblHeading;
+    @FXML
+    private TextArea txtQuestion;
 
     /**
      * Initializes the controller class.
@@ -162,7 +165,8 @@ public class MCQuestionController implements Initializable {
         String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber())).getDifficulty();
         lblHeading.setText(lblHeading.getText() + " - " + difficulty);
 
-       // String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber() + 1)).getDifficulty();
+        // String difficulty = (testobject.getQuestionList().get(testobject.getCurrentQuestionNumber() + 1)).getDifficulty();
+//        txtQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         lblQuestion.setText("Q " + (testobject.getCurrentQuestionNumber() + 1) + ". " + (testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber()).getQuestion());
         //lblQuestion.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getQuestion());
         rbA.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionA());
