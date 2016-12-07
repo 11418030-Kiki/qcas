@@ -60,7 +60,7 @@ public class EndTestController implements Initializable {
         GenTestController controller = fxmlLoader.<GenTestController>getController();
 
         controller.initData(testobject.getUserData());
-        stage.setTitle("Welcome to Student Dashboard");
+        stage.setTitle("Take Test");
         stage.setScene(new Scene(root, 630, 510));
         stage.show();
 
@@ -105,7 +105,7 @@ public class EndTestController implements Initializable {
 
     public void displayChart() {
         double[] fromData = new double[8];
-        testobject.getCorrectQuestions();
+      //  testobject.getCorrectQuestions();
 
         fromData[0] = testobject.getCorrectQuestions();
         fromData[1] = testobject.getIncorrectQuestions();

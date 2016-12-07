@@ -103,7 +103,7 @@ public class MAQuestionController implements Initializable {
         //if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
             currentQuestion++;
-            stage.setTitle("TestReport");
+            stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
             root1 = (Parent) fxmlLoader.load();
             //createTestResult();

@@ -121,7 +121,7 @@ public class GenTestController implements Initializable {
                         FIBQuestionController controller = fxmlLoader.<FIBQuestionController>getController();
                         controller.initData(test);
                     }
-
+                    stage.setTitle("Test");
                     stage.setScene(new Scene(root1));
                     stage.show();
 
