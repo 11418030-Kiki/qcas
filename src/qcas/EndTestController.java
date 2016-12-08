@@ -5,6 +5,14 @@
  */
 package qcas;
 
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,6 +26,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +38,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
 import qcas.backEnd.Test;
@@ -110,6 +121,34 @@ public class EndTestController implements Initializable {
         String resultAnalysis = "Result Analysis\nTotal Questions: " + testobject.getNumberOfQuestions() + "\nYou got " + testobject.getCorrectQuestions() + " questions right.\nYou " + testobject.getResult() + "ed the test!!";
         lblResult.setText(resultAnalysis);
     }
+    
+    @FXML
+    public void displayPdf(){
+        
+        FileChooser chooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF file(*.pdf)","   *.pdf ");
+        chooser.getExtensionFilters().add(extFilter);
+        File file = chooser.showSaveDialog(new Stage());
+        try {
+            WritableImage img = StudentResult.snapshot(null, null);
+            ImageData imgData = ImageDataFactory.create(SwingFXUtils.fromFXImage(img, null), null);
+
+            com.itextpdf.layout.element.Image pdfImg = new com.itextpdf.layout.element.Image(imgData);
+
+            System.out.println("Entered 3 ");
+            PdfWriter writer = new PdfWriter(new FileOutputStream(file));
+            PdfDocument pdfDoc = new PdfDocument(writer);
+            Document doc = new Document(pdfDoc);
+            doc.add(new Paragraph("Hello world, " + "this is a test pdf file."));
+            doc.add(pdfImg);
+            doc.close();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+    
+    
 
     public void displayChart() {
         double[] fromData = new double[8];
