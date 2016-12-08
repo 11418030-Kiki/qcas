@@ -41,7 +41,7 @@ public class DatabaseManager {
      */
     public DatabaseManager() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //url for database
-        url = "jdbc:mysql://qcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
+        url = "jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
         //jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas?zeroDateTimeBehavior=convertToNull
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         conn = DriverManager.getConnection(url, username, password);
