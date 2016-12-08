@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import qcas.backEnd.Test;
 import qcas.backEnd.User;
@@ -28,6 +29,8 @@ import qcas.backEnd.User;
 public class StudentDashboardController implements Initializable {
 
     User userObject = new User();
+    @FXML
+    private Label lblName;
 
     /**
      * Initializes the controller class.
@@ -70,6 +73,7 @@ public class StudentDashboardController implements Initializable {
 
     /**
      * logout button
+     *
      * @param event
      */
     @FXML
@@ -95,6 +99,7 @@ public class StudentDashboardController implements Initializable {
     @FXML
     public void initData(User user) {
         userObject = user;
+        lblName.setText("Hi " + userObject.getFirstName() + " " + userObject.getLastName());
 
     }
 }

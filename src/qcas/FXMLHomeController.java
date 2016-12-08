@@ -60,7 +60,7 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         if (user != null && user.getUserID() > 0) {
-            System.out.println("RRB-->"+cmbLoginType.getValue());
+            System.out.println("RRB-->" + cmbLoginType.getValue());
             try {
                 if (cmbLoginType.getValue().equalsIgnoreCase("student")) {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
@@ -70,9 +70,11 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
                     stage.setTitle("Welcome to Student Dashboard");
                     stage.setScene(new Scene(root, 630, 510));
                     stage.show();
-                }else {
+                } else {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InstructorDashboard.fxml"));
                     Parent root = (Parent) fxmlLoader.load();
+                    InstructorDashboardController controller = fxmlLoader.getController();
+                    controller.initData(user);
                     stage.setTitle("Welcome to Instructor Dashboard");
                     stage.setScene(new Scene(root, 630, 510));
                     stage.show();
@@ -85,7 +87,7 @@ public class FXMLHomeController extends AnchorPane implements Initializable {
             actiontarget.setText("Invalid Credentials!");
         }
     }
-    
+
     @FXML
     private void signUpAction(ActionEvent event) {
         Node node = (Node) event.getSource();

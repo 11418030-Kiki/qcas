@@ -23,9 +23,11 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
+import qcas.backEnd.User;
 
 /**
  * FXML Controller class
@@ -38,6 +40,10 @@ public class InstructorDashboardController implements Initializable {
     private ImageView imgHome;
     @FXML
     private BarChart<?, ?> StudentsPerformance;
+    @FXML
+    private Label lblName;
+    @FXML
+    private User userObject;
 
     /**
      * Initializes the controller class.
@@ -174,6 +180,16 @@ public class InstructorDashboardController implements Initializable {
             Logger.getLogger(InstructorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+      /**
+     * initialise resources
+     * @param user
+     */
+    @FXML
+    public void initData(User user) {
+        userObject = user;
+        lblName.setText("Hi "+ userObject.getFirstName()+" "+userObject.getLastName());
     }
 
 }

@@ -48,5 +48,6 @@
          </image>
       </ImageView>
       <Button layoutX="501.0" layoutY="82.0" mnemonicParsing="false" onAction="#homeApp" text="Home" />
+      <Label fx:id="lblName" layoutX="113.0" layoutY="82.0" prefHeight="21.0" prefWidth="261.0" text="Label" />
    </children>
 </AnchorPane>
