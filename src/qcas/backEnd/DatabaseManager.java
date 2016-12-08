@@ -26,8 +26,8 @@ import java.util.Map;
 public class DatabaseManager {
 
     String url;
-    String username = "rajeev";
-    String password = "rajeev123";
+    String username = "scott";
+    String password = "tiger123";
     String query;
     Connection conn = null;
 
