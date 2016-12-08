@@ -25,11 +25,18 @@
             <Font name="Britannic Bold" size="30.0" />
          </font>
       </Text>
-      <ImageView fitHeight="67.0" fitWidth="65.0" layoutX="496.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="55.0" fitWidth="51.0" layoutX="525.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/Logout-512.png" />
          </image>
       </ImageView>
       <Label fx:id="lblResult" layoutX="385.0" layoutY="149.0" prefHeight="174.0" prefWidth="179.0" text="Label" wrapText="true" />
+      <Button layoutX="520.0" layoutY="69.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="460.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/home.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="456.0" layoutY="69.0" mnemonicParsing="false" onAction="#homeApp" text="Home" />
    </children>
 </AnchorPane>

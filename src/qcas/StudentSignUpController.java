@@ -74,22 +74,20 @@ public class StudentSignUpController implements Initializable {
         User user;
         if (!username.isEmpty() && !password.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty() && !course.isEmpty() && !cmbSignupType.getValue().isEmpty()) {
             user = new User(userID, username, password, cmbSignupType.getValue().toLowerCase(), firstname, lastname, course);
-            dbManager.saveUserDetails(user);
+
+            boolean flag = dbManager.checkUserDetails(user);
+            if (flag) {
+                dbManager.saveUserDetails(user);
+                actiontarget.setText("Signed up Successfully! Please Login from Home");
+                return;
+            } else {
+                actiontarget.setText("User already exists! Please try again.");
+                return;
+            }
         } else {
             actiontarget.setText("Please enter all the required fields!");
             return;
         }
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GenTest.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        GenTestController controller = fxmlLoader.<GenTestController>getController();
-        controller.initData(user);
-        stage.setTitle("Take Test");
-        stage.setScene(new Scene(root1));
-        stage.show();
-
     }
 
     @FXML
