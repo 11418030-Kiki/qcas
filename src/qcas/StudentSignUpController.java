@@ -50,6 +50,7 @@ public class StudentSignUpController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -65,6 +66,7 @@ public class StudentSignUpController implements Initializable {
 
     /**
      * submit button
+     *
      * @param event
      * @throws ClassNotFoundException
      * @throws InstantiationException
@@ -89,9 +91,20 @@ public class StudentSignUpController implements Initializable {
             boolean flag = dbManager.checkUserDetails(user);
             if (flag) {
                 dbManager.saveUserDetails(user);
+                usernamefield.setText("");
+                passwordField.setText("");
+                firstName.setText("");
+                lastName.setText("");
+                Course.setText("");
                 actiontarget.setText("Signed up Successfully! Please Login from Home");
                 return;
             } else {
+                dbManager.saveUserDetails(user);
+                usernamefield.setText("");
+                passwordField.setText("");
+                firstName.setText("");
+                lastName.setText("");
+                Course.setText("");
                 actiontarget.setText("User already exists! Please try again.");
                 return;
             }
@@ -103,7 +116,8 @@ public class StudentSignUpController implements Initializable {
 
     /**
      * logout app
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void logoutApp(ActionEvent event) {
@@ -123,7 +137,8 @@ public class StudentSignUpController implements Initializable {
 
     /**
      * reset all fields
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void resetAllFields(ActionEvent event) {
