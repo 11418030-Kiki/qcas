@@ -60,6 +60,9 @@ public class MCQuestionController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,10 +83,30 @@ public class MCQuestionController implements Initializable {
         });
     }
 
+    /**
+     * previous button click
+     *
+     *
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     */
     @FXML
     protected void handlePreviousButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
     }
 
+    /**
+     * next button click
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         String a = answer; //.g;
@@ -143,6 +166,16 @@ public class MCQuestionController implements Initializable {
         stage.show();
     }
 
+    /**
+     * end test button
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
@@ -159,6 +192,10 @@ public class MCQuestionController implements Initializable {
         stage.show();
     }
 
+    /**
+     * initialize resourcess
+     * @param test
+     */
     @FXML
     public void initData(Test test) {
         testobject = test;

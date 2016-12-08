@@ -31,12 +31,24 @@ public class StudentDashboardController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     * take test button
+     *
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     */
     @FXML
     protected void handleTakeTestAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
 
@@ -56,6 +68,10 @@ public class StudentDashboardController implements Initializable {
         }
     }
 
+    /**
+     * logout button
+     * @param event
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -72,6 +88,10 @@ public class StudentDashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param user
+     */
     @FXML
     public void initData(User user) {
         userObject = user;

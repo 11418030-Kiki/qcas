@@ -369,7 +369,7 @@ public class Test {
     }
 
     /**
-     *
+     * save test details
      * @param testObject
      * @throws SQLException
      * @throws ClassNotFoundException

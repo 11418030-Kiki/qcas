@@ -49,6 +49,9 @@ public class QuestionUploaderController implements Initializable {
     @FXML
     private Label actionMessage;
 
+    /**
+     * chose file
+     */
     public File chosenFile;
 
     @FXML
@@ -67,6 +70,13 @@ public class QuestionUploaderController implements Initializable {
         return file;
     }
 
+    /**
+     * upload file
+     *
+     * @param event
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     @FXML
     private void uploadFile(ActionEvent event) throws FileNotFoundException, IOException {
 
@@ -128,6 +138,11 @@ public class QuestionUploaderController implements Initializable {
 
     }
 
+    /**
+     * start application
+     *
+     * @param event
+     */
     @FXML
     private void homeApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -143,6 +158,11 @@ public class QuestionUploaderController implements Initializable {
         }
     }
 
+    /**
+     * logout
+     *
+     * @param event
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -159,6 +179,11 @@ public class QuestionUploaderController implements Initializable {
         }
     }
 
+    /**
+     * parseCSV file
+     * @param line
+     * @return
+     */
     public static String[] parseCSVLine(String line) {
         // Create a pattern to match breaks
         Pattern p = Pattern.compile(",(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");

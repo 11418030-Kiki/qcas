@@ -48,9 +48,11 @@ public class EndTestController implements Initializable {
     @FXML
     private Label lblResult;
 
-    
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,6 +60,12 @@ public class EndTestController implements Initializable {
 
     }
 
+    /**
+     * go to student dashboard page
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void handleTakeTestButtonAction(ActionEvent event) throws IOException {
         Node node = (Node) event.getSource();
@@ -72,6 +80,16 @@ public class EndTestController implements Initializable {
         stage.show();
     }
 
+    /**
+     * initialize end test page calculate results
+     *
+     * @param test
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ParseException
+     */
     @FXML
     public void initData(Test test) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         testobject = test;
@@ -111,6 +129,9 @@ public class EndTestController implements Initializable {
         lblResult.setText(resultAnalysis);
     }
 
+    /**
+     * display charts according to score result
+     */
     public void displayChart() {
         double[] fromData = new double[8];
         //  testobject.getCorrectQuestions();
@@ -132,6 +153,9 @@ public class EndTestController implements Initializable {
 
     }
 
+    /*
+    logout button
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();

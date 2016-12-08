@@ -50,6 +50,8 @@ public class StudentSignUpController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,6 +63,15 @@ public class StudentSignUpController implements Initializable {
         lastName.setPromptText("Last Name");
     }
 
+    /**
+     * submit button
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     */
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException {
 
@@ -92,6 +103,10 @@ public class StudentSignUpController implements Initializable {
 
     }
 
+    /**
+     * logout app
+     * @param event 
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -108,6 +123,10 @@ public class StudentSignUpController implements Initializable {
         }
     }
 
+    /**
+     * reset all fields
+     * @param event 
+     */
     @FXML
     private void resetAllFields(ActionEvent event) {
         usernamefield.clear();
