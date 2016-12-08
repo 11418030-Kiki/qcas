@@ -59,9 +59,11 @@ public class EndTestController implements Initializable {
     @FXML
     private Label lblResult;
 
-    
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,6 +71,12 @@ public class EndTestController implements Initializable {
 
     }
 
+    /**
+     * go to student dashboard page
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void handleTakeTestButtonAction(ActionEvent event) throws IOException {
         Node node = (Node) event.getSource();
@@ -83,6 +91,16 @@ public class EndTestController implements Initializable {
         stage.show();
     }
 
+    /**
+     * initialize end test page calculate results
+     *
+     * @param test
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ParseException
+     */
     @FXML
     public void initData(Test test) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException {
         testobject = test;
@@ -150,6 +168,9 @@ public class EndTestController implements Initializable {
     
     
 
+    /**
+     * display charts according to score result
+     */
     public void displayChart() {
         double[] fromData = new double[8];
         //  testobject.getCorrectQuestions();
@@ -171,6 +192,9 @@ public class EndTestController implements Initializable {
 
     }
 
+    /*
+    logout button
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -180,6 +204,21 @@ public class EndTestController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();
             FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
             stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void homeApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            stage.setTitle("Welcome to Student Dashboard");
             stage.setScene(new Scene(root, 630, 510));
             stage.show();
         } catch (Exception e) {

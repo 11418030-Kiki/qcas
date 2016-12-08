@@ -51,16 +51,36 @@ public class MAQuestionController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     * prev button
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     */
     @FXML
     protected void handlePreviousButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
     }
 
+    /**
+     * next button click
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
@@ -102,6 +122,7 @@ public class MAQuestionController implements Initializable {
         FXMLLoader fxmlLoader = null;
         //if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            //end test page
             currentQuestion++;
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
@@ -110,6 +131,7 @@ public class MAQuestionController implements Initializable {
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
+            //next question page
             currentQuestion++;
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
 
@@ -141,6 +163,16 @@ public class MAQuestionController implements Initializable {
 
     }
 
+    /**
+     * end test button
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
@@ -157,6 +189,10 @@ public class MAQuestionController implements Initializable {
         stage.show();
     }
 
+    /**
+     * initialize resources
+     * @param test
+     */
     @FXML
     public void initData(Test test) {
         testobject = test;
@@ -171,6 +207,11 @@ public class MAQuestionController implements Initializable {
         cbD.setText(((testobject.getQuestionList()).get(testobject.getCurrentQuestionNumber())).getOptionD());
     }
 
+    /**
+     * split answer
+     * @param answer
+     * @return
+     */
     public List<String> splitAnswer(String answer) {
         List<String> finAnswers = Arrays.asList(answer.split(","));
         return finAnswers;

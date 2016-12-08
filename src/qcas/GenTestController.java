@@ -44,6 +44,9 @@ public class GenTestController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
 
@@ -65,9 +68,12 @@ public class GenTestController implements Initializable {
 
             //imgLogout .setStyle("-fx-image: url(\""+ IMAGE2 + "\");");
         });
-        */
+         */
     }
 
+    /*
+        get question list
+     */
     private ArrayList<Question> getQList() {
         ArrayList<Question> questionList = new ArrayList<Question>();
         questionList.add(new Question(1, "MC", "E", "ABCDE1", "A", true, "B", false, "C", false, "D", false, "A"));
@@ -78,6 +84,15 @@ public class GenTestController implements Initializable {
         return questionList;
     }
 
+    /**
+     * take test button
+     *
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     */
     @FXML
     protected void handleTakeTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //read the combobox selected value
@@ -154,6 +169,11 @@ public class GenTestController implements Initializable {
         }
     }
 
+    /**
+     * cancel button
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void handleCancelTestButtonAction(ActionEvent event) throws IOException {
         Node node = (Node) event.getSource();
@@ -174,11 +194,20 @@ public class GenTestController implements Initializable {
         //stage.show();
     }
 
+    /**
+     * initialise resources
+     * @param user
+     */
     @FXML
     public void initData(User user) {
         userObject = user;
     }
 
+    
+    /**
+     * logout button
+     * @param event 
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();

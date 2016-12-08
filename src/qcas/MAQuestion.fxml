@@ -14,7 +14,7 @@
       <CheckBox fx:id="cbB" layoutX="57.0" layoutY="200.0" mnemonicParsing="false" text="CheckBox" />
       <CheckBox fx:id="cbC" layoutX="57.0" layoutY="250.0" mnemonicParsing="false" text="CheckBox" />
       <CheckBox fx:id="cbD" layoutX="57.0" layoutY="300.0" mnemonicParsing="false" text="CheckBox" />
-      <Button fx:id="btnNext" layoutX="57.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
-      <Button fx:id="btnEndTest" layoutX="277.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
+      <Button fx:id="btnNext" layoutX="176.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" prefHeight="27.0" prefWidth="140.0" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="94.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

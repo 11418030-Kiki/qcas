@@ -67,12 +67,20 @@ public class StudentReportsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     * display charts
+     *
+     * @param period
+     */
     public void displayChart1(String period) {
         try {
             double[] fromData = new double[8];
@@ -103,6 +111,11 @@ public class StudentReportsController implements Initializable {
         }
     }
 
+    /**
+     * display chart
+     *
+     * @param period
+     */
     public void displayChart2(String period) {
         try {
             DatabaseManager dbManager = new DatabaseManager();
@@ -126,6 +139,11 @@ public class StudentReportsController implements Initializable {
 
     }
 
+    /**
+     * display chart
+     *
+     * @param period
+     */
     public void displayChart3(String period) {
         try {
 
@@ -158,6 +176,11 @@ public class StudentReportsController implements Initializable {
 
     }
 
+    /**
+     * display chart
+     *
+     * @param period
+     */
     public void displayChart4(String period) {
         try {
 
@@ -184,6 +207,11 @@ public class StudentReportsController implements Initializable {
 
     }
 
+    /**
+     * display graph
+     *
+     * @param event
+     */
     @FXML
     private void displayGraphAction(ActionEvent event) {
         displayChart1(comboReportPeriod.getValue());
@@ -192,6 +220,11 @@ public class StudentReportsController implements Initializable {
         displayChart4(comboReportPeriod.getValue());
     }
 
+    /**
+     * home button
+     *
+     * @param event
+     */
     @FXML
     private void homeApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -207,6 +240,11 @@ public class StudentReportsController implements Initializable {
         }
     }
 
+    /**
+     * logout app
+     *
+     * @param event
+     */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();

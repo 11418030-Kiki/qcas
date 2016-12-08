@@ -57,6 +57,9 @@ public class TFNewController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,6 +78,17 @@ public class TFNewController implements Initializable {
         });
     }
 
+    /**
+     * next button
+     *
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         String a;
@@ -101,6 +115,7 @@ public class TFNewController implements Initializable {
             testobject.setIncorrectQuestions(testobject.getIncorrectQuestions() + 1);
         }
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            //end test page
             currentQuestion++;
             stage.setTitle("Test Report");
             fxmlLoader = new FXMLLoader(getClass().getResource("EndTest.fxml"));
@@ -109,6 +124,7 @@ public class TFNewController implements Initializable {
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
+            //next question
             stage.setTitle("Test");
             currentQuestion++;
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
@@ -143,6 +159,16 @@ public class TFNewController implements Initializable {
         }
     }
 
+    /**
+     * end test page
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
@@ -159,6 +185,10 @@ public class TFNewController implements Initializable {
         stage.show();
     }
 
+    /**
+     * initalise page
+     * @param test
+     */
     @FXML
     public void initData(Test test) {
         // @FXML

@@ -53,10 +53,28 @@ public class FIBQuestionController implements Initializable {
         }
     }
 
+    /**
+     * 
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     */
     @FXML
     protected void handlePreviousButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
     }
 
+    /**
+     * on next button handle
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleNextButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         String userAnswer = ((TextField) txtAnswer).getText();
@@ -76,6 +94,7 @@ public class FIBQuestionController implements Initializable {
         }
 
         if (currentQuestion == (testobject.getNumberOfQuestions() - 1)) {
+            //if on last question end test
             currentQuestion++;
             //createTestResult();
             stage.setTitle("Test Report");
@@ -85,6 +104,7 @@ public class FIBQuestionController implements Initializable {
             EndTestController controller = fxmlLoader.<EndTestController>getController();
             controller.initData(testobject);
         } else {
+            //go to next question
             currentQuestion++;
             stage.setTitle("Test");
             String nextQuestionType = testobject.getQuestionList().get(currentQuestion).getQuestionType();
@@ -117,6 +137,16 @@ public class FIBQuestionController implements Initializable {
         stage.show();
     }
 
+    /**
+     * end test button
+     * @param event
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws SQLException
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws ParseException
+     */
     @FXML
     protected void handleEndTestButtonAction(ActionEvent event) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException, IOException, ParseException {
         Node node = (Node) event.getSource();
@@ -133,6 +163,10 @@ public class FIBQuestionController implements Initializable {
         stage.show();
     }
 
+    /**
+     * initalize resources
+     * @param test
+     */
     @FXML
     public void initData(Test test) {
         testobject = test;

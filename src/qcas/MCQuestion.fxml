@@ -17,7 +17,7 @@
       <RadioButton fx:id="rbB" layoutX="57.0" layoutY="205.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
       <RadioButton fx:id="rbC" layoutX="57.0" layoutY="255.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
       <RadioButton fx:id="rbD" layoutX="57.0" layoutY="305.0" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgAnswers" />
-      <Button fx:id="btnNext" layoutX="57.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
-      <Button fx:id="btnEndTest" layoutX="277.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
+      <Button fx:id="btnNext" layoutX="169.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" prefHeight="27.0" prefWidth="135.0" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="84.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

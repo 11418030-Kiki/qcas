@@ -41,6 +41,8 @@ public class InstructorDashboardController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,7 +68,10 @@ public class InstructorDashboardController implements Initializable {
         });
 */
     }
-
+    /**
+     * import question
+     * @param event 
+     */
     @FXML
     private void importQuestions(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -81,7 +86,10 @@ public class InstructorDashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+    /**
+     * home button
+     * @param event 
+     */
     @FXML
     private void homeApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -96,7 +104,10 @@ public class InstructorDashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-
+/**
+ * logout button functionality
+ * @param event 
+ */
     @FXML
     private void logoutApp(ActionEvent event) {
         Node node = (Node) event.getSource();
@@ -128,6 +139,9 @@ public class InstructorDashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void displayChart() {
         try {
             double[] fromData = new double[8];
