@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- *
+ * test class
  * @author aayush
  */
 public class Test {
@@ -33,122 +33,242 @@ public class Test {
     private String result;
     private User userData;
 
+    /**
+     * getUserID method
+     * @return
+     */
     public int getUserID() {
         return this.userID;
     }
 
+    /**
+     *setUserID method
+     * @param userID
+     */
     public void setUserID(int userID) {
         this.userID = userID;
     }
 
+    /**
+     * getNumberOfQuestions method 
+     * @return
+     */
     public int getNumberOfQuestions() {
         return this.numberOfQuestions;
     }
 
+    /**
+     *getNumberOfQuestions method
+     * @param noOfQues
+     */
     public void setNumberOfQuestions(int noOfQues) {
         this.numberOfQuestions = noOfQues;
     }
 
+    /**
+     *getDifficulty method
+     * @return
+     */
     public String getDifficulty() {
         return this.difficulty;
     }
 
+    /**
+     *setDifficulty method
+     * @param difficulty
+     */
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
+    /**
+     *getQuestionList method
+     * @return
+     */
     public ArrayList<Question> getQuestionList() {
         return this.questionList;
     }
 
+    /**
+     *setQuestionList method
+     * @param questionList
+     */
     public void setQuestionList(ArrayList<Question> questionList) {
         this.questionList = questionList;
     }
 
+    /**
+     *getAnswerArrayListmethod
+     * @return
+     */
     public String[] getAnswerArrayList() {
         return this.answerArrayList;
     }
 
+    /**
+     *setAnswerArrayList method
+     * @param answerArrayList
+     */
     public void setAnswerArrayList(String[] answerArrayList) {
         this.answerArrayList = answerArrayList;
     }
 
+    /**
+     * getIsAnswerCorrectArray method
+     * @return
+     */
     public int[] getIsAnswerCorrectArray() {
         return this.isAnswerCorrect;
     }
 
+    /**
+     * setIsAnswerCorrectArray method
+     * @param isAnswerCorrect
+     */
     public void setIsAnswerCorrectArray(int[] isAnswerCorrect) {
         this.isAnswerCorrect = isAnswerCorrect;
     }
 
+    /**
+     *getCorrectQuestions method
+     * @return
+     */
     public int getCorrectQuestions() {
         return this.correctQuestions;
     }
 
+    /**
+     *setCorrectQuestions method
+     * @param correctQuestions
+     */
     public void setCorrectQuestions(int correctQuestions) {
         this.correctQuestions = correctQuestions;
     }
 
+    /**
+     *getIncorrectQuestions method
+     * @return
+     */
     public int getIncorrectQuestions() {
         return this.incorrectQuestions;
     }
 
+    /**
+     *setIncorrectQuestions method
+     * @param incorrectQuestions
+     */
     public void setIncorrectQuestions(int incorrectQuestions) {
         this.incorrectQuestions = incorrectQuestions;
     }
 
+    /**
+     *getUnansweredQuestions method
+     * @return
+     */
     public int getUnansweredQuestions() {
         return this.unansweredQuestions;
     }
 
+    /**
+     *set unansweredQuestions method
+     * @param unansweredQuestions
+     */
     public void setUnansweredQuestions(int unansweredQuestions) {
         this.unansweredQuestions = unansweredQuestions;
     }
 
+    /**
+     *getTestDate method
+     * @return
+     */
     public String getTestDate() {
         return this.testDate;
     }
 
+    /**
+     *setTestDate method
+     * @param date
+     */
     public void setTestDate(String date) {
         this.testDate = date;
     }
 
+    /**
+     *getCurrentQuestionNumber method
+     * @return
+     */
     public int getCurrentQuestionNumber() {
         return this.currentQuestionNumber;
     }
 
+    /**
+     * setCurrentQuestionNumber method
+     * @param currentQuestionNumber
+     */
     public void setCurrentQuestionNumber(int currentQuestionNumber) {
         this.currentQuestionNumber = currentQuestionNumber;
     }
 
+    /**
+     * get score
+     * @return
+     */
     public int getScore() {
         return this.score;
     }
 
+    /**
+     * set score test 
+     * @param score
+     */
     public void setScore(int score) {
         this.score = score;
     }
 
+    /**
+     * get scaled score method
+     * @return
+     */
     public Double getScaledScore() {
         return this.scaledScore;
     }
 
+    /**
+     *setScaledScore method
+     * @param scaledScore
+     */
     public void setScaledScore(Double scaledScore) {
         this.scaledScore = scaledScore;
     }
 
+    /**
+     * get Result method
+     * @return
+     */
     public String getResult() {
         return this.result;
     }
 
+    /**
+     * set Result method
+     * @param result
+     */
     public void setResult(String result) {
         this.result = result;
     }
 
+    /**
+     * getUserData method
+     * @return
+     */
     public User getUserData() {
         return this.userData;
     }
 
+    /**
+     * setUserData method
+     * @param user
+     */
     public void setUserData(User user) {
         this.userData = user;
     }
@@ -162,6 +282,7 @@ public class Test {
     /**
      * constructor
      *
+     * @param userData
      * @param noOfQuest
      * @param difficulty
      */
@@ -181,8 +302,9 @@ public class Test {
      * @return
      */
     public int[] getRandomNumberOfQuestionForAllDifficultyTypes(int noOfQues) {
+       
         int[] numberOfQuestion = new int[3];
-        if(noOfQues==5)
+        /* if(noOfQues==5)
         {
             numberOfQuestion[0] =2;
             numberOfQuestion[1] =2;
@@ -200,7 +322,8 @@ public class Test {
             numberOfQuestion[1] =6;
             numberOfQuestion[2] =4;
         }
-        /*
+        */
+       // /*
         Random random = new Random();
         //number of easy question 1 to (n-2) questions
         int randomEasy = random.nextInt(noOfQues - 2) + 1;
@@ -211,7 +334,7 @@ public class Test {
         numberOfQuestion[0] = randomEasy;
         numberOfQuestion[1] = randomMedium;
         numberOfQuestion[2] = randomDifficult;
-        */
+       // */
         return numberOfQuestion;
     }
 
@@ -223,6 +346,9 @@ public class Test {
      * @param difficulty
      * @return
      * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
      */
     public ArrayList<Question> generateTest(int noOfQuest, String difficulty) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ArrayList<Question> questionList = new ArrayList<>();
@@ -242,6 +368,14 @@ public class Test {
         return questionList;
     }
 
+    /**
+     *
+     * @param testObject
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public void saveTestDetails(Test testObject) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DatabaseManager dbManager = new DatabaseManager();
         dbManager.saveTestDetails(testObject);

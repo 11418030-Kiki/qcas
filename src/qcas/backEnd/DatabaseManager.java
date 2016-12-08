@@ -41,12 +41,6 @@ public class DatabaseManager {
      */
     public DatabaseManager() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         //url for database
-        // url = "jdbc:derby://localhost:1527/EmployeeDB2;create=true;";
-        //username for database
-        //username = "app";
-        //password for database
-        //password = "app";
-
         url = "jdbc:mysql://qcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas";
         //jdbc:mysql://cmuqcas.csnb2ea61dmx.us-west-2.rds.amazonaws.com:3306/qcas?zeroDateTimeBehavior=convertToNull
         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -62,6 +56,7 @@ public class DatabaseManager {
      * @return
      */
     public User login(String userName, String userPassword, String userType) {
+        //query to get user data
         String query3 = "SELECT * FROM qcas.user where username = '" + userName + "' and password = '" + userPassword + "' and usertype = '" + userType + "'";
         User user = new User();
 
@@ -86,6 +81,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * get test date Details
+     *
+     * @return @throws SQLException
+     */
     public int[] getDateDetails() throws SQLException {
 //String query2 = "SELECT * FROM qcas.test where  YEAR(testdate) = YEAR(dateadd(yy, -1, getdate()))\n AND MONTH(testdate) = MONTH(dateddd(mm, -1, getdate()))";
         int[] arr = new int[3];
@@ -120,11 +120,20 @@ public class DatabaseManager {
         return arr;
     }
 
+    /**
+     * get instructor graph
+     *
+     * @return @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public double[] getInstructorGraph() throws SQLException, ClassNotFoundException {
         // Create a simple query
         ArrayList<String> arr = new ArrayList<>();
+        //query to get number of rows from test table
         String query0 = "SELECT count(*) as rc_0 FROM qcas.test";
+        //query to get avg of score from table
         String query1 = "Select sum(scaledScore)/count(*) as rc_1 FROM qcas.test ";
+        //query to get avg score from table bassed for Hard
         String query2 = "Select sum(scaledScore)/count(scaledScore) as rc_2 FROM qcas.test where difficultyLevel = \"Hard\"";
         arr.add(query0);
         arr.add(query1);
@@ -238,6 +247,7 @@ public class DatabaseManager {
     }
 
     /**
+     * get random question type
      *
      * @return
      */
@@ -248,15 +258,19 @@ public class DatabaseManager {
         int questionTypeValue = random.nextInt(4) + 1;
         switch (questionTypeValue) {
             case 1:
+                //for FIB test
                 questionType = "FIB";
                 break;
             case 2:
+                //for multi correct type
                 questionType = "MA";
                 break;
             case 3:
+                //for mcq test type
                 questionType = "MC";
                 break;
             case 4:
+                //for TF type
                 questionType = "TF";
                 break;
             default:
@@ -267,6 +281,7 @@ public class DatabaseManager {
     }
 
     /**
+     * get question from database
      *
      * @param con
      * @param query
@@ -293,7 +308,9 @@ public class DatabaseManager {
             String optionD = rs.getString("optionD");
             boolean optionDCorrect = rs.getBoolean("optionDCorrect");
             StringBuilder answerString = new StringBuilder();
+            //create answer string containing("answerOption" )
             if (questionType.equals("MC")) {
+                //for MC type
                 if (optionACorrect) {
                     answerString.append(optionA);
                 }
@@ -307,6 +324,7 @@ public class DatabaseManager {
                     answerString.append(optionD);
                 }
             } else if (questionType.equals("MA")) {
+                //for MA type
                 if (optionACorrect) {
                     answerString.append("A").append(",");
                 }
@@ -323,6 +341,7 @@ public class DatabaseManager {
                     answerString.setLength(answerString.length() - 1);
                 }
             } else if (questionType.equals("TF") || questionType.equals("FIB")) {
+                //for FIB and TF type
                 answerString.append(optionA);
             }
             questionObject = new Question(questionID, questionType, difficulty, question, optionA, optionACorrect, optionB, optionBCorrect, optionC, optionCCorrect, optionD, optionDCorrect, answerString.toString());
@@ -334,7 +353,6 @@ public class DatabaseManager {
      * for specific difficulty type test
      *
      * @param numberOfQuest
-     * @param numberOfQuestOfAllDificultyType
      * @param testDifficultyLevel
      * @return
      * @throws SQLException
@@ -377,8 +395,15 @@ public class DatabaseManager {
      */
     //issue--looping unnecesarily
     ///*
+    /* for specific difficulty type test
+     *
+     * @param numberOfQuest
+     * @param testDifficultyLevel
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<Question> generateTest(int numberOfQuest, String testDifficultyLevel) throws SQLException {
-        //query to be executed, finds sailor details with1 max salary in every position
+        //compare difficulty tpe and sets it accordingly
         if (testDifficultyLevel.equals("Easy")) {
             testDifficultyLevel = "E";
         } else if (testDifficultyLevel.equals("Medium")) {
@@ -397,13 +422,17 @@ public class DatabaseManager {
             while (uniqueQuesMap.size() < numberOfQuest) {
                 questionType = getRandomQuestionType();
                 //query = "SELECT * FROM qcas.questions WHERE questionType = '" + questionType + "' and difficultyLevel = '" + testDifficultyLevel + "' and questionID >= (SELECT FLOOR( MAX(questionID) * RAND()) FROM qcas.questions ) ORDER BY questionID LIMIT 1";
+
+                //query to get question from db randomly
                 query = "SELECT * FROM qcas.questions WHERE questionType = '" + questionType + "' and difficultyLevel = '" + testDifficultyLevel + "' order by rand() LIMIT 1";
                 Question questionObject = getQuestionFromDB(con, query, questionType);
+                //map to check whether the question is unique or not                
                 uniqueQuesMap.put(questionObject.getQuestionID(), questionObject);
             }
             for (Map.Entry<Integer, Question> entry : uniqueQuesMap.entrySet()) {
                 questionList.add(entry.getValue());
             }
+            //shuffles the question
             Collections.shuffle(questionList);
             String qType = questionList.get(questionList.size() - 1).getQuestionType();
             while (qType.equalsIgnoreCase("TF")) {
@@ -438,11 +467,12 @@ public class DatabaseManager {
             while (i < numberOfQuest) {
                 //for (int i = 0; i < numberOfQuest; i++) {
                 while (numberOfQuestOfAllDificultyType[0] > 0) {
+                    //get easy type questions
+                    //get random next question type
                     questionType = getRandomQuestionType();
                     //     query = "SELECT * FROM qcas.questions WHERE questionType = '" + questionType + "' and difficultyLevel = 'E' and questionID >= (SELECT FLOOR( MAX(questionID) * RAND()) FROM qcas.questions ) ORDER BY questionID LIMIT 1";
                     query = "SELECT * FROM qcas.questions WHERE questionType = '" + questionType + "' and difficultyLevel = 'E' order by rand() LIMIT 1";
 
-                    // query = "Select * from questions where questionType = '" + questionType + "' and difficultyLevel = 'E'";
                     Question questionObject = getQuestionFromDB(con, query, questionType);
                     //add this question to the questionlist only if it is not already present
                     if (!questionList.contains(questionObject)) {
@@ -452,6 +482,7 @@ public class DatabaseManager {
                     }
                 }
                 while (numberOfQuestOfAllDificultyType[1] > 0) {
+                    //get medium type questions
                     questionType = getRandomQuestionType();
                     // query = "SELECT * FROM qcas.questions WHERE questionType = '" + questionType + "' and difficultyLevel = 'M' and questionID >= (SELECT FLOOR( MAX(questionID) * RAND()) FROM qcas.questions ) ORDER BY questionID LIMIT 1";
                     //query = "Select * from questions where questionType = '" + questionType + "' and difficultyLevel = 'M'";
@@ -466,6 +497,7 @@ public class DatabaseManager {
                     }
                 }
                 while (numberOfQuestOfAllDificultyType[2] > 0) {
+                    //get difficult type questions
                     questionType = getRandomQuestionType();
                     //query = "SELECT * FROM qcas.questions WHERE questionType = '" + questionType + "' and difficultyLevel = 'H' and questionID >= (SELECT FLOOR( MAX(questionID) * RAND()) FROM qcas.questions ) ORDER BY questionID LIMIT 1";
                     //query = "Select * from questions where questionType = '" + questionType + "' and difficultyLevel = 'H'";
@@ -480,6 +512,7 @@ public class DatabaseManager {
                     }
                 }
             }
+            //sort the question list
             Collections.shuffle(questionList);
             String qType = questionList.get(questionList.size() - 1).getQuestionType();
             while (qType.equalsIgnoreCase("TF")) {
@@ -497,10 +530,10 @@ public class DatabaseManager {
     }
 
     /**
-     * for mixed difficulty test
+     * save test details in the database
      *
+     * @param testObject
      * @param numberOfQuest
-     * @param numberOfQuestOfAllDificultyType
      * @return
      * @throws SQLException
      */
@@ -510,6 +543,7 @@ public class DatabaseManager {
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             Statement stmt = con.createStatement();
+            //saves test details
             query = "INSERT INTO qcas.test values (" + null + ", '" + testObject.getTestDate() + "'," + testObject.getUserID() + "," + testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() + "," + testObject.getIncorrectQuestions() + "," + testObject.getUnansweredQuestions() + "," + testObject.getScore() + "," + testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
 
 //            query = "INSERT INTO TEST (testID," + "29 - November - 2016" + "," + testObject.getUserID() + "," + testObject.getNumberOfQuestions() + ",'" + testObject.getDifficulty() + "'," + testObject.getCorrectQuestions() + "," + testObject.getIncorrectQuestions() + "," + testObject.getUnansweredQuestions() + "," + testObject.getScore() + "," + testObject.getScaledScore() + ",'" + testObject.getResult() + "')";
@@ -522,13 +556,19 @@ public class DatabaseManager {
 
     }
 
+    /**
+     * save user details
+     *
+     * @param userObject
+     * @throws SQLException
+     */
     public void saveUserDetails(User userObject) throws SQLException {
         String query2;
 
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             Statement stmt = con.createStatement();
-
+            //query to save user details
             query2 = "INSERT INTO user values(" + userObject.getUserID() + ",'" + userObject.getUserName() + "','" + userObject.getPassword() + "','" + userObject.getUserType() + "','" + userObject.getFirstName() + "','" + userObject.getLastName() + "','" + userObject.getCourse() + "')";
 
             stmt.executeUpdate(query2);
@@ -539,38 +579,4 @@ public class DatabaseManager {
         }
 
     }
-
-    /**
-     * method to getNummberOfTestsTakenOverAPeriod (last month/quarter)
-     *
-     * @param userType
-     * @param userName
-     * @return
-     */
-    /*
-    public User getNummberOfTestsTakenOverAPeriod(int numberOfMonth) {
-        //query to be executed, finds sailor details with1 max salary in every position
-        //String query = "SELECT * FROM USER where username is '" + userName + "'";
-        String query = "SELECT COUNT(*) AS rowcount FROM TEST where month(testDate) = month(getdate()) - "+ numberOfMonth;
-
-        User user = new User();
-        ResultSet rs = null;
-        int numberOfRecords;
-        try (Connection con = DriverManager.getConnection(url, username, password)) {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-            //access resultset for every record present in the records set
-            while (rs.next()) {
-                int numberOfRecords = rs.getInt("rowcount");
-                
-            }
-            return user;
-        } catch (SQLException e) {
-            System.out.println("Exception creating connection: " + e);
-            return user;
-            //System.exit(0);
-        }
-    }
-
-     */
 }

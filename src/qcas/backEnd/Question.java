@@ -6,7 +6,7 @@
 package qcas.backEnd;
 
 /**
- *
+ * question class
  * @author aayush
  */
 public class Question {
@@ -27,7 +27,7 @@ public class Question {
     private String answerString;
 
     /**
-     *
+     * get questionType method
      * @return
      */
     public String getQuestionType() {
@@ -35,7 +35,7 @@ public class Question {
     }
 
     /**
-     *
+     *set questionType method
      * @param quesType
      */
     public void setQuestionType(String quesType) {
@@ -43,7 +43,7 @@ public class Question {
     }
     
     /**
-     *
+     *getDifficulty method
      * @return
      */
     public String getDifficulty() {
@@ -51,7 +51,7 @@ public class Question {
     }
 
     /**
-     *
+     *setDifficulty method
      * @param diff
      */
     public void setDifficulty(String diff) {
@@ -59,7 +59,7 @@ public class Question {
     }
     
     /**
-     *
+     *getQuestion method
      * @return
      */
     public String getQuestion() {
@@ -67,7 +67,7 @@ public class Question {
     }
 
     /**
-     *
+     *setQuestion method
      * @param ques
      */
     public void setQuestion(String ques) {
@@ -75,7 +75,7 @@ public class Question {
     }
     
     /**
-     *
+     *getOptionA method
      * @return
      */
     public String getOptionA() {
@@ -83,7 +83,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionA method
      * @param optA
      */
     public void setOptionA(String optA) {
@@ -91,7 +91,7 @@ public class Question {
     }
     
     /**
-     *
+     *getOptionACorrect method
      * @return
      */
     public boolean getOptionACorrect() {
@@ -99,7 +99,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionACorrect method
      * @param optACorrect
      */
     public void setOptionACorrect(boolean optACorrect) {
@@ -107,7 +107,7 @@ public class Question {
     }
 
     /**
-     *
+     *getOptionB method
      * @return
      */
     public String getOptionB() {
@@ -115,7 +115,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionB method
      * @param optB
      */
     public void setOptionB(String optB) {
@@ -123,7 +123,7 @@ public class Question {
     }
 
     /**
-     *
+     *getOptionB correct
      * @return
      */
     public boolean getOptionBCorrect() {
@@ -131,7 +131,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionBCorrect
      * @param optBCorrect
      */
     public void setOptionBCorrect(boolean optBCorrect) {
@@ -139,7 +139,7 @@ public class Question {
     }
     
     /**
-     *
+     *getOptionC method
      * @return
      */
     public String getOptionC() {
@@ -147,7 +147,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionC method
      * @param optC
      */
     public void setOptionC(String optC) {
@@ -155,7 +155,7 @@ public class Question {
     }
 
     /**
-     *
+     *getOptionCCorrect method
      * @return
      */
     public boolean getOptionCCorrect() {
@@ -163,7 +163,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionCCorrect method
      * @param optCCorrect
      */
     public void setOptionCCorrect(boolean optCCorrect) {
@@ -171,7 +171,7 @@ public class Question {
     }
     
     /**
-     *
+     *getOptionD method
      * @return
      */
     public String getOptionD() {
@@ -179,7 +179,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionD method
      * @param optD
      */
     public void setOptionD(String optD) {
@@ -187,7 +187,7 @@ public class Question {
     }
 
     /**
-     *
+     *getOptionD correct
      * @return
      */
     public boolean getOptionDCorrect() {
@@ -195,7 +195,7 @@ public class Question {
     }
 
     /**
-     *
+     *setOptionD correct
      * @param optDCorrect
      */
     public void setOptionDCorrect(boolean optDCorrect) {
@@ -203,14 +203,15 @@ public class Question {
     }
     
     /**
-     *
+     * ctr
      */
     public Question() {
 
     }
 
     /**
-     *
+     * ctr
+     * @param questionID
      * @param questType
      * @param questDifficulty
      * @param question
@@ -222,6 +223,7 @@ public class Question {
      * @param optCCorrect
      * @param optD
      * @param optDCorrect
+     * @param answerString
      */
     public Question(Integer questionID, String questType, String questDifficulty, String question, String optA, boolean optACorrect, String optB, boolean optBCorrect, String optC, boolean optCCorrect, String optD, boolean optDCorrect, String answerString) {
         this.questionID=questionID;
@@ -239,18 +241,34 @@ public class Question {
         this.answerString=answerString;
     }
 
+    /**
+     *getAnswer string method
+     * @return
+     */
     public String getAnswerString() {
         return answerString;
     }
 
+    /**
+     *set answer string method
+     * @param answerString
+     */
     public void setAnswerString(String answerString) {
         this.answerString = answerString;
     }
 
+    /**
+     *getQuestionID method
+     * @return
+     */
     public Integer getQuestionID() {
         return questionID;
     }
 
+    /**
+     *setQuestionID method
+     * @param questionID
+     */
     public void setQuestionID(Integer questionID) {
         this.questionID = questionID;
     }
