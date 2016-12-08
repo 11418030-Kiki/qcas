@@ -12,7 +12,7 @@
       <Label fx:id="lblQuestion" layoutX="57.0" layoutY="65.0" prefHeight="65.0" prefWidth="439.0" text="Label" wrapText="true" />
       <TextField fx:id="txtAnswer" layoutX="147.0" layoutY="150.0" />
       <Label layoutX="57.0" layoutY="150.0" text="Answer" />
-      <Button fx:id="btnNext" layoutX="57.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" text="Next Question" />
-      <Button fx:id="btnEndTest" layoutX="277.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
+      <Button fx:id="btnNext" layoutX="147.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNextButtonAction" prefHeight="27.0" prefWidth="135.0" text="Next Question" />
+      <Button fx:id="btnEndTest" layoutX="67.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleEndTestButtonAction" text="End Test" />
    </children>
 </AnchorPane>

@@ -171,5 +171,20 @@ public class EndTestController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    private void homeApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentDashboard.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            stage.setTitle("Welcome to Student Dashboard");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

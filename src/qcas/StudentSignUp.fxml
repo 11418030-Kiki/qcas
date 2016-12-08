@@ -52,6 +52,9 @@
                             <String fx:id="teacher" fx:value="Instructor" />
                         </FXCollections>
                     </items>
+                    <value>
+                        <String fx:value="Student" />
+                    </value>
                 </ComboBox>
                 <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             
@@ -61,7 +64,7 @@
             
             </children>
         </GridPane>
-        <Text fill="#da1a3a" layoutX="288.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="109.0">
+        <Text fill="#da1a3a" layoutX="288.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" wrappingWidth="131.0">
             <font>
                 <Font name="Britannic Bold" size="30.0" />
             </font>
@@ -74,6 +77,12 @@
                 <Image url="@../Resources/grad.png" />
             </image>
         </ImageView>
-      <Text fx:id="actiontarget" fill="RED" layoutX="150.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="310.13671875" />
+        <Text fx:id="actiontarget" fill="RED" layoutX="150.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="310.13671875" />
+      <ImageView fitHeight="57.0" fitWidth="56.0" layoutX="546.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/home.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="546.0" layoutY="74.0" mnemonicParsing="false" onAction="#logoutApp" text="Home" />
     </children>
 </AnchorPane>
