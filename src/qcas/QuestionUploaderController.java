@@ -19,8 +19,13 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import qcas.backEnd.DatabaseManager;
@@ -36,17 +41,16 @@ public class QuestionUploaderController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     ArrayList<Question> questionList = new ArrayList<>();
-    
+
     @FXML
     private Label label;
-    
+
     @FXML
     private Label actionMessage;
-    
+
     public File chosenFile;
-    
+
     @FXML
     private File chooseFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -62,14 +66,14 @@ public class QuestionUploaderController implements Initializable {
         label.setText(file.getName());
         return file;
     }
-    
+
     @FXML
     private void uploadFile(ActionEvent event) throws FileNotFoundException, IOException {
 
         try {
             System.out.println("Computing");
             Question ques;
-            
+
             BufferedReader br = null;
             //String filePath = System.getProperty("user.dir") + "/src/importques/question.csv";
             br = new BufferedReader(new FileReader(chosenFile));
@@ -79,7 +83,7 @@ public class QuestionUploaderController implements Initializable {
             while ((line = br.readLine()) != null) {
                 ques = new Question();
                 String[] fields = parseCSVLine(line);
-                if(fields[1].equals("MC") || fields[1].equals("MA")){
+                if (fields[1].equals("MC") || fields[1].equals("MA")) {
                     ques.setQuestionType(fields[1]);
                     ques.setDifficulty(fields[2]);
                     ques.setQuestion(fields[3]);
@@ -91,12 +95,12 @@ public class QuestionUploaderController implements Initializable {
                     ques.setOptionCCorrect(fields[9].equals("correct"));
                     ques.setOptionD(fields[10]);
                     ques.setOptionDCorrect(fields[11].equals("correct"));
-                }else if(fields[1].equals("TF")){
+                } else if (fields[1].equals("TF")) {
                     ques.setQuestionType(fields[1]);
                     ques.setDifficulty(fields[2]);
                     ques.setQuestion(fields[3]);
                     ques.setOptionA(fields[4]);
-                }else if(fields[1].equals("FIB")){
+                } else if (fields[1].equals("FIB")) {
                     ques.setQuestionType(fields[1]);
                     ques.setDifficulty(fields[2]);
                     ques.setQuestion(fields[3]);
@@ -107,7 +111,7 @@ public class QuestionUploaderController implements Initializable {
             DatabaseManager dbManager = new DatabaseManager();
             dbManager.insertQuestionInDatabase(questionList);
             actionMessage.setText("Questions uploaded successfully!");
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuestionUploaderController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -118,12 +122,43 @@ public class QuestionUploaderController implements Initializable {
             Logger.getLogger(QuestionUploaderController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
-    
+
+    @FXML
+    private void homeApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InstructorDashboard.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            stage.setTitle("Welcome Instructor Dashboard");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void logoutApp(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLHomeController controller = fxmlLoader.<FXMLHomeController>getController();
+            stage.setTitle("Welcome to QCAS");
+            stage.setScene(new Scene(root, 630, 510));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String[] parseCSVLine(String line) {
         // Create a pattern to match breaks
         Pattern p = Pattern.compile(",(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
@@ -135,5 +170,5 @@ public class QuestionUploaderController implements Initializable {
         }
         return fields;
     }
-    
+
 }

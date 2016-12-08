@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcas.InstructorDashboardController">
    <children>
-      <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="487.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="61.0" fitWidth="54.0" layoutX="538.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/Logout-512.png" />
          </image>
@@ -26,10 +26,10 @@
             <Image url="@../Resources/studentreports.gif" />
          </image>
       </ImageView>
-      <Button layoutX="495.0" layoutY="91.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
+      <Button layoutX="538.0" layoutY="82.0" mnemonicParsing="false" onAction="#logoutApp" text="Logout" />
       <Button layoutX="191.0" layoutY="132.0" mnemonicParsing="false" onAction="#importQuestions" text="Import Questions" />
-      <Button layoutX="194.0" layoutY="269.0" mnemonicParsing="false" text="Student Reports" />
-      <Text fill="#da1a3a" layoutX="32.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Instructor Dashboard">
+      <Button layoutX="194.0" layoutY="269.0" mnemonicParsing="false" onAction="#loadStudentReports" text="Student Reports" />
+      <Text fill="#da1a3a" layoutX="22.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Instructor Dashboard">
          <font>
             <Font name="Britannic Bold" size="30.0" />
          </font>
@@ -42,5 +42,11 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
+      <ImageView fitHeight="54.0" fitWidth="54.0" layoutX="484.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/home.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="487.0" layoutY="82.0" mnemonicParsing="false" onAction="#homeApp" text="Home" />
    </children>
 </AnchorPane>
